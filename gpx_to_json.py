@@ -26,7 +26,11 @@ for track in gpx.tracks:
         for point in segment.points:
             time_ = point.time
             time_conv = time_.strftime('%H:%M:%S')
+            power,hr,atemp,cad = '0','0','0','0'
             for el in point.extensions:
+                if 'power' in el.tag:
+                    power = el.text
+                    continue
                 for inner_el in el:
                     if 'hr' in inner_el.tag:
                         hr = inner_el.text
@@ -42,13 +46,15 @@ for track in gpx.tracks:
                 'time': time_conv,
                 'heart_rate':hr,
                 'temperature':atemp,
-                'cadence': cad
+                'cadence': cad,
+                'power':power
             })
 
+route_info_json = {'route_data':route_info}
+print(route_info_json)
 
-
-route_df = pd.DataFrame(route_info)
-print(route_df.head())
+# route_df = pd.DataFrame(route_info)
+# print(route_df)
 
 
 
