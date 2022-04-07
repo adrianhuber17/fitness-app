@@ -26,6 +26,7 @@ class gpxParser:
         self.center_latitude = None
         self.center_longitude = None
         self.coordinates = None
+        self.map_json = None
 
     def get_route_info_json(self,gpx_upload):
         """Parameter: .gpx file, Returns: a json with the route information"""
@@ -36,8 +37,11 @@ class gpxParser:
         for track in gpx.tracks:
             for segment in track.segments:
                 for point in segment.points:
-                    time_ = point.time
-                    time_conv = time_.strftime('%H:%M:%S')
+                    if point.time:
+                        time_ = point.time
+                        time_conv = time_.strftime('%H:%M:%S')
+                    else:
+                        time_conv = '0'
                     power,hr,atemp,cad = '0','0','0','0'
                     for el in point.extensions:
                         if 'power' in el.tag:
@@ -72,6 +76,8 @@ class gpxParser:
         values_of_route = self.route_info_json['route_data']
         self.route_df = pd.DataFrame(values_of_route)
 
+        print(self.route_df)
+
         return self.route_df
 
     def get_center_latitude(self):
@@ -98,7 +104,23 @@ class gpxParser:
         
         return self.coordinates
 
+    def get_json_for_map(self):
+        """returns the json needed for the frot end and the database
+        activity"""
 
+        self.map_json = {'coordinates': self.coordinates,
+                        'latitude': self.center_latitude,
+                        'longitude': self.center_longitude}
+
+    def complete_gpx_parser_main(self,gpx_upload):
+        self.get_route_info_json(gpx_upload)
+        self.route_info_df()
+        self.get_center_latitude()
+        self.get_center_longitude()
+        self.get_coordinates_full_route()
+        self.get_json_for_map()
+
+        return self.map_json
 
 
 
