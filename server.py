@@ -30,4 +30,7 @@ def get_map_name():
 
 
 if __name__ == "__main__":
-  app.run(debug=True)
+    from model import connect_to_db
+
+    connect_to_db(app)
+    app.run(debug=True)
