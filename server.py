@@ -15,8 +15,8 @@ def get_map_name():
 
     gpx_file_test = 'Morning_Ride.gpx'
     activity = gpxParser()
-    get_activity_json = activity.get_route_info_json(gpx_file_test)
-    get_activity_json_df = activity.route_info_df()
+    activity.get_route_info_json(gpx_file_test)
+    activity.route_info_df()
     get_activity_center_lat = activity.get_center_latitude()
     get_activity_center_long = activity.get_center_longitude()
     get_activity_coordinates = activity.get_coordinates_full_route()
