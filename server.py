@@ -13,7 +13,7 @@ def index():
 @app.route("/map.json")
 def get_activity_map_data():
     """"""
-    gpx_file_test = 'Adrian_Ride.gpx'
+    gpx_file_test = 'Camilo_Ride.gpx'
     activity = gpxParser()
     activity.complete_gpx_parser_main(gpx_file_test)
 

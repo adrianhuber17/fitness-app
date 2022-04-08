@@ -159,7 +159,3 @@ class gpxParser:
                                                               'max_elevation_feet':max_elevation_feet}}
 
         return self.elevation_stats_json
-
-#minimum=7.0, maximum=446.8
-# print(gpx.get_elevation_extremes()) # altitude range -> MinimumMaximum(minimum=3.2, maximum=454.2)
-# print(gpx.get_uphill_downhill()) # elevation gained and lost -> UphillDownhill(uphill=494.65999999999934, downhill=482.05999999999773)
