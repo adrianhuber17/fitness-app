@@ -11,13 +11,13 @@ def index():
     return render_template('index.html')
 
 @app.route("/map.json")
-def get_map_name():
-
-    gpx_file_test = 'Camilo_Ride.gpx'
+def get_activity_map_data():
+    """"""
+    gpx_file_test = 'Adrian_Ride.gpx'
     activity = gpxParser()
-    map_json = activity.complete_gpx_parser_main(gpx_file_test)
+    activity.complete_gpx_parser_main(gpx_file_test)
 
-    return jsonify(map_json)
+    return jsonify(activity.map_json)
 
 
 

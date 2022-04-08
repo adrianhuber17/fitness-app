@@ -27,6 +27,24 @@ class gpxParser:
         self.center_longitude = None
         self.coordinates = None
         self.map_json = None
+        self.hr_stats_json = None
+        self.elevation_stats_json = None
+
+    def complete_gpx_parser_main(self,gpx_upload):
+
+        """executes all the functions required to get attributes completed"""
+
+        #--> functions needed to get the self.map_json attribute for map
+        self.get_route_info_json(gpx_upload)
+        self.route_info_df()
+        self.get_center_latitude()
+        self.get_center_longitude()
+        self.get_coordinates_full_route()
+        self.get_json_for_map()
+
+        #--> functions needed to get heart_rate attribute, elevation extremes
+        self.get_heart_rate_min_max_avg()
+        self.get_elevation_extremes()
 
     def get_route_info_json(self,gpx_upload):
         """Parameter: .gpx file, Returns: a json with the route information"""
@@ -112,16 +130,36 @@ class gpxParser:
                         'latitude': self.center_latitude,
                         'longitude': self.center_longitude}
 
-    def complete_gpx_parser_main(self,gpx_upload):
-        self.get_route_info_json(gpx_upload)
-        self.route_info_df()
-        self.get_center_latitude()
-        self.get_center_longitude()
-        self.get_coordinates_full_route()
-        self.get_json_for_map()
+    def get_heart_rate_min_max_avg(self):
 
-        return self.map_json
+        """returns a JSON with heart rate max,min, and average"""
 
+        route_df_hr_int = self.route_df['heart_rate'].astype(int)
+        min_hr = route_df_hr_int.min()
+        max_hr = route_df_hr_int.max()
+        avg_hr = route_df_hr_int.mean()
 
+        self.hr_stats_json = {'max_heart_rate':max_hr,
+                        'min_heart_rate':min_hr,
+                        'average_heart_rate': avg_hr}
+        
+        return self.hr_stats_json
 
+    def get_elevation_extremes(self):
+        """returns a JSON with max, min elevation (altitude range)"""
+        route_df_elevation_int = self.route_df['elevation'].astype(int)
+        min_elevation_meters= route_df_elevation_int.min()
+        max_elevation_meters = route_df_elevation_int.max()
+        min_elevation_feet = min_elevation_meters * 3.28084
+        max_elevation_feet = max_elevation_meters * 3.28084
 
+        self.elevation_stats_json = {'extreme_elevation_meters':{'min_elevation_meters':min_elevation_meters,
+                                                                'max_elevation_meters':max_elevation_meters},
+                                    'extreme_elevation_feet':{'min_elevation_feet':min_elevation_feet,
+                                                              'max_elevation_feet':max_elevation_feet}}
+
+        return self.elevation_stats_json
+
+#minimum=7.0, maximum=446.8
+# print(gpx.get_elevation_extremes()) # altitude range -> MinimumMaximum(minimum=3.2, maximum=454.2)
+# print(gpx.get_uphill_downhill()) # elevation gained and lost -> UphillDownhill(uphill=494.65999999999934, downhill=482.05999999999773)
