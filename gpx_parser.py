@@ -29,6 +29,8 @@ class gpxParser:
         self.map_json = None
         self.hr_stats_json = None
         self.elevation_stats_json = None
+        self.ride_date = None
+        self.ride_name = None
 
     def complete_gpx_parser_main(self,gpx_upload):
 
@@ -52,6 +54,13 @@ class gpxParser:
         with open(gpx_upload,'r') as gpx_file:
             gpx = gpxpy.parse(gpx_file)
 
+        self.ride_date = gpx.tracks[0].segments[0].points[0].time
+        
+        if gpx.tracks[0].name:
+            self.ride_name = gpx.tracks[0].name
+        else:
+            self.ride_name = "Your Ride"
+
         for track in gpx.tracks:
             for segment in track.segments:
                 for point in segment.points:
@@ -59,6 +68,7 @@ class gpxParser:
                         time_ = point.time
                         time_conv = time_.strftime('%H:%M:%S')
                     else:
+                        time_ = '0'
                         time_conv = '0'
                     power,hr,atemp,cad = '0','0','0','0'
                     for el in point.extensions:
@@ -77,7 +87,8 @@ class gpxParser:
                         'latitude': point.latitude,
                         'longitude': point.longitude,
                         'elevation': point.elevation,
-                        'time': time_conv,
+                        'time_date_time': time_,
+                        'time_conv': time_conv,
                         'heart_rate':hr,
                         'temperature':atemp,
                         'cadence': cad,
