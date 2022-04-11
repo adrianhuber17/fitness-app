@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log-in page</title>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class=flashes>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+    {% endwith %}
+
+</head>
+<body>
+    <h1>Register Account</h1>
+    <form action="/" method="post">
+        <label for="email">Email: </label><input type="text" name="email" id="email" required><br>
+        <label for="password">Password: </label><input type="password" name="password" id="password" required><br>
+        <label for="first_name">First Name: </label><input type="text" name="first_name" id="first_name" required><br>
+        <label for="last_name">Last Name: </label><input type="text" name="last_name" id="last_name" required><br>
+        <button type="submit">Create Account</button>
+    </form>
+
+    <h1>Log-in</h1>
+    <form action="/login" method="post">
+        <label for="ex_email">Email: </label><input type="text" name="ex_email" id="ex_email" required ><br>
+        <label for="ex_password">Password: </label><input type="password" name="ex_password" id="ex_password" required><br>
+        <button type="submit">Log in</button>
+    </form>
+    
+</body>
+</html>

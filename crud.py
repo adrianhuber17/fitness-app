@@ -12,6 +12,29 @@ def create_user(email,first_name,last_name,password):
 
     return user
 
+#add funtion for get user object by email
+def get_user(email):
+    """Get a user object based on email"""
+    return
+
+
+def is_user_correct(email):
+    """Confirm if user exists based on an email"""
+
+    is_email = db.session.query(User).filter_by(email=email).first()
+    
+    if is_email:
+        return True
+
+def is_password_correct(password):
+    """confirms if a password for log in is correct"""
+
+    is_password = db.session.query(User).filter_by(password=password).first()
+
+    if is_password:
+        return True
+
+
 def create_activity(user,date,ride_name,ride_caption,max_elevation,
                     min_elevation, activity_json):
     """Create and return a new activity"""
@@ -40,7 +63,7 @@ def follow_a_user(user_id_user,user_id_to_follow):
 #def is_following():
 # Add a function to check if user is following another user.
 
-#add funtion for get user object by id
+
 
 if __name__ == '__main__':
     from server import app
