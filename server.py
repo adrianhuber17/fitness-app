@@ -1,4 +1,3 @@
-from crypt import methods
 from flask import Flask, redirect, render_template,jsonify, request, session, flash
 import os
 from gpx_parser import gpxParser
