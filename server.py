@@ -28,7 +28,7 @@ def login():
     if crud.is_user_correct(user_email) == True and crud.is_password_correct(password) == True:
         session['email'] = session.get('email',user_email)
         return redirect('/')
-    elif crud.is_user_exist(user_email) == None:
+    elif crud.is_user_correct(user_email) == None:
         print('wrong user_name')
         flash('Username is incorrect')
         return redirect('/')
@@ -49,8 +49,22 @@ def logout():
 @app.route("/create-account",methods=["POST"])
 def create_user():
     """creates a new user and adds them to the database"""
-    # work on this section
-    return 
+    email = request.form.get('email')
+    password = request.form.get('password')
+    first_name = request.form.get('first_name')
+    last_name = request.form.get('last_name')
+
+    if crud.is_user_correct(email) == None:
+        new_user = crud.create_user(email,first_name,last_name,password)
+        db.session.add(new_user)
+        db.session.commit()
+        flash("Account successfully created")
+        return redirect('/')
+    else:
+        flash("User already exist, please try a different email")
+        return redirect('/')
+
+
 
 @app.route("/map.json")
 def get_activity_map_data():
@@ -64,7 +78,7 @@ def get_activity_map_data():
 
 
 if __name__ == "__main__":
-    from model import connect_to_db
+    from model import connect_to_db, db
 
     connect_to_db(app)
     app.run(debug=True)
