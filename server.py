@@ -76,7 +76,8 @@ def get_user_data():
 
     email = session['email']
     user_json = crud.get_user(email)
-
+    #add to user json another key for total feet climbed meters and feet
+    #need to update model to accept json for elevation and rerun models
     return jsonify([user_json])
 
 @app.route("/map.json")
