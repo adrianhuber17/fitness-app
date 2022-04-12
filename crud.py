@@ -40,12 +40,16 @@ def is_password_correct(password):
         return True
 
 
-def create_activity(user,date,ride_name,ride_caption,max_elevation,
-                    min_elevation, activity_json):
+def create_activity(user,date,ride_name,ride_caption,
+                    max_min_elevation_json,
+                    elevation_gain_loss_json,
+                    activity_json):
     """Create and return a new activity"""
 
-    activity = Activity(user=user,date=date,ride_name=ride_name,ride_caption=ride_caption,
-                        max_elevation=max_elevation,min_elevation=min_elevation,
+    activity = Activity(user=user,date=date,ride_name=ride_name,
+                        ride_caption=ride_caption,
+                        max_min_elevation_json=max_min_elevation_json,
+                        elevation_gain_loss_json=elevation_gain_loss_json,
                         activity_json=activity_json)  
 
     return activity

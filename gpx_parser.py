@@ -31,6 +31,7 @@ class gpxParser:
         self.elevation_stats_json = None
         self.ride_date = None
         self.ride_name = None
+        self.elevation_gain_loss_json = None
 
     def complete_gpx_parser_main(self,gpx_upload):
 
@@ -56,6 +57,10 @@ class gpxParser:
 
         self.ride_date = gpx.tracks[0].segments[0].points[0].time
         
+        elevation_loss_meters_float = gpx.get_uphill_downhill().downhill
+        elevation_gain_meters_float = gpx.get_uphill_downhill().uphill
+        self.get_elevation_gain_loss_json(elevation_loss_meters_float,elevation_gain_meters_float)
+
         if gpx.tracks[0].name:
             self.ride_name = gpx.tracks[0].name
         else:
@@ -164,9 +169,27 @@ class gpxParser:
         min_elevation_feet = min_elevation_meters * 3.28084
         max_elevation_feet = max_elevation_meters * 3.28084
 
-        self.elevation_stats_json = {'extreme_elevation_meters':{'min_elevation_meters':min_elevation_meters,
-                                                                'max_elevation_meters':max_elevation_meters},
-                                    'extreme_elevation_feet':{'min_elevation_feet':min_elevation_feet,
-                                                              'max_elevation_feet':max_elevation_feet}}
+        min_elevation_meters_str = str(min_elevation_meters)
+        max_elevation_meters_str = str(max_elevation_meters)
+        min_elevation_feet_str = str(min_elevation_feet)
+        max_elevation_feet_str = str(max_elevation_feet)
 
+        
+        self.elevation_stats_json = {'extreme_elevation_meters':{'min_elevation_meters':min_elevation_meters_str,
+                                                                'max_elevation_meters':max_elevation_meters_str},
+                                    'extreme_elevation_feet':{'min_elevation_feet':min_elevation_feet_str,
+                                                              'max_elevation_feet':max_elevation_feet_str}}
+                                                              
         return self.elevation_stats_json
+
+    def get_elevation_gain_loss_json(self,elevation_loss_meters_float,elevation_gain_meters_float):
+        elevation_loss_meters = str(elevation_loss_meters_float)
+        elevation_gain_meters = str(elevation_gain_meters_float)
+        elevation_loss_feet = str(elevation_loss_meters_float * 3.28084)
+        elevation_gain_feet = str(elevation_gain_meters_float * 3.28084)
+
+        self.elevation_gain_loss_json = {'elevation_loss_meters':elevation_loss_meters,
+                                    'elevation_gain_meters':elevation_gain_meters,
+                                    'elevation_loss_feet':elevation_loss_feet,
+                                    'elevation_gain_feet':elevation_gain_feet}
+        return self.elevation_gain_loss_json

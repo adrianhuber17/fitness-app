@@ -77,13 +77,12 @@ def get_user_data():
     email = session['email']
     user_json = crud.get_user(email)
     #add to user json another key for total feet climbed meters and feet
-    #need to update model to accept json for elevation and rerun models
     return jsonify([user_json])
 
 @app.route("/map.json")
 def get_activity_map_data():
     """endpoint with cordinates JSON for the map"""
-    gpx_file_test = '/Users/adrianhuber/fitness-web-app/gpx_files/Mike_Ride.gpx'
+    gpx_file_test = '/Users/adrianhuber/fitness-web-app/gpx_files/Adrian_Ride.gpx'
     activity = gpxParser()
     activity.complete_gpx_parser_main(gpx_file_test)
 

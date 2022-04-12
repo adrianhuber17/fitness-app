@@ -43,8 +43,8 @@ class Activity(db.Model):
     date = db.Column(db.DateTime)
     ride_name = db.Column(db.String(60))
     ride_caption = db.Column(db.String(60))
-    max_elevation = db.Column(db.Integer)
-    min_elevation = db.Column(db.Integer)
+    max_min_elevation_json = db.Column(JSON)
+    elevation_gain_loss_json = db.Column(JSON)
     activity_json = db.Column(JSON)
 
     user = db.relationship("User", backref = 'activities')
@@ -67,4 +67,4 @@ if __name__ == "__main__":
 
     connect_to_db(app)
     print("Successfully connected to the database")
-    # db.create_all() -> only used to create database from scratch
+    # db.create_all() # -> only used to create database from scratch
