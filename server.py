@@ -70,6 +70,15 @@ def get_user_profile():
 
     return render_template("user-profile.html")
 
+@app.route("/user-data.json")
+def get_user_data():
+    """returns a JSON with user data"""
+
+    email = session['email']
+    user_json = crud.get_user(email)
+
+    return jsonify([user_json])
+
 @app.route("/map.json")
 def get_activity_map_data():
     """endpoint with cordinates JSON for the map"""

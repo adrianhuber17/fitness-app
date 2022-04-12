@@ -15,7 +15,12 @@ def create_user(email,first_name,last_name,password):
 #add funtion for get user object by email
 def get_user(email):
     """Get a user object based on email"""
-    return
+    user = db.session.query(User).filter_by(email=email).one()
+    user_json = {'user_id':user.user_id,
+                'email':user.email,
+                'first_name': user.first_name,
+                'last_name': user.last_name}
+    return user_json
 
 
 def is_user_correct(email):
