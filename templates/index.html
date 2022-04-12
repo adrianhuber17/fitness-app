@@ -35,12 +35,17 @@
                     right:50px;
                     top:50px;
                     }
+                .usrPBtn{
+                    position:fixed;
+                    right:50px;
+                    top:80px;
+                    }
             </style>
         
 </head>
 <body>
 
-    <h1>Here is your map</h1>
+    <h1>Latest Ride</h1>
     <div class="folium-map" id="mapDisplay" ></div><br>
 
     <form name="logout" method="post" action="/logout">
@@ -48,6 +53,10 @@
         <button type="submit">Log out</button>
         </label>
     </form>
+    
+    <button class="usrPBtn" id="uerProfileBtn">Profile</button>
+
 <script src="/static/map_creator.js"></script>
+<script src="/static/userProfileBtn.js"></script>
 </body>
 </html>

@@ -64,12 +64,16 @@ def create_user():
         flash("User already exist, please try a different email")
         return redirect('/')
 
+@app.route("/user-profile")
+def get_user_profile():
 
+
+    return render_template("user-profile.html")
 
 @app.route("/map.json")
 def get_activity_map_data():
     """endpoint with cordinates JSON for the map"""
-    gpx_file_test = 'Camilo_Ride.gpx'
+    gpx_file_test = '/Users/adrianhuber/fitness-web-app/gpx_files/Mike_Ride.gpx'
     activity = gpxParser()
     activity.complete_gpx_parser_main(gpx_file_test)
 
