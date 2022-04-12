@@ -76,7 +76,9 @@ def get_user_data():
 
     email = session['email']
     user_json = crud.get_user(email)
-    #add to user json another key for total feet climbed meters and feet
+    #create CRUD function to get elevation_gain_loss_json
+    #elevation_gain_loss_json = crud.get_elevation_gain_loss(email)
+    #create a front end table to shot elevation gain loss and create a toggle to change from feet to meters
     return jsonify([user_json])
 
 @app.route("/map.json")
