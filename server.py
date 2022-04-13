@@ -1,6 +1,7 @@
 from flask import Flask, redirect, render_template,jsonify, request, session, flash
 import os
 from gpx_parser import gpxParser
+from gpx_parser_new import gpxParserNew
 import crud
 
 app = Flask(__name__)
@@ -76,10 +77,10 @@ def get_user_data():
 
     email = session['email']
     user_json = crud.get_user(email)
-    #create CRUD function to get elevation_gain_loss_json
-    #elevation_gain_loss_json = crud.get_elevation_gain_loss(email)
-    #create a front end table to shot elevation gain loss and create a toggle to change from feet to meters
+
     return jsonify([user_json])
+
+#create a new route for total feet climbed and loss for user-profile
 
 @app.route("/map.json")
 def get_activity_map_data():
@@ -90,6 +91,19 @@ def get_activity_map_data():
 
     return jsonify(activity.map_json)
 
+@app.route("/post-gpx-parser",methods = ["POST"])
+def get_json_frontend():
+    
+    file_transfer_object = request.files.get('file')
+    
+    encoded_json_file = file_transfer_object.stream.read()
+
+    gpx_file = encoded_json_file.decode('utf-8')
+
+    activity = gpxParserNew()
+
+    activity.complete_gpx_parser_main(gpx_file)
+    return 'hello'
 
 
 if __name__ == "__main__":
