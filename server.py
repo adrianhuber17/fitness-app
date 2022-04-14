@@ -95,15 +95,23 @@ def get_activity_map_data():
 def get_json_frontend():
     
     file_transfer_object = request.files.get('file')
-    
     encoded_json_file = file_transfer_object.stream.read()
-
     gpx_file = encoded_json_file.decode('utf-8')
-
     activity = gpxParserNew()
-
     activity.complete_gpx_parser_main(gpx_file)
-    return 'hello'
+   
+    # need to add the ride comment coming in as a post request
+    # elevation_gain_loss_json = activity.elevation_gain_loss_json
+    # max_min_elevation_json = activity.elevation_stats_json
+    # activity_json = activity.map_json
+    # date = activity.ride_date
+    # ride_name = activity.ride_date
+
+    ## need to implement posting ride into the database for the user
+
+    value = {'ok':200}
+
+    return jsonify(value)
 
 
 if __name__ == "__main__":

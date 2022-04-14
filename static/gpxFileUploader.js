@@ -12,12 +12,12 @@ uploadForm.addEventListener('submit', function(e) {
         hearders: {'Content-Type': 'multipart/form-data'}
     })
     .then(resp => resp.json())
-    .then(data => {
+    .then(data => { 
         if (data.errors) {
             alert(data.errors)
         }
         else {
-            console.log(data)
+            alert('.gpx file uploaded successfully')
         }
     })
 })
