@@ -85,11 +85,12 @@ def get_user_data():
 @app.route("/map.json")
 def get_activity_map_data():
     """endpoint with cordinates JSON for the map"""
-    gpx_file_test = '/Users/adrianhuber/fitness-web-app/gpx_files/Adrian_Ride.gpx'
-    activity = gpxParser()
-    activity.complete_gpx_parser_main(gpx_file_test)
+    
+    email = session['email']
 
-    return jsonify(activity.map_json)
+    latest_activity_json_map = crud.get_latest_activity(email)
+
+    return jsonify(latest_activity_json_map)
 
 @app.route("/post-gpx-parser",methods = ["POST"])
 def get_ride_gpx_create_activity():

@@ -1,6 +1,7 @@
 """CRUD operations"""
 
 from model import db, User, Activity, connect_to_db
+from sqlalchemy import desc
 
 #CRUD helper functions
 
@@ -59,6 +60,19 @@ def create_activity(user,date,ride_name,ride_caption,
                         activity_json=activity_json)  
 
     return activity
+
+def get_latest_activity(email):
+    """Returns the latest activity JSON"""
+    
+    user_object = User.query.filter_by(email = email).first()
+    user_id = user_object.user_id
+
+    latest_ride_object = db.session.query(Activity).filter_by(user_id = user_id).order_by(desc(Activity.date)).first()
+    if latest_ride_object is not None:
+        latest_ride_json = latest_ride_object.activity_json
+        return latest_ride_json
+    else:
+        return None
 
 def follow_a_user(user_id_user,user_id_to_follow):
     """follow another user"""
