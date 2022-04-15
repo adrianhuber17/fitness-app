@@ -1,4 +1,3 @@
-#to be deleted once i can get the map from the gpx_parser_new.py
 from datetime import time
 import gpxpy
 import gpxpy.gpx
@@ -52,8 +51,8 @@ class gpxParser:
     def get_route_info_json(self,gpx_upload):
         """Parameter: .gpx file, Returns: a json with the route information"""
 
-        with open(gpx_upload,'r') as gpx_file:
-            gpx = gpxpy.parse(gpx_file)
+  
+        gpx = gpxpy.parse(gpx_upload)
 
         self.ride_date = gpx.tracks[0].segments[0].points[0].time
         

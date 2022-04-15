@@ -1,7 +1,6 @@
 from flask import Flask, redirect, render_template,jsonify, request, session, flash
 import os
 from gpx_parser import gpxParser
-from gpx_parser_new import gpxParserNew
 import crud
 
 app = Flask(__name__)
@@ -107,7 +106,7 @@ def get_ride_gpx_create_activity():
     file_transfer_object = request.files.get('file')
     encoded_json_file = file_transfer_object.stream.read()
     gpx_file = encoded_json_file.decode('utf-8')
-    activity = gpxParserNew()
+    activity = gpxParser()
     activity.complete_gpx_parser_main(gpx_file)
     
     # Activity Details
