@@ -1,11 +1,14 @@
 const uploadForm = document.querySelector('.upload')
 uploadForm.addEventListener('submit', function(e) {
     e.preventDefault()
+
     let file = e.target.uploadFile.files[0]
-    console.log(file)
+    let comment = document.querySelector("input#ridecap").value;
+
     let formData = new FormData()
     formData.append('file', file)
-    console.log(formData)
+    formData.append('ride-caption',comment)
+
     fetch('/post-gpx-parser', {
         method: 'POST',
         body: formData,

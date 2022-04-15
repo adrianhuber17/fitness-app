@@ -76,7 +76,7 @@ def get_user_data():
     """returns a JSON with user data"""
 
     email = session['email']
-    user_json = crud.get_user(email)
+    user_json = crud.get_user_json(email)
 
     return jsonify([user_json])
 
@@ -92,23 +92,35 @@ def get_activity_map_data():
     return jsonify(activity.map_json)
 
 @app.route("/post-gpx-parser",methods = ["POST"])
-def get_json_frontend():
-    
+def get_ride_gpx_create_activity():
+    """creates an activity for a logged in user"""
+
+    # User in session
+    email = session['email']
+    user = crud.get_user(email)
+
+    # User ride comment
+    ride_caption = request.form.get('ride-caption')
+
+    # User Activity transfer
     file_transfer_object = request.files.get('file')
     encoded_json_file = file_transfer_object.stream.read()
     gpx_file = encoded_json_file.decode('utf-8')
     activity = gpxParserNew()
     activity.complete_gpx_parser_main(gpx_file)
-   
-    # need to add the ride comment coming in as a post request
-    # elevation_gain_loss_json = activity.elevation_gain_loss_json
-    # max_min_elevation_json = activity.elevation_stats_json
-    # activity_json = activity.map_json
-    # date = activity.ride_date
-    # ride_name = activity.ride_date
-
-    ## need to implement posting ride into the database for the user
-
+    
+    # Activity Details
+    elevation_gain_loss_json = activity.elevation_gain_loss_json
+    max_min_elevation_json = activity.elevation_stats_json
+    activity_json = activity.map_json
+    date = activity.ride_date
+    ride_name = activity.ride_name
+    activity = crud.create_activity(user,date,ride_name,
+                                    ride_caption,max_min_elevation_json,
+                                    elevation_gain_loss_json,activity_json)
+    db.session.add(activity)
+    db.session.commit()
+     
     value = {'ok':200}
 
     return jsonify(value)
