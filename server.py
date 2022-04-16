@@ -125,6 +125,14 @@ def get_ride_gpx_create_activity():
 
     return jsonify(value)
 
+@app.route("/get-user-json")
+def get_users():
+    """gets users and sends to front end for searching"""
+
+    user_json = crud.get_all_users_json()
+    
+    return jsonify(user_json)
+
 
 if __name__ == "__main__":
     from model import connect_to_db, db

@@ -40,11 +40,17 @@
                     right:50px;
                     top:80px;
                     }
+                #searchbar{
+                    margin-bottom: 10px;
+                    margin-left: 10px;
+                    padding:10px;
+                    border-radius: 5px;
+                }
             </style>
         
 </head>
 <body>
-
+    
     <h1>Latest Ride</h1>
     <div class="folium-map" id="mapDisplay" ></div><br>
 
@@ -56,17 +62,29 @@
     
     <button class="usrPBtn" id="uerProfileBtn">Profile</button>
 
+    <div>
+        <h2>User search</h2>
+        <input id="searchbar" type="text"
+            name="search" placeholder="Search user..">
+            <ul></ul>
+    </div>
 
-    <form class="upload">
-        <input type="file" name="uploadFile" required /><br>
-        <label for="ridecap">Ride Caption:</label>
-        <input required id="ridecap" type="text" name="ride-caption"/><br>
-        <input type="submit" />
-     </form>
+
+    <div>
+        <form class="upload">
+            <h2>Upload a new ride</h2>
+            <input type="file" name="uploadFile" required /><br>
+            <label for="ridecap">Ride Caption:</label>
+            <input required id="ridecap" type="text" name="ride-caption"/><br>
+            <input type="submit" value="submit" />
+        </form>
+    </div>
+
 
 <script src="/static/mapCreator.js"></script>
 <script src="/static/userProfileBtn.js"></script>
 <script src="/static/gpxFileUploader.js"></script>
+<script src="/static/searchUser.js"></script>
 </body>
 </html>
 

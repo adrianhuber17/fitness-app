@@ -30,6 +30,18 @@ def get_user(email):
 
     return user
 
+def get_all_users_json():
+
+    users = db.session.query(User).all()
+
+    users_list = []
+    for user in users:
+        users_list.append(user.first_name + " " + user.last_name)
+
+    users_json = {'users':users_list}
+
+    return users_json
+
 def is_user_correct(email):
     """Confirm if user exists based on an email"""
 
