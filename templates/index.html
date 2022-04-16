@@ -46,6 +46,14 @@
                     padding:10px;
                     border-radius: 5px;
                 }
+                .search li:hover{
+                    color: #2693ff;
+                }
+                .search li {
+                    cursor: pointer;
+                    -webkit-transition: all 0.2s ease-in-out;
+                    transition: all 0.2s ease-in-out;
+                }
             </style>
         
 </head>
@@ -66,7 +74,7 @@
         <h2>User search</h2>
         <input id="searchbar" type="text"
             name="search" placeholder="Search user..">
-            <ul></ul>
+            <ul class="search"></ul>
     </div>
 
 
