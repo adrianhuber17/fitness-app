@@ -23,4 +23,7 @@ uploadForm.addEventListener('submit', function(e) {
             alert('.gpx file uploaded successfully')
         }
     })
+    document.querySelector("input.file").value = ""
+    document.querySelector("#ridecap").value = ""
+
 })
