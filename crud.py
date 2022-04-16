@@ -37,6 +37,7 @@ def is_user_correct(email):
     
     if is_email:
         return True
+    return False
 
 def is_password_correct(password):
     """confirms if a password for log in is correct"""
@@ -45,6 +46,7 @@ def is_password_correct(password):
 
     if is_password:
         return True
+    return False
 
 
 def create_activity(user,date,ride_name,ride_caption,
@@ -71,8 +73,8 @@ def get_latest_activity(email):
     if latest_ride_object is not None:
         latest_ride_json = latest_ride_object.activity_json
         return latest_ride_json
-    else:
-        return None
+    
+    return None
 
 def follow_a_user(user_id_user,user_id_to_follow):
     """follow another user"""

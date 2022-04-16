@@ -28,11 +28,11 @@ def login():
     if crud.is_user_correct(user_email) == True and crud.is_password_correct(password) == True:
         session['email'] = session.get('email',user_email)
         return redirect('/')
-    elif crud.is_user_correct(user_email) == None:
+    elif crud.is_user_correct(user_email) == False:
         print('wrong user_name')
         flash('Username is incorrect')
         return redirect('/')
-    elif crud.is_password_correct(password) == None:
+    elif crud.is_password_correct(password) == False:
         print('wrong password')
         flash('Password is incorrect')
         return redirect('/')
@@ -54,7 +54,7 @@ def create_user():
     first_name = request.form.get('first_name')
     last_name = request.form.get('last_name')
 
-    if crud.is_user_correct(email) == None:
+    if crud.is_user_correct(email) == False:
         new_user = crud.create_user(email,first_name,last_name,password)
         db.session.add(new_user)
         db.session.commit()
@@ -99,7 +99,7 @@ def get_ride_gpx_create_activity():
     email = session['email']
     user = crud.get_user(email)
 
-    # User ride comment
+    # User ride caption
     ride_caption = request.form.get('ride-caption')
 
     # User Activity transfer
