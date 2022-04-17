@@ -1,8 +1,11 @@
+//----------------------------------------------//
+//GET OTHER USER DATA
 let urlLocSearch = window.location.search
 let userId = urlLocSearch.split("=")[1]
 
 let data = {userId:userId}
-console.log(data)
+
+
 fetch('/other-user.json',{
     method:'POST',
     headers:{
@@ -13,7 +16,11 @@ fetch('/other-user.json',{
 .then(response => response.json())
 .then(data => {
 
+    console.log(data)
+
     let otherUserDataObj = data.userData
+    document.querySelector("h1").innerText = `${otherUserDataObj.first_name}'s user information:`
+    document.querySelector("h2").innerText = `${otherUserDataObj.first_name}'s latest ride:`
     document.querySelector("tr#user").insertAdjacentHTML('beforeend',`<td>${otherUserDataObj.user_id}</td>`)
     document.querySelector("tr#user").insertAdjacentHTML('beforeend',`<td>${otherUserDataObj.first_name}</td>`)
     document.querySelector("tr#user").insertAdjacentHTML('beforeend',`<td>${otherUserDataObj.last_name}</td>`)
@@ -65,4 +72,39 @@ fetch('/other-user.json',{
 
     }
 
+    otherUserIsFollowing = data.isFollowing
+    
+    if (otherUserIsFollowing === true){
+        document.querySelector("button").disabled = true;
+        document.querySelector("button").innerHTML = "unfollow"
+    }
+
 })
+
+
+//----------------------------------------------//
+//FOLLOW BUTTON
+let followBtn = document.createElement("button");
+followBtn.innerHTML = "follow";
+document.body.appendChild(followBtn);
+followBtn.addEventListener("click",followOtherUsr)
+
+function followOtherUsr(){
+    fetch('/follow-user',{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(responseData => {
+
+        alert(`following user ${responseData.followStatus}`)
+        document.querySelector("button").innerHTML = "unfollow"
+        document.querySelector("button").disabled = true;
+    })
+
+};
+
+

@@ -2,14 +2,24 @@ fetch('/user-data.json')
 .then(response => response.json())
 .then(responseData => {
 
-    let userData = responseData[0]
+    let userData = responseData.userData
 
     document.querySelector("tr#user").insertAdjacentHTML('beforeend',`<td>${userData.user_id}</td>`)
     document.querySelector("tr#user").insertAdjacentHTML('beforeend',`<td>${userData.first_name}</td>`)
     document.querySelector("tr#user").insertAdjacentHTML('beforeend',`<td>${userData.last_name}</td>`)
     document.querySelector("tr#user").insertAdjacentHTML('beforeend',`<td>${userData.email}</td>`)
 
-    let followerData = responseData[1]
-    console.log(followerData)
+    let followingDataArray = responseData.followingData
+        
+    let tbody = document.getElementById("following")
+
+    for (followingData of followingDataArray){
+        let newRow = tbody.insertRow()
+        newRow.insertAdjacentHTML('beforeend',`<td>${followingData.userId}</td>`)
+        newRow.insertAdjacentHTML('beforeend',`<td>${followingData.firstName}</td>`)
+        newRow.insertAdjacentHTML('beforeend',`<td>${followingData.lastName}</td>`)
+        newRow.insertAdjacentHTML('beforeend',`<td>${followingData.email}</td>`)
+
+    }
     
 })

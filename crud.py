@@ -23,21 +23,23 @@ def get_user_json(email):
                 'last_name': user.last_name}
     return user_json
 
-def get_other_user_data_json(userId):
-    """Get a user JSON based on email"""
+def get_other_user_data_json(user_id_user,other_user_id):
+    """Get a user JSON based on userId"""
     
-    user = db.session.query(User).filter_by(user_id=userId).one()
+    user = db.session.query(User).filter_by(user_id=other_user_id).one()
     other_user_info = {'user_id':user.user_id,
                 'email':user.email,
                 'first_name': user.first_name,
                 'last_name': user.last_name}
     
-    latest_ride_object = db.session.query(Activity).filter_by(user_id = userId).order_by(desc(Activity.date)).first()
+    latest_ride_object = db.session.query(Activity).filter_by(user_id = other_user_id).order_by(desc(Activity.date)).first()
     other_user_latest_act = None
     if latest_ride_object is not None:
         other_user_latest_act = latest_ride_object.activity_json
+
+    is_user_following_other = is_following(user_id_user,other_user_id)
     
-    other_user_data_json = {'userData':other_user_info,'userLatestRide':other_user_latest_act}
+    other_user_data_json = {'userData':other_user_info,'userLatestRide':other_user_latest_act,'isFollowing':is_user_following_other}
 
     return other_user_data_json
 
@@ -125,20 +127,41 @@ def follow_a_user(user_id_user,user_id_to_follow):
 
     user = db.session.query(User).filter_by(user_id = user_id_user).one()
     to_follow = db.session.query(User).filter_by(user_id = user_id_to_follow).one()
-
-    #def is_following(): check if user is following, if not add if they are then do not follow
-
     user.follower.append(to_follow)
 
-    #this is to be added to the flask route. 
-    # db.session.add(user)
-    # db.session.commit()
+    return user
+
+def is_following(user_id_user,user_id_to_follow):
+    """check if user is already following another user"""
+    user_obj = db.session.query(User).filter_by(user_id = user_id_user).one()
+    user_follows_list = user_obj.follower.all()
+    if len(user_follows_list) == 0:
+        return False
+    else:
+        is_user_following = user_obj.follower.filter_by(user_id = user_id_to_follow).first()
+        if is_user_following == None:
+            return False
+        else:
+            return True
+
+def get_user_is_following(user_id):
+    """get user following list"""
+
+    user_obj = db.session.query(User).filter_by(user_id = user_id).one()
+    following_list = user_obj.follower.all()
+    
+    following_info_list = []
+
+    for following in following_list:
+        following_info_list.append({
+                            'userId':following.user_id,
+                            'firstName':following.first_name,
+                            'lastName':following.last_name,
+                            'email':following.email,
+        })
 
 
-#def is_following():
-# Add a function to check if user is following another user.
-
-
+    return following_info_list
 
 if __name__ == '__main__':
     from server import app

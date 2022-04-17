@@ -1,4 +1,3 @@
-from crypt import methods
 from flask import Flask, redirect, render_template,jsonify, request, session, flash
 import os
 from gpx_parser import gpxParser
@@ -80,9 +79,12 @@ def get_user_data():
     user_json = crud.get_user_json(email)
 
     #follower data work on this
-    follower_json = {'num':'1'}
+    user_id = crud.get_user_id(email)
+    following_info_list = crud.get_user_is_following(user_id)
 
-    return jsonify([user_json,follower_json])
+    userProfileJson = {'userData':user_json,'followingData':following_info_list}
+
+    return jsonify(userProfileJson)
 
 #create a new route for total feet climbed and loss for user-profile
 
@@ -145,11 +147,34 @@ def other_user_profile():
 
 @app.route('/other-user.json',methods=["POST"])
 def get_other_user_json():
+    """gets personal data and latest ride data for another user"""
 
-    userId = request.json.get('userId')
-    otherUserDataJson = crud.get_other_user_data_json(userId)
+    #logged in user Data
+    user_email = session['email']
+    user_id_user = crud.get_user_id(user_email)
+    #Other user Data
+    other_user_id = request.json.get('userId')
+    otherUserDataJson = crud.get_other_user_data_json(user_id_user,other_user_id)
     
     return jsonify(otherUserDataJson)
+
+@app.route('/follow-user',methods=["POST"])
+def follow_other_user():
+    """route to follow another user"""
+    #logged in user Data
+    user_email = session['email']
+    user_id_user = crud.get_user_id(user_email)
+
+    #Other user Data
+    user_id_to_follow = request.json.get('userId')
+
+    follow_user = crud.follow_a_user(user_id_user,user_id_to_follow)
+    db.session.add(follow_user)
+    db.session.commit()
+
+    followedStatus = 'ok'
+
+    return jsonify({'followStatus':followedStatus})
 
 if __name__ == "__main__":
     from model import connect_to_db, db
