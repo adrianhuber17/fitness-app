@@ -13,7 +13,7 @@ def create_user(email,first_name,last_name,password):
 
     return user
 
-#add funtion for get user object by email
+
 def get_user_json(email):
     """Get a user JSON based on email"""
     user = db.session.query(User).filter_by(email=email).one()
@@ -22,6 +22,25 @@ def get_user_json(email):
                 'first_name': user.first_name,
                 'last_name': user.last_name}
     return user_json
+
+def get_other_user_data_list(userId):
+    """Get a user JSON based on email"""
+    
+    user = db.session.query(User).filter_by(user_id=userId).one()
+    other_user_info = {'user_id':user.user_id,
+                'email':user.email,
+                'first_name': user.first_name,
+                'last_name': user.last_name}
+    
+    latest_ride_object = db.session.query(Activity).filter_by(user_id = userId).order_by(desc(Activity.date)).first()
+    if latest_ride_object is not None:
+        other_user_latest_act = latest_ride_object.activity_json
+    else:
+        other_user_latest_act = None
+    
+    other_user_data_list = [other_user_info,other_user_latest_act]
+
+    return other_user_data_list
 
 def get_user(email):
     """get a User object"""

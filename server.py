@@ -138,18 +138,19 @@ def get_users():
     
     return jsonify(user_json)
 
-@app.route('/route-to-other-user')
-def route_to_other_user_profile():
-    """Redirects to other user's profile"""
-    return jsonify({'redirect':'/other-user-profile'})
-
 @app.route('/other-user-profile')
 def other_user_profile():
     """renders user profile"""
-    print(request.args)
-    # continue here to built other user
     return render_template('other-user-profile.html')
 
+@app.route('/other-user.json',methods=["POST"])
+def get_other_user_json():
+
+    userId = request.json.get('userId')
+    otherUserDataList = crud.get_other_user_data_list(userId)
+    otherUserDataJson = {'userData':otherUserDataList}
+
+    return jsonify(otherUserDataJson)
 
 if __name__ == "__main__":
     from model import connect_to_db, db

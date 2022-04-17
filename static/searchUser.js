@@ -34,10 +34,7 @@ function searchUser(){
         let selectedUser = e.target.innerText;
         let userObj = data.filter(user => user.fullName === selectedUser)
         let userId = userObj[0].userId
-        
-        fetch('/route-to-other-user?')
-        .then(response => response.json())
-        .then(data => location.assign(`${data.redirect}?userId=${userId}`))
+        location.assign(`/other-user-profile?userId=${userId}`)
       })
    
     });
