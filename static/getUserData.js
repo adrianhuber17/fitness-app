@@ -10,7 +10,10 @@ fetch('/user-data.json')
     document.querySelector("tr#user").insertAdjacentHTML('beforeend',`<td>${userData.email}</td>`)
 
     let followingDataArray = responseData.followingData
-        
+    let followingCount = followingDataArray.length
+    
+    document.getElementById("following-h1").innerText = `Following ${followingCount} users`
+
     let tbody = document.getElementById("following")
 
     for (followingData of followingDataArray){
