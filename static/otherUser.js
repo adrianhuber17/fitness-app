@@ -13,13 +13,13 @@ fetch('/other-user.json',{
 .then(response => response.json())
 .then(data => {
 
-    let otherUserDataObj = data.userData[0]
+    let otherUserDataObj = data.userData
     document.querySelector("tr#user").insertAdjacentHTML('beforeend',`<td>${otherUserDataObj.user_id}</td>`)
     document.querySelector("tr#user").insertAdjacentHTML('beforeend',`<td>${otherUserDataObj.first_name}</td>`)
     document.querySelector("tr#user").insertAdjacentHTML('beforeend',`<td>${otherUserDataObj.last_name}</td>`)
     document.querySelector("tr#user").insertAdjacentHTML('beforeend',`<td>${otherUserDataObj.email}</td>`)
 
-    let otherUserRideObj = data.userData[1]
+    let otherUserRideObj = data.userLatestRide
 
     if(otherUserRideObj !== null){
         let latitude = otherUserRideObj.latitude

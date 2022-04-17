@@ -147,9 +147,8 @@ def other_user_profile():
 def get_other_user_json():
 
     userId = request.json.get('userId')
-    otherUserDataList = crud.get_other_user_data_list(userId)
-    otherUserDataJson = {'userData':otherUserDataList}
-
+    otherUserDataJson = crud.get_other_user_data_json(userId)
+    
     return jsonify(otherUserDataJson)
 
 if __name__ == "__main__":
