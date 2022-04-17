@@ -17,22 +17,42 @@
     </style>
 </head>
 <body>
-    <h1>User Profile Information:</h1>
+    <div>
+        <h1>User Profile Information:</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id ="user">
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr id ="add">
-            </tr>
-        </tbody>
-    </table>
+    <div>
+        <h1>Following</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id ="follower">
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
 
     <script src="/static/getUserData.js"></script>
 </body>

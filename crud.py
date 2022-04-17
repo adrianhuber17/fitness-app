@@ -30,17 +30,31 @@ def get_user(email):
 
     return user
 
-def get_all_users_json():
+def get_user_id(email):
+    """get a User id"""
 
+    user = db.session.query(User).filter_by(email=email).one()
+    user_id = user.user_id
+
+    return user_id
+
+def get_all_users_list():
+    """get a list of all users and ids [{'fullName':Adrian Huber,'userId':1}]"""
     users = db.session.query(User).all()
 
     users_list = []
     for user in users:
-        users_list.append(user.first_name + " " + user.last_name)
+        first_name = user.first_name
+        last_name = user.last_name
+        full_name = first_name + ' ' + last_name
+        user_id = user.user_id
+        users_list.append({'fullName':full_name,'userId':user_id})
 
-    users_json = {'users':users_list}
+    return users_list
 
-    return users_json
+def get_followers(email):
+
+    return
 
 def is_user_correct(email):
     """Confirm if user exists based on an email"""

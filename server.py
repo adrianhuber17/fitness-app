@@ -1,3 +1,4 @@
+from crypt import methods
 from flask import Flask, redirect, render_template,jsonify, request, session, flash
 import os
 from gpx_parser import gpxParser
@@ -74,10 +75,14 @@ def get_user_profile():
 def get_user_data():
     """returns a JSON with user data"""
 
+    # user data
     email = session['email']
     user_json = crud.get_user_json(email)
 
-    return jsonify([user_json])
+    #follower data work on this
+    follower_json = {'num':'1'}
+
+    return jsonify([user_json,follower_json])
 
 #create a new route for total feet climbed and loss for user-profile
 
@@ -129,9 +134,21 @@ def get_ride_gpx_create_activity():
 def get_users():
     """gets users and sends to front end for searching"""
 
-    user_json = crud.get_all_users_json()
+    user_json = crud.get_all_users_list()
     
     return jsonify(user_json)
+
+@app.route('/route-to-other-user')
+def route_to_other_user_profile():
+    """Redirects to other user's profile"""
+    return jsonify({'redirect':'/other-user-profile'})
+
+@app.route('/other-user-profile')
+def other_user_profile():
+    """renders user profile"""
+    print(request.args)
+    # continue here to built other user
+    return render_template('other-user-profile.html')
 
 
 if __name__ == "__main__":

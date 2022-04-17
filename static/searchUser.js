@@ -7,16 +7,16 @@ function searchUser(){
     .then(response => response.json())
     .then(data => {
 
-
-    let userList = data.users
+    let userList = data.map(user => user.fullName)
     console.log(userList)
+   
 
     document.querySelector("#searchbar").addEventListener('input',(e)=>{
 
         let users = [];
         if(e.target.value){
             users = userList.filter(user => user.toLowerCase().includes(e.target.value))
-            users = users.map(user => `<li> ${user} </li>`)
+            users = users.map((user,index) => `<li> ${user} </li>`)
         }
         showUsers(users)
 
@@ -28,8 +28,17 @@ function searchUser(){
         document.querySelector('ul').innerHTML = html
 
     }
+
+    document.querySelector("ul").addEventListener('click',(e)=>{
+        
+        let selectedUser = e.target.innerText;
+        let userObj = data.filter(user => user.fullName === selectedUser)
+        let userId = userObj[0].userId
+        
+        fetch('/route-to-other-user?')
+        .then(response => response.json())
+        .then(data => location.assign(`${data.redirect}?userId=${userId}`))
+      })
    
     });
-
 }
-
