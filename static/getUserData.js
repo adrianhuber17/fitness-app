@@ -16,13 +16,14 @@ fetch('/user-data.json')
 
     let tbody = document.getElementById("following")
 
-    for (followingData of followingDataArray){
+    followingDataArray.forEach(followingData => {
+
         let newRow = tbody.insertRow()
         newRow.insertAdjacentHTML('beforeend',`<td>${followingData.userId}</td>`)
         newRow.insertAdjacentHTML('beforeend',`<td>${followingData.firstName}</td>`)
         newRow.insertAdjacentHTML('beforeend',`<td>${followingData.lastName}</td>`)
         newRow.insertAdjacentHTML('beforeend',`<td>${followingData.email}</td>`)
 
-    }
+    })
     
 })
