@@ -75,8 +75,11 @@ fetch('/other-user.json',{
     otherUserIsFollowing = data.isFollowing
     
     if (otherUserIsFollowing === true){
-        document.querySelector("button").disabled = true;
-        document.querySelector("button").innerHTML = "unfollow"
+        document.getElementById("follow").disabled = true;
+        // document.querySelector("button").innerHTML = "unfollow"
+    }
+    else{
+        document.getElementById("unfollow").disabled = true;
     }
 
 })
@@ -84,9 +87,10 @@ fetch('/other-user.json',{
 
 //----------------------------------------------//
 //FOLLOW BUTTON
-let followBtn = document.createElement("button");
-followBtn.innerHTML = "follow";
-document.body.appendChild(followBtn);
+
+let followBtn = document.getElementById("follow")
+
+
 followBtn.addEventListener("click",followOtherUsr)
 
 function followOtherUsr(){
@@ -101,10 +105,37 @@ function followOtherUsr(){
     .then(responseData => {
 
         alert(`following user ${responseData.followStatus}`)
-        document.querySelector("button").innerHTML = "unfollow"
-        document.querySelector("button").disabled = true;
+        // document.querySelector("button").innerHTML = "unfollow"
+        document.getElementById("follow").disabled = true;
+        document.getElementById("unfollow").disabled = false;
     })
 
 };
 
+//----------------------------------------------//
+//UNFOLLOW BUTTON
+let unfollowBtn = document.getElementById("unfollow");
 
+
+unfollowBtn.addEventListener("click",unfollowOtherUsr)
+
+function unfollowOtherUsr(){
+
+    fetch('/unfollow-user',{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify(data),
+
+    })
+    .then(response => response.json())
+    .then(responseData => {
+        console.log(responseData)
+        alert(`user unfollowed ${responseData.unfollowStatus}`)
+        document.getElementById("unfollow").disabled = true;
+        document.getElementById("follow").disabled = false;
+
+    })
+
+}

@@ -163,6 +163,16 @@ def get_user_is_following(user_id):
 
     return following_info_list
 
+def unfollow_user(user_id,following_id):
+    """unfollows a user and return user"""
+
+    user = db.session.query(User).filter_by(user_id = user_id).one()
+    user_to_unfollow = db.session.query(User).filter_by(user_id = following_id).one()
+    user.follower.remove(user_to_unfollow)
+    db.session.add(user)
+    db.session.commit()
+
+
 if __name__ == '__main__':
     from server import app
     connect_to_db(app)

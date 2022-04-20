@@ -176,6 +176,21 @@ def follow_other_user():
 
     return jsonify({'followStatus':followedStatus})
 
+@app.route('/unfollow-user', methods = ["POST"])
+def unfollow_other_user():
+    """route to unfollow a user"""
+
+    user_email = session['email']
+    user_id = crud.get_user_id(user_email)
+    #Other user Data
+    following_id = request.json.get('userId')
+
+    crud.unfollow_user(user_id,following_id)
+
+    unfollowedStatus = 'ok'
+
+    return jsonify({'unfollowStatus':unfollowedStatus})
+
 if __name__ == "__main__":
     from model import connect_to_db, db
 
