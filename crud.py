@@ -160,7 +160,6 @@ def get_user_is_following(user_id):
                             'email':following.email,
         })
 
-
     return following_info_list
 
 def unfollow_user(user_id,following_id):
