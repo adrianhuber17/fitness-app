@@ -169,8 +169,8 @@ def unfollow_user(user_id,following_id):
     user = db.session.query(User).filter_by(user_id = user_id).one()
     user_to_unfollow = db.session.query(User).filter_by(user_id = following_id).one()
     user.follower.remove(user_to_unfollow)
-    db.session.add(user)
-    db.session.commit()
+    
+    return user
 
 
 if __name__ == '__main__':

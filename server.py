@@ -11,11 +11,10 @@ app.secret_key = SECRET_KEY
 @app.route('/')
 def index():
     """homepage route"""
+
     if 'email' in session.keys():
-        print(session)
         return render_template('index.html')
     else:
-        print(session)
         return render_template('login-page.html')
 
 @app.route("/login",methods=["POST"])
@@ -185,7 +184,9 @@ def unfollow_other_user():
     #Other user Data
     following_id = request.json.get('userId')
 
-    crud.unfollow_user(user_id,following_id)
+    user_unfollowed = crud.unfollow_user(user_id,following_id)
+    db.session.add(user_unfollowed)
+    db.session.commit()
 
     unfollowedStatus = 'ok'
 
