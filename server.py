@@ -181,7 +181,7 @@ def unfollow_other_user():
 
     user_email = session['email']
     user_id = crud.get_user_id(user_email)
-    #Other user Data
+
     following_id = request.json.get('userId')
 
     user_unfollowed = crud.unfollow_user(user_id,following_id)
