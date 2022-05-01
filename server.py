@@ -48,6 +48,7 @@ def logout():
 @app.route("/create-account",methods=["POST"])
 def create_user():
     """creates a new user and adds them to the database"""
+
     email = request.form.get('email')
     password = request.form.get('password')
     first_name = request.form.get('first_name')
@@ -65,13 +66,13 @@ def create_user():
 
 @app.route("/user-profile")
 def get_user_profile():
-
+    """Route to the user profile page"""
 
     return render_template("user-profile.html")
 
 @app.route("/user-data.json")
 def get_user_data():
-    """returns a JSON with user data"""
+    """returns a JSON with user data, and user following data"""
 
     # user data
     email = session['email']
