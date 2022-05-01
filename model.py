@@ -5,6 +5,7 @@ from flask import Flask
 
 db = SQLAlchemy()
 
+#many to many relationship table for followers
 followers = db.Table('followers',
             db.Column('follower_id',db.Integer, db.ForeignKey('users.user_id')),
             db.Column('followee_id',db.Integer, db.ForeignKey('users.user_id')))

@@ -72,10 +72,6 @@ def get_all_users_list():
 
     return users_list
 
-def get_followers(email):
-
-    return
-
 def is_user_correct(email):
     """Confirm if user exists based on an email"""
 
@@ -123,7 +119,7 @@ def get_latest_activity(email):
     return None
 
 def follow_a_user(user_id_user,user_id_to_follow):
-    """follow another user"""
+    """follow another user and return update user object"""
 
     user = db.session.query(User).filter_by(user_id = user_id_user).one()
     to_follow = db.session.query(User).filter_by(user_id = user_id_to_follow).one()
@@ -133,6 +129,7 @@ def follow_a_user(user_id_user,user_id_to_follow):
 
 def is_following(user_id_user,user_id_to_follow):
     """check if user is already following another user"""
+
     user_obj = db.session.query(User).filter_by(user_id = user_id_user).one()
     user_follows_list = user_obj.follower.all()
     if len(user_follows_list) == 0:
@@ -145,7 +142,7 @@ def is_following(user_id_user,user_id_to_follow):
             return True
 
 def get_user_is_following(user_id):
-    """get user following list"""
+    """return user's following list"""
 
     user_obj = db.session.query(User).filter_by(user_id = user_id).one()
     following_list = user_obj.follower.all()
@@ -162,8 +159,12 @@ def get_user_is_following(user_id):
 
     return following_info_list
 
+def get_user_followers(email):
+
+    return
+
 def unfollow_user(user_id,following_id):
-    """unfollows a user and return user"""
+    """unfollows a user and returns update user object"""
 
     user = db.session.query(User).filter_by(user_id = user_id).one()
     user_to_unfollow = db.session.query(User).filter_by(user_id = following_id).one()
