@@ -90,7 +90,8 @@ def get_user_data():
 
 @app.route("/map.json")
 def get_activity_map_data():
-    """endpoint with cordinates JSON for the map"""
+    """returns a JSON with latest activity json (lat,long)
+    for mapping"""
     
     email = session['email']
 
@@ -100,7 +101,7 @@ def get_activity_map_data():
 
 @app.route("/post-gpx-parser",methods = ["POST"])
 def get_ride_gpx_create_activity():
-    """creates an activity for a logged in user"""
+    """Post request from the front end to store activity data in database"""
 
     # User in session
     email = session['email']
@@ -134,7 +135,7 @@ def get_ride_gpx_create_activity():
 
 @app.route("/get-user-json")
 def get_users():
-    """gets users and sends to front end for searching"""
+    """Returns a json with all users list"""
 
     user_json = crud.get_all_users_list()
     
