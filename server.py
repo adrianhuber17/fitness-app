@@ -143,12 +143,13 @@ def get_users():
 
 @app.route('/other-user-profile')
 def other_user_profile():
-    """renders user profile"""
+    """route to other user profile"""
+
     return render_template('other-user-profile.html')
 
 @app.route('/other-user.json',methods=["POST"])
 def get_other_user_json():
-    """gets personal data and latest ride data for another user"""
+    """returns JSON with personal data and latest ride data for another user"""
 
     #logged in user Data
     user_email = session['email']
@@ -161,7 +162,8 @@ def get_other_user_json():
 
 @app.route('/follow-user',methods=["POST"])
 def follow_other_user():
-    """route to follow another user"""
+    """Post request to follow another user"""
+
     #logged in user Data
     user_email = session['email']
     user_id_user = crud.get_user_id(user_email)
@@ -179,7 +181,7 @@ def follow_other_user():
 
 @app.route('/unfollow-user', methods = ["POST"])
 def unfollow_other_user():
-    """route to unfollow a user"""
+    """Post request to unfollow a user"""
 
     user_email = session['email']
     user_id = crud.get_user_id(user_email)
