@@ -196,10 +196,6 @@ def unfollow_other_user():
 
     return jsonify({'unfollowStatus':unfollowedStatus})
 
-@app.route('/api-request')
-def test():
-
-    return jsonify({'ziggy':23})
 
 if __name__ == "__main__":
     from model import connect_to_db, db

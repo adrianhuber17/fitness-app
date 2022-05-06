@@ -1,25 +1,16 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { useState, useEffect } from "react";
+import Register from "./Register";
+import Login from "./Login";
 
 function App() {
-  const [apiData, setApiData] = useState("");
-
-  useEffect(() => {
-    let url = "/api-request";
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        setApiData(data.ziggy);
-      });
-  }, []);
-
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>APIDATA:{apiData}</p>
       </header>
+      <Register />
+      <Login />
     </div>
   );
 }
