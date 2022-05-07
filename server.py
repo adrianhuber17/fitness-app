@@ -16,7 +16,7 @@ app.secret_key = SECRET_KEY
 #         return render_template('index.html')
 #     else:
 #         return render_template('login-page.html')
-@app.route('/session.api', methods=["GET"])
+@app.route('/session.json', methods=["GET"])
 def index():
     if 'email' in session.keys():
         email = session['email']
@@ -24,24 +24,33 @@ def index():
     else:
         return jsonify({'email':None})
 
-@app.route("/login",methods=["POST"])
+@app.route('/login-user.json',methods=["POST"])
 def login():
-    """Login a user if user_name and password are correct"""
+    email = request.json.get('email')
+    password = request.json.get('password')
+    print(email)
+    print(password)
+    ## continue checking email and password
+    return jsonify({'hello':'hello'})
 
-    user_email = request.form.get('ex_email')
-    password = request.form.get('ex_password')
+# @app.route("/login",methods=["POST"])
+# def login():
+#     """Login a user if user_name and password are correct"""
 
-    if crud.is_user_correct(user_email) == True and crud.is_password_correct(password) == True:
-        session['email'] = session.get('email',user_email)
-        return redirect('/')
-    elif crud.is_user_correct(user_email) == False:
-        print('wrong user_name')
-        flash('Username is incorrect')
-        return redirect('/')
-    elif crud.is_password_correct(password) == False:
-        print('wrong password')
-        flash('Password is incorrect')
-        return redirect('/')
+#     user_email = request.form.get('ex_email')
+#     password = request.form.get('ex_password')
+
+#     if crud.is_user_correct(user_email) == True and crud.is_password_correct(password) == True:
+#         session['email'] = session.get('email',user_email)
+#         return redirect('/')
+#     elif crud.is_user_correct(user_email) == False:
+#         print('wrong user_name')
+#         flash('Username is incorrect')
+#         return redirect('/')
+#     elif crud.is_password_correct(password) == False:
+#         print('wrong password')
+#         flash('Password is incorrect')
+#         return redirect('/')
 
 @app.route("/logout",methods=["POST"])
 def logout():

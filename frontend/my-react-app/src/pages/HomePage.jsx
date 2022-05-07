@@ -5,7 +5,7 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   useEffect(() => {
-    let url = "/session.api";
+    let url = "/session.json";
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
