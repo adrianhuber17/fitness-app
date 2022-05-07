@@ -8,14 +8,21 @@ SECRET_KEY = os.environ['APP_KEY']
 app.secret_key = SECRET_KEY
 
 
-@app.route('/')
-def index():
-    """homepage route"""
+# @app.route('/')
+# def index():
+#     """homepage route"""
 
+#     if 'email' in session.keys():
+#         return render_template('index.html')
+#     else:
+#         return render_template('login-page.html')
+@app.route('/session.api', methods=["GET"])
+def index():
     if 'email' in session.keys():
-        return render_template('index.html')
+        email = session['email']
+        return jsonify({'email':email})
     else:
-        return render_template('login-page.html')
+        return jsonify({'email':None})
 
 @app.route("/login",methods=["POST"])
 def login():
