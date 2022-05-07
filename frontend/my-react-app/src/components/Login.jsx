@@ -40,7 +40,7 @@ export default function Login() {
     <div className="login">
       <h1>Log-in</h1>
       <form>
-        <label htmlFor="ex_email">Email: </label>
+        <label htmlFor="email">Email: </label>
         <input
           onChange={handleEmail}
           type="text"
@@ -49,7 +49,7 @@ export default function Login() {
           required
         />
         <br></br>
-        <label htmlFor="ex_password">Password: </label>
+        <label htmlFor="password">Password: </label>
         <input
           onChange={handlePassword}
           type="password"

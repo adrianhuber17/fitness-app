@@ -67,24 +67,39 @@ def logout():
     flash("Successfully logged out")
     return redirect('/')
 
-@app.route("/create-account",methods=["POST"])
+@app.route("/register-user.json",methods=["POST"])
 def create_user():
-    """creates a new user and adds them to the database"""
-
-    email = request.form.get('email')
-    password = request.form.get('password')
-    first_name = request.form.get('first_name')
-    last_name = request.form.get('last_name')
+    email = request.json.get('email')
+    password = request.json.get('password')
+    first_name = request.json.get('firstName')
+    last_name = request.json.get('lastName')
 
     if crud.is_user_correct(email) == False:
         new_user = crud.create_user(email,first_name,last_name,password)
         db.session.add(new_user)
         db.session.commit()
-        flash("Account successfully created")
-        return redirect('/')
+        return jsonify({"status":"Success"})
     else:
-        flash("User already exist, please try a different email")
-        return redirect('/')
+        return jsonify({"status":"Fail"})
+
+# @app.route("/create-account",methods=["POST"])
+# def create_user():
+#     """creates a new user and adds them to the database"""
+
+#     email = request.form.get('email')
+#     password = request.form.get('password')
+#     first_name = request.form.get('first_name')
+#     last_name = request.form.get('last_name')
+
+#     if crud.is_user_correct(email) == False:
+#         new_user = crud.create_user(email,first_name,last_name,password)
+#         db.session.add(new_user)
+#         db.session.commit()
+#         flash("Account successfully created")
+#         return redirect('/')
+#     else:
+#         flash("User already exist, please try a different email")
+#         return redirect('/')
 
 @app.route("/user-profile")
 def get_user_profile():

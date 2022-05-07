@@ -17,8 +17,13 @@ export default function HomePage() {
         setLoading(false);
       });
   });
-  //useState update with fetcehed user data
-  // useEffect to fetch homepage data for that user
-
-  return loading === false && <h1>Home: {email}</h1>;
+  // WORK ON HOMEPAGE HTML
+  return (
+    loading === false && (
+      <div>
+        <h1>Home: {email}</h1>
+        <p>helooooo</p>
+      </div>
+    )
+  );
 }
