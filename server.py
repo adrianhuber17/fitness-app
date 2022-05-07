@@ -28,10 +28,16 @@ def index():
 def login():
     email = request.json.get('email')
     password = request.json.get('password')
-    print(email)
-    print(password)
-    ## continue checking email and password
-    return jsonify({'hello':'hello'})
+    if crud.is_user_correct(email) == True and crud.is_password_correct(password) == True:
+        session['email'] = session.get('email',email)
+        print(session)
+        return jsonify({'status':'sign in ok'})
+    elif crud.is_user_correct(email) == False:
+        print('wrong email')
+        return jsonify({'status':'wrong email'})
+    elif crud.is_password_correct(password) == False:
+        print('wrong password')
+        return jsonify({'status':'wrong password'})
 
 # @app.route("/login",methods=["POST"])
 # def login():

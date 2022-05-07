@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -23,7 +25,15 @@ export default function Login() {
       body: JSON.stringify(loginData),
     })
       .then((response) => response.json())
-      .then((responseData) => console.log(responseData));
+      .then((responseData) => {
+        if (responseData.status === "wrong email") {
+          alert("Email enetered is incorrect, please try again");
+        } else if (responseData.status === "wrong password") {
+          alert("Password enetered is incorrect, please try again");
+        } else {
+          navigate("/");
+        }
+      });
   };
 
   return (
