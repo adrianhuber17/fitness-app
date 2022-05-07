@@ -1,17 +1,19 @@
-import logo from "./logo.svg";
 import "./App.css";
-import Register from "./Register";
-import Login from "./Login";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import UserProfile from "./pages/UserProfile";
+import OtherUser from "./pages/OtherUserProfile";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-      </header>
-      <Register />
-      <Login />
-    </div>
+    <BrowserRouter>
+      <div className="App"></div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/user-profile" element={<UserProfile />} />
+        <Route path="/other-user-profile" element={<OtherUser />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
