@@ -173,7 +173,7 @@ def get_ride_gpx_create_activity():
     db.session.add(activity)
     db.session.commit()
      
-    value = {'ok':200}
+    value = {'status':'ok'}
 
     return jsonify(value)
 

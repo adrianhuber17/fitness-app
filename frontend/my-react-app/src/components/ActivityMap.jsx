@@ -32,7 +32,7 @@ export default function ActivityMap() {
         className="map"
         center={[centerLatitude, centerLongitude]}
         crs={L.CRS.EPSG3857}
-        zoom={10}
+        zoom={12}
         scrollWheelZoom={true}
         preferCanvas={false}
       >

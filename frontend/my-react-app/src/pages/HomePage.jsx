@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import LogOut from "../components/LogOutBtn";
 import UserProfileBtn from "../components/UserProfileBtn";
 import ActivityMap from "../components/ActivityMap";
+import GpxUploader from "../components/GpxUploader";
 
 export default function HomePage() {
   const [loading, setLoading] = useState(true);
@@ -28,6 +29,7 @@ export default function HomePage() {
         <LogOut />
         <UserProfileBtn />
         <ActivityMap />
+        <GpxUploader />
       </div>
     )
   );
