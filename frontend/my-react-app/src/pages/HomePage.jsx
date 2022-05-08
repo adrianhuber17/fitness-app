@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import LogOut from "../components/LogOut";
 
 export default function HomePage() {
   const [loading, setLoading] = useState(true);
@@ -22,6 +23,7 @@ export default function HomePage() {
     loading === false && (
       <div className="App">
         <h1>Hello: {email}</h1>
+        <LogOut />
       </div>
     )
   );

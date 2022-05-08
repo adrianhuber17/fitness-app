@@ -58,14 +58,21 @@ def login():
 #         flash('Password is incorrect')
 #         return redirect('/')
 
-@app.route("/logout",methods=["POST"])
+# @app.route("/logout",methods=["POST"])
+# def logout():
+#     """logs user out and clears the session"""
+
+#     session.clear()
+
+#     flash("Successfully logged out")
+#     return redirect('/')
+
+@app.route("/logout.json")
 def logout():
     """logs user out and clears the session"""
-
     session.clear()
 
-    flash("Successfully logged out")
-    return redirect('/')
+    return jsonify({'status':'ok'})
 
 @app.route("/register-user.json",methods=["POST"])
 def create_user():
