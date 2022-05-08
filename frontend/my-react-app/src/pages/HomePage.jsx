@@ -20,9 +20,8 @@ export default function HomePage() {
   // WORK ON HOMEPAGE HTML
   return (
     loading === false && (
-      <div>
-        <h1>Home: {email}</h1>
-        <p>helooooo</p>
+      <div className="App">
+        <h1>Hello: {email}</h1>
       </div>
     )
   );
