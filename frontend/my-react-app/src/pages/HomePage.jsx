@@ -4,6 +4,7 @@ import LogOut from "../components/LogOutBtn";
 import UserProfileBtn from "../components/UserProfileBtn";
 import ActivityMap from "../components/ActivityMap";
 import GpxUploader from "../components/GpxUploader";
+import UserSearchBar from "../components/UserSearchBar";
 
 export default function HomePage() {
   const [loading, setLoading] = useState(true);
@@ -30,6 +31,7 @@ export default function HomePage() {
         <UserProfileBtn />
         <ActivityMap />
         <GpxUploader />
+        <UserSearchBar />
       </div>
     )
   );
