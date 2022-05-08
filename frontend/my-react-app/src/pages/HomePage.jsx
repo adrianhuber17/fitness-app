@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LogOut from "../components/LogOut";
+import LogOut from "../components/LogOutBtn";
+import UserProfileBtn from "../components/UserProfileBtn";
+import ActivityMap from "../components/ActivityMap";
 
 export default function HomePage() {
   const [loading, setLoading] = useState(true);
@@ -24,6 +26,8 @@ export default function HomePage() {
       <div className="App">
         <h1>Hello: {email}</h1>
         <LogOut />
+        <UserProfileBtn />
+        <ActivityMap />
       </div>
     )
   );

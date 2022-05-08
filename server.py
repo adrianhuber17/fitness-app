@@ -108,11 +108,11 @@ def create_user():
 #         flash("User already exist, please try a different email")
 #         return redirect('/')
 
-@app.route("/user-profile")
-def get_user_profile():
-    """Route to the user profile page"""
+# @app.route("/user-profile")
+# def get_user_profile():
+#     """Route to the user profile page"""
 
-    return render_template("user-profile.html")
+#     return render_template("user-profile.html")
 
 @app.route("/user-data.json")
 def get_user_data():
