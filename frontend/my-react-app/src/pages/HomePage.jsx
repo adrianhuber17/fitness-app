@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LogOut from "../components/LogOutBtn";
 import UserProfileBtn from "../components/UserProfileBtn";
-import ActivityMap from "../components/ActivityMap";
 import GpxUploader from "../components/GpxUploader";
 import UserSearchBar from "../components/UserSearchBar";
 
@@ -29,7 +28,6 @@ export default function HomePage() {
         <h1>Hello: {email}</h1>
         <LogOut />
         <UserProfileBtn />
-        <ActivityMap />
         <GpxUploader />
         <UserSearchBar />
       </div>

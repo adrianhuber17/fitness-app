@@ -12,7 +12,6 @@ export default function UserSearchBar(props) {
         setLoading(false);
       });
   }, []);
-  console.log(users);
   return (
     loading === false && (
       <div>

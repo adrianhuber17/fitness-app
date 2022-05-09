@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import Flask, redirect, render_template,jsonify, request, session, flash
 import os
 from gpx_parser import gpxParser
@@ -8,14 +9,6 @@ SECRET_KEY = os.environ['APP_KEY']
 app.secret_key = SECRET_KEY
 
 
-# @app.route('/')
-# def index():
-#     """homepage route"""
-
-#     if 'email' in session.keys():
-#         return render_template('index.html')
-#     else:
-#         return render_template('login-page.html')
 @app.route('/session.json', methods=["GET"])
 def index():
     if 'email' in session.keys():
@@ -39,34 +32,6 @@ def login():
         print('wrong password')
         return jsonify({'status':'wrong password'})
 
-# @app.route("/login",methods=["POST"])
-# def login():
-#     """Login a user if user_name and password are correct"""
-
-#     user_email = request.form.get('ex_email')
-#     password = request.form.get('ex_password')
-
-#     if crud.is_user_correct(user_email) == True and crud.is_password_correct(password) == True:
-#         session['email'] = session.get('email',user_email)
-#         return redirect('/')
-#     elif crud.is_user_correct(user_email) == False:
-#         print('wrong user_name')
-#         flash('Username is incorrect')
-#         return redirect('/')
-#     elif crud.is_password_correct(password) == False:
-#         print('wrong password')
-#         flash('Password is incorrect')
-#         return redirect('/')
-
-# @app.route("/logout",methods=["POST"])
-# def logout():
-#     """logs user out and clears the session"""
-
-#     session.clear()
-
-#     flash("Successfully logged out")
-#     return redirect('/')
-
 @app.route("/logout.json")
 def logout():
     """logs user out and clears the session"""
@@ -88,31 +53,6 @@ def create_user():
         return jsonify({"status":"Success"})
     else:
         return jsonify({"status":"Fail"})
-
-# @app.route("/create-account",methods=["POST"])
-# def create_user():
-#     """creates a new user and adds them to the database"""
-
-#     email = request.form.get('email')
-#     password = request.form.get('password')
-#     first_name = request.form.get('first_name')
-#     last_name = request.form.get('last_name')
-
-#     if crud.is_user_correct(email) == False:
-#         new_user = crud.create_user(email,first_name,last_name,password)
-#         db.session.add(new_user)
-#         db.session.commit()
-#         flash("Account successfully created")
-#         return redirect('/')
-#     else:
-#         flash("User already exist, please try a different email")
-#         return redirect('/')
-
-# @app.route("/user-profile")
-# def get_user_profile():
-#     """Route to the user profile page"""
-
-#     return render_template("user-profile.html")
 
 @app.route("/user-data.json")
 def get_user_data():
@@ -165,7 +105,8 @@ def get_ride_gpx_create_activity():
     elevation_gain_loss_json = activity.elevation_gain_loss_json
     max_min_elevation_json = activity.elevation_stats_json
     activity_json = activity.map_json
-    date = activity.ride_date
+    # date = activity.ride_date
+    date = datetime.now()
     ride_name = activity.ride_name
     activity = crud.create_activity(user,date,ride_name,
                                     ride_caption,max_min_elevation_json,

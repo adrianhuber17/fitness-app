@@ -2,6 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import ForeignKey
 from sqlalchemy.dialects.postgresql import JSON
 from flask import Flask
+from datetime import datetime
 
 db = SQLAlchemy()
 
