@@ -18,6 +18,8 @@ export default function Login() {
   const handleClick = (event) => {
     event.preventDefault();
     const loginData = { email: email, password: password };
+    setEmail("");
+    setPassword("");
     const url = "/login-user.json";
     fetch(url, {
       method: "POST",
@@ -46,6 +48,7 @@ export default function Login() {
           type="text"
           name="email"
           id="email"
+          value={email}
           required
         />
         <br></br>
@@ -55,10 +58,16 @@ export default function Login() {
           type="password"
           name="password"
           id="password"
+          value={password}
           required
         />
         <br></br>
-        <button onClick={handleClick}>Log in</button>
+        <button
+          disabled={email === "" || password === ""}
+          onClick={handleClick}
+        >
+          Log in
+        </button>
       </form>
     </div>
   );

@@ -93,7 +93,17 @@ export default function Register() {
           required
         />
         <br></br>
-        <button onClick={handleClick}>Create Account</button>
+        <button
+          disabled={
+            regEmail === "" ||
+            regPassword === "" ||
+            firstName === "" ||
+            lastName === ""
+          }
+          onClick={handleClick}
+        >
+          Create Account
+        </button>
       </form>
     </div>
   );
