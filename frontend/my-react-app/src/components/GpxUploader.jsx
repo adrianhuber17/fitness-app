@@ -91,7 +91,9 @@ export default function GpxUploader() {
           value={rideComment}
         />
         <br />
-        <button onClick={handleClick}>Submit</button>
+        <button disabled={rideComment === ""} onClick={handleClick}>
+          Submit
+        </button>
       </form>
       {!loading && (
         <ActivityMap
