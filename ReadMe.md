@@ -20,6 +20,8 @@ as well as to search for other users.
 
 **Server:** Python, Flask, SQLAlchemy, PostgreSQL
 
-## The App
+# The App
 
-![](/ReadME/appGIF.gif)
+### Log-in to the App
+
+![](/ReadME/logIn.gif)
