@@ -22,6 +22,12 @@ as well as to search for other users.
 
 # The App
 
-### Log-in to the App
+## Log-in to the App
 
 ![](/ReadME/logIn.gif)
+
+## Upload an activity
+
+Upload a .gpx (GPS exchange format) from user's local drive, add an activity comment and upload the activity. File is parsed and rendered on a map displaying User's latest activity. Map component is rendered without refreshing the entire page.
+
+![](/ReadME/uploadFile.gif)
