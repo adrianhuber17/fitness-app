@@ -1,6 +1,6 @@
 # Cycling Tracker
 
-Cycling Tracker is a social media for cyclists to track their cycling
+Cycling Tracker is a social media app for cyclists to track their cycling
 activities and share with their friends.
 Users can upload their rides as a .gpx file and instantly view the
 ctivity and associated activity data on the home page, along with their friends latest activities.
@@ -11,7 +11,7 @@ This App is currently being built using ReactJS with a back-end stach of Python,
 and Flask as the web framework.
 
 Immedediately after the user log-in the user's latest activity feed and user's followers activity
-feed is displayed on a map, an upload form to submit a new activity, and navigation capabilities to go to user profile
+feed is displayed on a map, an upload form to submit a new activity, navigation capabilities to go to user's profile
 as well as to search for other users.
 
 # Tech Stack
