@@ -78,6 +78,7 @@ export default function GpxUploader() {
           className="uploadFile"
           type="file"
           name="uploadFile"
+          accept=".gpx"
           required
         />
         <br />
