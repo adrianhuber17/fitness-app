@@ -85,7 +85,9 @@ def get_activity_map_data():
 
 @app.route("/post-gpx-parser",methods = ["POST"])
 def get_ride_gpx_create_activity():
-    """Post request from the front end to store activity data in database"""
+    """Post request from the front end to store activity data in database,
+    eturns a JSON with latest activity json (lat,long)
+    for mapping"""
 
     # User in session
     email = session['email']
@@ -114,7 +116,9 @@ def get_ride_gpx_create_activity():
     db.session.add(activity)
     db.session.commit()
      
-    value = {'status':'ok'}
+    latest_activity_json_map = crud.get_latest_activity(email)
+
+    value = {'latestActivity':latest_activity_json_map}
 
     return jsonify(value)
 

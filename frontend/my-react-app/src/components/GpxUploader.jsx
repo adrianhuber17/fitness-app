@@ -10,7 +10,6 @@ export default function GpxUploader() {
   const [coordinates, setCoordinates] = useState([""]);
 
   const [loading, setLoading] = useState(true);
-  const [fetchedFlag, setFetchedFlag] = useState(true);
 
   useEffect(() => {
     let url = "/map.json";
@@ -26,11 +25,10 @@ export default function GpxUploader() {
           setCenterLatitude("37.773972");
           setCenterLongitude("-122.431297");
           setCoordinates(["37.773972", "-122.431297"]);
-          setLoading(false); // ! setLoading will not be needed when this logic moves to onClick
+          setLoading(false);
         }
       });
-    //TODO: remove fetchedFlag when /post-gpx-parser is updated
-  }, [fetchedFlag]);
+  }, []);
 
   const handleGpxFile = (event) => {
     setGpxFile(event.target.files[0]);
@@ -50,7 +48,6 @@ export default function GpxUploader() {
     setRideComment("");
 
     fetch("/post-gpx-parser", {
-      //TODO: response should return respData as /map.json does
       method: "POST",
       body: formData,
       hearders: { "Content-Type": "multipart/form-data" },
@@ -58,12 +55,16 @@ export default function GpxUploader() {
       .then((resp) => resp.json())
       .then((data) => {
         console.log("SUBMITTING!");
-        if (data.errors) {
-          console.log(data.errors);
-          setFetchedFlag((fetchedFlag) => !fetchedFlag);
+        if (data !== null) {
+          setCenterLatitude(data.latestActivity.latitude);
+          setCenterLongitude(data.latestActivity.longitude);
+          setCoordinates(data.latestActivity.coordinates);
+          setLoading(false);
         } else {
-          console.log(".gpx file uploaded successfully");
-          setFetchedFlag((fetchedFlag) => !fetchedFlag);
+          setCenterLatitude("37.773972");
+          setCenterLongitude("-122.431297");
+          setCoordinates(["37.773972", "-122.431297"]);
+          setLoading(false);
         }
       });
   };
