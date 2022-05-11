@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 
-export default function UserSearchBar(props) {
+export default function UserSearchBar() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchUser, setSearchUser] = useState("");
+
   useEffect(() => {
     let url = "/get-user-json";
     fetch(url)
@@ -12,17 +14,43 @@ export default function UserSearchBar(props) {
         setLoading(false);
       });
   }, []);
+
+  const handleSearch = (event) => {
+    setSearchUser(event.target.value.toLowerCase());
+  };
+  // console.log(users);
   return (
     loading === false && (
       <div>
-        <h2>User search</h2>
         <input
+          className="searchBar"
           id="searchbar"
           type="text"
-          name="search"
           placeholder="Search user.."
+          name="search"
+          onChange={handleSearch}
         />
-        <ul className="search"></ul>
+        {searchUser.length !== 0 && (
+          <ul className="searchResults">
+            {users
+              .filter((user) => {
+                if (
+                  searchUser === "" ||
+                  user.fullName.toLowerCase().includes(searchUser)
+                ) {
+                  return user;
+                }
+                return null;
+              })
+              .map((user) => (
+                <p key={user.userId}>
+                  <a href={`/other-user-profile?userId=${user.userId}`}>
+                    {user.fullName}
+                  </a>
+                </p>
+              ))}
+          </ul>
+        )}
       </div>
     )
   );

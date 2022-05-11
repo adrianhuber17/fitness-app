@@ -5,3 +5,15 @@
   height: 600px;
   width: 1000px;
 }
+
+.searchResults {
+  height: 100px;
+  background-color: white;
+  box-shadow: lightsalmon 0px 5px 15px;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+a:hover {
+  background-color: lightsalmon;
+}

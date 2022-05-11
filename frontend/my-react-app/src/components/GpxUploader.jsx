@@ -90,6 +90,7 @@ export default function GpxUploader() {
           id="ridecap"
           type="text"
           name="ride-caption"
+          placeholder="Enter activity caption.."
           value={rideComment}
         />
         <br />

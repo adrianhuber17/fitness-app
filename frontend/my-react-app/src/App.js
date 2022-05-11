@@ -4,6 +4,7 @@ import LogInPage from "./pages/LogInPage";
 import UserProfile from "./pages/UserProfile";
 import OtherUser from "./pages/OtherUserProfile";
 import HomePage from "./pages/HomePage";
+import { StateParamWrapper } from "./helperFunction/StateParamWrapper";
 
 function App() {
   return (
@@ -13,7 +14,9 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LogInPage />} />
         <Route path="/user-profile" element={<UserProfile />} />
-        <Route path="/other-user-profile" element={<OtherUser />} />
+        <Route element={<StateParamWrapper />}>
+          <Route path="/other-user-profile" element={<OtherUser />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

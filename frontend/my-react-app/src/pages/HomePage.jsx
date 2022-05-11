@@ -28,8 +28,8 @@ export default function HomePage() {
         <h1>Hello: {email}</h1>
         <LogOut />
         <UserProfileBtn />
-        <GpxUploader />
         <UserSearchBar />
+        <GpxUploader />
       </div>
     )
   );

@@ -1,4 +1,8 @@
+import { GetOtherUserId } from "../helperFunction/StateParamWrapper";
+
 const OtherUser = () => {
-  return <h1>Other User Profile</h1>;
+  const otherUserId = GetOtherUserId();
+  console.log(otherUserId);
+  return <h1>Other User Profile : {otherUserId}</h1>;
 };
 export default OtherUser;
