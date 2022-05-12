@@ -1,4 +1,6 @@
+import UserPrflTable from "../components/UserPrflTable";
+
 const UserProfile = () => {
-  return <h1>User Profile</h1>;
+  return <UserPrflTable />;
 };
 export default UserProfile;
