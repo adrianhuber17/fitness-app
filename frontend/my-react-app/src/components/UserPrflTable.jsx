@@ -1,22 +1,7 @@
-import { useEffect, useState } from "react";
-import UserFollowingTable from "./UserFollowingTable";
-
-export default function UserPrflTable() {
-  const [userFollowing, setUserFollowing] = useState({});
-  const [userProfileInfo, setUserProfileInfo] = useState([]);
-
-  useEffect(() => {
-    fetch("/user-data.json")
-      .then((response) => response.json())
-      .then((responseData) => {
-        setUserFollowing(responseData.followingData);
-        setUserProfileInfo(responseData.userData);
-      });
-  }, []);
-
+export default function UserPrflTable(props) {
   return (
     <div>
-      <h1>Hey {userProfileInfo.first_name}!</h1>
+      <h1>Hey {props.profileInfo.first_name}!</h1>
       <h2>Profile Information</h2>
       <table>
         <thead>
@@ -29,14 +14,13 @@ export default function UserPrflTable() {
         </thead>
         <tbody>
           <tr>
-            <td>{userProfileInfo.user_id}</td>
-            <td>{userProfileInfo.first_name}</td>
-            <td>{userProfileInfo.last_name}</td>
-            <td>{userProfileInfo.email}</td>
+            <td>{props.profileInfo.user_id}</td>
+            <td>{props.profileInfo.first_name}</td>
+            <td>{props.profileInfo.last_name}</td>
+            <td>{props.profileInfo.email}</td>
           </tr>
         </tbody>
       </table>
-      <UserFollowingTable followingList={userFollowing} />
     </div>
   );
 }
