@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { GetOtherUserId } from "../helperFunction/StateParamWrapper";
 import ActivityMap from "../components/ActivityMap";
 import OtherUserTable from "../components/OtherUserTable";
+import FollowBtn from "../components/FollowBtn";
 
 const OtherUser = () => {
   const [centerLatitude, setCenterLatitude] = useState("");
@@ -24,13 +25,13 @@ const OtherUser = () => {
     })
       .then((response) => response.json())
       .then((respData) => {
-        console.log(respData);
         if (respData.userLatestRide !== null) {
           setCenterLatitude(respData.userLatestRide.latitude);
           setCenterLongitude(respData.userLatestRide.longitude);
           setCoordinates(respData.userLatestRide.coordinates);
           setUserData(respData.userData);
           setIsFollowing(respData.isFollowing);
+          console.log(respData.isFollowing);
           setLoading(false);
         } else {
           setCenterLatitude("37.773972");
@@ -46,6 +47,7 @@ const OtherUser = () => {
   return (
     <div>
       <OtherUserTable userData={userData} />
+      {!loading && <FollowBtn isFollowing={isFollowing} userId={userId} />}
       {!loading && (
         <ActivityMap
           centerLatitude={centerLatitude}

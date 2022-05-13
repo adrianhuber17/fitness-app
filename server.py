@@ -149,7 +149,7 @@ def get_other_user_json():
     
     return jsonify(otherUserDataJson)
 
-@app.route('/follow-user',methods=["POST"])
+@app.route('/follow-user.json',methods=["POST"])
 def follow_other_user():
     """Post request to follow another user"""
 
@@ -165,10 +165,13 @@ def follow_other_user():
     db.session.commit()
 
     followedStatus = 'ok'
+    print(f"current user -------------- {user_id_user}")
+    print(f"other user -------------- {user_id_to_follow}")
+    print(f"followedStatus -------------- {followedStatus}")
 
     return jsonify({'followStatus':followedStatus})
 
-@app.route('/unfollow-user', methods = ["POST"])
+@app.route('/unfollow-user.json', methods = ["POST"])
 def unfollow_other_user():
     """Post request to unfollow a user"""
 
@@ -182,6 +185,9 @@ def unfollow_other_user():
     db.session.commit()
 
     unfollowedStatus = 'ok'
+    print(f"current user -------------- {user_id}")
+    print(f"other user -------------- {following_id}")
+    print(f"unfollowedStatus -------------- {unfollowedStatus}")
 
     return jsonify({'unfollowStatus':unfollowedStatus})
 
