@@ -2,12 +2,11 @@ import { useState } from "react";
 
 export default function FollowBtn(props) {
   const [isFollowing, setIsFollowing] = useState(props.isFollowing);
-  const [userId, setUserId] = useState(props.userId);
 
   console.log("children page ", isFollowing);
   const handleFollowClick = (event) => {
     const follow = event.target.value;
-    const data = { userId: userId, follow: follow };
+    const data = { userId: props.userId, follow: follow };
     fetch("/follow-user.json", {
       method: "POST",
       headers: {
@@ -24,7 +23,7 @@ export default function FollowBtn(props) {
 
   const handleUnfollowClick = (event) => {
     const unfollow = event.target.value;
-    const data = { userId: userId, unfollow: unfollow };
+    const data = { userId: props.userId, unfollow: unfollow };
     fetch("/unfollow-user.json", {
       method: "POST",
       headers: {
