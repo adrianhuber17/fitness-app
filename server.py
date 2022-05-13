@@ -130,11 +130,6 @@ def get_users():
     
     return jsonify(user_json)
 
-@app.route('/other-user-profile')
-def other_user_profile():
-    """route to other user profile"""
-
-    return render_template('other-user-profile.html')
 
 @app.route('/other-user.json',methods=["POST"])
 def get_other_user_json():
