@@ -1,8 +1,8 @@
 export default function UserFollowingTable(props) {
-  console.log(props.followingList);
+  console.log("following", props.followingList);
   return (
     <div>
-      <h2>Following:</h2>
+      <h2>Following {props.followingList.length} users:</h2>
       <table id="following-table">
         <thead>
           <tr>
@@ -10,12 +10,23 @@ export default function UserFollowingTable(props) {
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
+            <th>Profile</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>list will go here, with HREF to go to user profile page</td>
-          </tr>
+          {props.followingList.map((user) => (
+            <tr key={user.userId}>
+              <td>{user.userId}</td>
+              <td>{user.firstName}</td>
+              <td>{user.lastName}</td>
+              <td>{user.email}</td>
+              <td>
+                <a href={`/other-user-profile?userId=${user.userId}`}>
+                  {user.firstName} profile
+                </a>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

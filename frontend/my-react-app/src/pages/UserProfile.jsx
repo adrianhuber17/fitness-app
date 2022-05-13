@@ -3,6 +3,7 @@ import UserFollowingTable from "../components/UserFollowingTable";
 import { useEffect, useState } from "react";
 
 const UserProfile = () => {
+  const [loading, setLoading] = useState(true);
   const [userFollowing, setUserFollowing] = useState({});
   const [userProfileInfo, setUserProfileInfo] = useState([]);
 
@@ -12,12 +13,17 @@ const UserProfile = () => {
       .then((responseData) => {
         setUserFollowing(responseData.followingData);
         setUserProfileInfo(responseData.userData);
+        setLoading(false);
       });
   }, []);
   return (
     <div>
-      <UserPrflTable profileInfo={userProfileInfo} />
-      <UserFollowingTable followingList={userFollowing} />
+      {!loading && (
+        <>
+          <UserPrflTable profileInfo={userProfileInfo} />
+          <UserFollowingTable followingList={userFollowing} />
+        </>
+      )}
     </div>
   );
 };
