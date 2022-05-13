@@ -159,9 +159,21 @@ def get_user_is_following(user_id):
 
     return following_info_list
 
-def get_user_followers(email):
+def get_user_followers(user_id):
+    """return user's follower list"""
+    user_obj = db.session.query(User).filter_by(user_id = user_id).one()
+    follower_list = user_obj.followers
 
-    return
+    followers_info_list = []
+    for follower in follower_list:
+        followers_info_list.append({
+                            'userId':follower.user_id,
+                            'firstName':follower.first_name,
+                            'lastName':follower.last_name,
+                            'email':follower.email,
+        })
+
+    return followers_info_list
 
 def unfollow_user(user_id,following_id):
     """unfollows a user and returns update user object"""
