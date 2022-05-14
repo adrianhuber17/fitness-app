@@ -1,10 +1,10 @@
-export default function UserFollowingTable(props) {
-  console.log("following", props.followingList);
-  if (props.followingList.length !== 0) {
+export default function UserFollowerTable(props) {
+  console.log("follower", props.followerList);
+  if (props.followerList.length !== 0) {
     return (
       <div>
-        <h2>Following {props.followingList.length} users:</h2>
-        <table id="following-table">
+        <h2>{props.followerList.length} followers:</h2>
+        <table id="follower-table">
           <thead>
             <tr>
               <th>Id</th>
@@ -15,7 +15,7 @@ export default function UserFollowingTable(props) {
             </tr>
           </thead>
           <tbody>
-            {props.followingList.map((user) => (
+            {props.followerList.map((user) => (
               <tr key={user.userId}>
                 <td>{user.userId}</td>
                 <td>{user.firstName}</td>
@@ -33,6 +33,6 @@ export default function UserFollowingTable(props) {
       </div>
     );
   } else {
-    return <h2>Not following any user</h2>;
+    return <h2>No followers</h2>;
   }
 }

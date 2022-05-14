@@ -61,12 +61,14 @@ def get_user_data():
     # user data
     email = session['email']
     user_json = crud.get_user_json(email)
-
-    #follower data work on this
+   
     user_id = crud.get_user_id(email)
     following_info_list = crud.get_user_is_following(user_id)
+    follower_info_list = crud.get_user_followers(user_id)
 
-    userProfileJson = {'userData':user_json,'followingData':following_info_list}
+    userProfileJson = {'userData':user_json,
+                    'followingData':following_info_list,
+                    'followerData':follower_info_list}
 
     return jsonify(userProfileJson)
 
