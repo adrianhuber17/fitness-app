@@ -1,3 +1,4 @@
+from crypt import methods
 from datetime import datetime
 from flask import Flask, redirect, render_template,jsonify, request, session, flash
 import os
@@ -66,13 +67,15 @@ def get_user_data():
     following_info_list = crud.get_user_is_following(user_id)
     follower_info_list = crud.get_user_followers(user_id)
 
+    total_elevation_gain_json = crud.get_total_elevation_monthly(user_id)
+
     userProfileJson = {'userData':user_json,
                     'followingData':following_info_list,
-                    'followerData':follower_info_list}
+                    'followerData':follower_info_list,
+                    'totalElevationGain': total_elevation_gain_json}
 
     return jsonify(userProfileJson)
 
-#create a new route for total feet climbed and loss for user-profile
 
 @app.route("/map.json")
 def get_activity_map_data():
@@ -187,7 +190,6 @@ def unfollow_other_user():
     print(f"unfollowedStatus -------------- {unfollowedStatus}")
 
     return jsonify({'unfollowStatus':unfollowedStatus})
-
 
 if __name__ == "__main__":
     from model import connect_to_db, db

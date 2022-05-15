@@ -17,4 +17,6 @@ def total_elevation_gain_json(activities):
     
         total_elevation_json[activity_year][activity_month] = int(total_elevation_json[activity_year][activity_month] + feet_climbed)
 
+    total_elevation_json[activity_year][activity_month] = str(total_elevation_json[activity_year][activity_month])
+    
     return total_elevation_json

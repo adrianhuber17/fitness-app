@@ -54,6 +54,7 @@ export const data = {
   ],
 };
 
-export function Plot() {
+export function Plot(props) {
+  console.log(props.totalElevationGain);
   return <Line options={options} data={data} />;
 }
