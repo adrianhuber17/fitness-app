@@ -185,7 +185,7 @@ def unfollow_user(user_id,following_id):
     
     return user
 
-def get_elevation_gain(user_id):
+def get_total_elevation_gain_monthly(user_id):
     """get elevation gain for user's entire history"""
 
     user = db.session.query(User).filter_by(user_id = user_id).one()
@@ -196,9 +196,9 @@ def get_elevation_gain(user_id):
         activities.append({'date': activity.date,
                             'elevation_gain': activity.elevation_gain_loss_json['elevation_loss_feet']})
 
-    print(total_elevation_gain_json(activities))
+    total_elevation_gain_json(activities)
 
-    # return activities
+    return total_elevation_gain_json(activities)
 
 
 if __name__ == '__main__':
