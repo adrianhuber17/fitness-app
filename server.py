@@ -69,10 +69,13 @@ def get_user_data():
 
     total_elevation_gain_json = crud.get_total_elevation_monthly(user_id)
 
+    total_activities_monthly_json = crud.get_total_activities_monthly(user_id)
+
     userProfileJson = {'userData':user_json,
                     'followingData':following_info_list,
                     'followerData':follower_info_list,
-                    'totalElevationGain': total_elevation_gain_json}
+                    'totalElevationGain': total_elevation_gain_json,
+                    'totalActivites':total_activities_monthly_json}
 
     return jsonify(userProfileJson)
 

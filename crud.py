@@ -2,7 +2,7 @@
 
 from model import db, User, Activity, connect_to_db
 from sqlalchemy import desc
-from helper_functions import total_elevation_gain_json
+from helper_functions import total_elevation_gain_json,total_activities_monthly_json
 
 #CRUD helper functions
 
@@ -197,6 +197,14 @@ def get_total_elevation_monthly(user_id):
                             'elevation_gain': activity.elevation_gain_loss_json['elevation_gain_feet']})
 
     return total_elevation_gain_json(activities)
+
+def get_total_activities_monthly(user_id):
+    """get total activites for user's entire history"""
+
+    user = db.session.query(User).filter_by(user_id = user_id).one()
+    activities = Activity.query.filter_by(user_id = user.user_id).all()
+
+    return total_activities_monthly_json(activities)
 
 
 if __name__ == '__main__':

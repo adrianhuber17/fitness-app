@@ -10,6 +10,7 @@ const UserProfile = () => {
   const [userFollower, setUserFollower] = useState([]);
   const [userProfileInfo, setUserProfileInfo] = useState([]);
   const [totalElevationGain, setTotalElevationGain] = useState({});
+  const [totalActivites, setTotalActivities] = useState({});
 
   useEffect(() => {
     fetch("/user-data.json")
@@ -19,6 +20,7 @@ const UserProfile = () => {
         setUserFollower(responseData.followerData);
         setUserProfileInfo(responseData.userData);
         setTotalElevationGain(responseData.totalElevationGain);
+        setTotalActivities(responseData.totalActivites);
         setLoading(false);
       });
   }, []);
@@ -29,7 +31,13 @@ const UserProfile = () => {
           <UserPrflTable profileInfo={userProfileInfo} />
           <UserFollowingTable followingList={userFollowing} />
           <UserFollowerTable followerList={userFollower} />
-          <Plot totalElevationGain={totalElevationGain} />
+          {Object.keys(totalElevationGain).length !== 0 &&
+            Object.keys(totalActivites).length !== 0 && (
+              <Plot
+                totalElevationGain={totalElevationGain}
+                totalActivites={totalActivites}
+              />
+            )}
         </>
       )}
     </div>
