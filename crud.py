@@ -2,6 +2,7 @@
 
 from model import db, User, Activity, connect_to_db
 from sqlalchemy import desc
+from helper_functions import total_elevation_gain_json
 
 #CRUD helper functions
 
@@ -183,6 +184,21 @@ def unfollow_user(user_id,following_id):
     user.follower.remove(user_to_unfollow)
     
     return user
+
+def get_elevation_gain(user_id):
+    """get elevation gain for user's entire history"""
+
+    user = db.session.query(User).filter_by(user_id = user_id).one()
+    activities_elevation_gain_hist = user.activities
+
+    activities = []
+    for activity in activities_elevation_gain_hist:
+        activities.append({'date': activity.date,
+                            'elevation_gain': activity.elevation_gain_loss_json['elevation_loss_feet']})
+
+    print(total_elevation_gain_json(activities))
+
+    # return activities
 
 
 if __name__ == '__main__':

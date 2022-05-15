@@ -2,6 +2,7 @@ import UserPrflTable from "../components/UserPrflTable";
 import UserFollowingTable from "../components/UserFollowingTable";
 import { useEffect, useState } from "react";
 import UserFollowerTable from "../components/UserFollowerTable";
+import { Plot } from "../components/Plot";
 
 const UserProfile = () => {
   const [loading, setLoading] = useState(true);
@@ -26,6 +27,7 @@ const UserProfile = () => {
           <UserPrflTable profileInfo={userProfileInfo} />
           <UserFollowingTable followingList={userFollowing} />
           <UserFollowerTable followerList={userFollower} />
+          <Plot />
         </>
       )}
     </div>
