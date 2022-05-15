@@ -44,10 +44,50 @@ const OtherUser = () => {
       });
   }, [userId]);
 
+  const handleFollowClick = (event) => {
+    const follow = event.target.value;
+    const data = { userId: userId, follow: follow };
+    fetch("/follow-user.json", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+        setIsFollowing(true);
+      });
+  };
+
+  const handleUnfollowClick = (event) => {
+    const unfollow = event.target.value;
+    const data = { userId: userId, unfollow: unfollow };
+    fetch("/unfollow-user.json", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log("handleUnfollowClick response:", response);
+        setIsFollowing(false);
+      });
+  };
+
   return (
     <div>
       <OtherUserTable userData={userData} />
-      {!loading && <FollowBtn isFollowing={isFollowing} userId={userId} />}
+      {!loading && (
+        <FollowBtn
+          isFollowing={isFollowing}
+          handleFollowClick={handleFollowClick}
+          handleUnfollowClick={handleUnfollowClick}
+        />
+      )}
       {!loading && (
         <ActivityMap
           centerLatitude={centerLatitude}

@@ -25,7 +25,7 @@ export default function HomePage() {
   return (
     loading === false && (
       <div className="App">
-        <h1>Hello: {email}</h1>
+        <h1>Hello {email}</h1>
         <LogOut />
         <UserProfileBtn />
         <UserSearchBar />

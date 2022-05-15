@@ -1,51 +1,14 @@
-import { useState } from "react";
-
 export default function FollowBtn(props) {
-  const [isFollowing, setIsFollowing] = useState(props.isFollowing);
-
-  console.log("children page ", isFollowing);
-  const handleFollowClick = (event) => {
-    const follow = event.target.value;
-    const data = { userId: props.userId, follow: follow };
-    fetch("/follow-user.json", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response);
-        setIsFollowing(true);
-      });
-  };
-
-  const handleUnfollowClick = (event) => {
-    const unfollow = event.target.value;
-    const data = { userId: props.userId, unfollow: unfollow };
-    fetch("/unfollow-user.json", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response);
-        setIsFollowing(false);
-      });
-  };
+  console.log("FollowBtn, isFollowing props: ", props.isFollowing);
 
   return (
     <div>
-      {isFollowing ? (
-        <button value={"unfollow"} onClick={handleUnfollowClick}>
+      {props.isFollowing ? (
+        <button value={"unfollow"} onClick={props.handleUnfollowClick}>
           unfollow
         </button>
       ) : (
-        <button value={"follow"} onClick={handleFollowClick}>
+        <button value={"follow"} onClick={props.handleFollowClick}>
           follow
         </button>
       )}

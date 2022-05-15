@@ -25,7 +25,7 @@ const UserProfile = () => {
       });
   }, []);
   return (
-    <div>
+    <>
       {!loading && (
         <>
           <UserPrflTable profileInfo={userProfileInfo} />
@@ -40,7 +40,7 @@ const UserProfile = () => {
             )}
         </>
       )}
-    </div>
+    </>
   );
 };
 export default UserProfile;
