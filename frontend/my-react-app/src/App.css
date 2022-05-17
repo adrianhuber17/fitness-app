@@ -6,16 +6,24 @@
   width: 600px;
 }
 
+.userSearch {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+}
 .searchResults {
-  height: 100px;
-  background-color: white;
+  background-color: #202124;
   box-shadow: lightsalmon 0px 5px 15px;
   overflow: hidden;
-  overflow-y: auto;
+  overflow-y: scroll;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
 }
 
 a:hover {
-  background-color: lightsalmon;
+  background-color: #8ab4f8;
 }
 
 .userGpxForm {
@@ -38,6 +46,7 @@ a:hover {
   border: 1px solid salmon;
   height: 300px;
   width: 600px;
+  border-radius: 10px;
 }
 .feedBody {
   display: flex;
@@ -54,7 +63,6 @@ input[type="file"]::file-selector-button {
 }
 
 input[type="file"]::file-selector-button:hover {
-  /* background-color: #a29bfe; */
   border: 2px solid salmon;
   cursor: pointer;
 }
@@ -63,4 +71,9 @@ input[type="file"]::file-selector-button:hover {
   position: relative;
   height: 20vh;
   width: 60vw;
+}
+
+.userSearchLinks {
+  color: #bdc1c6;
+  text-decoration: none;
 }

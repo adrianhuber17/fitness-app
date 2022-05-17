@@ -16,6 +16,7 @@ code {
 
 input {
   background-color: #202124;
+  color: #bdc1c6;
 }
 
 button {
@@ -30,4 +31,8 @@ button {
 button:hover {
   border: 2px solid salmon;
   cursor: pointer;
+}
+
+a {
+  color: #bdc1c6;
 }

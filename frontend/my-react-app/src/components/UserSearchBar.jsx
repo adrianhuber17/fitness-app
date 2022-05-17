@@ -21,7 +21,7 @@ export default function UserSearchBar() {
   // console.log(users);
   return (
     loading === false && (
-      <div>
+      <div className="userSearch">
         <input
           className="searchBar"
           id="searchbar"
@@ -44,7 +44,10 @@ export default function UserSearchBar() {
               })
               .map((user) => (
                 <p key={user.userId}>
-                  <a href={`/other-user-profile?userId=${user.userId}`}>
+                  <a
+                    className="userSearchLinks"
+                    href={`/other-user-profile?userId=${user.userId}`}
+                  >
                     {user.fullName}
                   </a>
                 </p>
