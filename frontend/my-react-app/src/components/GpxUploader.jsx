@@ -70,18 +70,20 @@ export default function GpxUploader() {
   };
 
   return (
-    <div>
+    <div className="userGpxForm">
       <form>
-        <h2>Upload a new ride</h2>
-        <input
-          onChange={handleGpxFile}
-          id="uploadFile"
-          className="uploadFile"
-          type="file"
-          name="uploadFile"
-          accept=".gpx"
-          required
-        />
+        <h2 className="uploadHeading">Upload a new ride</h2>
+        <label for="uploadFile" className="uploadFile">
+          file upload
+          <input
+            onChange={handleGpxFile}
+            id="uploadFile"
+            type="file"
+            name="uploadFile"
+            accept=".gpx"
+            required
+          />
+        </label>
         <br />
         <label htmlFor="ridecap">Ride Caption:</label>
         <input
@@ -92,18 +94,27 @@ export default function GpxUploader() {
           name="ride-caption"
           placeholder="Enter activity caption.."
           value={rideComment}
+          className="rideCaption"
         />
         <br />
-        <button disabled={rideComment === ""} onClick={handleClick}>
+        <button
+          disabled={rideComment === ""}
+          onClick={handleClick}
+          className="submitGpx"
+        >
           Submit
         </button>
       </form>
       {!loading && (
-        <ActivityMap
-          centerLatitude={centerLatitude}
-          centerLongitude={centerLongitude}
-          coordinates={coordinates}
-        />
+        <>
+          <h3>Latest Ride</h3>
+          <ActivityMap
+            centerLatitude={centerLatitude}
+            centerLongitude={centerLongitude}
+            coordinates={coordinates}
+            className="userMap"
+          />
+        </>
       )}
     </div>
   );

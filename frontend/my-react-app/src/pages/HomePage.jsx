@@ -29,7 +29,10 @@ export default function HomePage() {
         <LogOut />
         <UserProfileBtn />
         <UserSearchBar />
-        <GpxUploader />
+        <div className="feedBody">
+          <GpxUploader />
+          <div className="friendsFeed"></div>
+        </div>
       </div>
     )
   );

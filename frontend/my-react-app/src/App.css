@@ -2,8 +2,8 @@
   text-align: center;
 }
 .map {
-  height: 600px;
-  width: 1000px;
+  height: 400px;
+  width: 600px;
 }
 
 .searchResults {
@@ -16,4 +16,48 @@
 
 a:hover {
   background-color: lightsalmon;
+}
+
+.userGpxForm {
+  position: relative;
+  border: 1px solid salmon;
+  border-radius: 10px;
+}
+
+.submitGpx {
+  margin-bottom: 3px;
+  margin-top: 3px;
+}
+
+.rideCaption {
+  margin-bottom: 3px;
+  margin-top: 3px;
+}
+
+.friendsFeed {
+  border: 1px solid salmon;
+  height: 300px;
+  width: 600px;
+}
+.feedBody {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+
+input[type="file"] {
+  display: none;
+  /* background: #8ab4f8;
+  border: 1px solid transparent;
+  box-shadow: none;
+  color: #202124; */
+}
+.uploadFile {
+  margin-bottom: 3px;
+  margin-top: 3px;
+  background: #8ab4f8;
+  border: 1px solid transparent;
+  box-shadow: none;
+  color: #202124;
 }
