@@ -73,8 +73,7 @@ export default function GpxUploader() {
     <div className="userGpxForm">
       <form>
         <h2 className="uploadHeading">Upload a new ride</h2>
-        <label for="uploadFile" className="uploadFile">
-          file upload
+        <label htmlFor="uploadFile" className="uploadFile">
           <input
             onChange={handleGpxFile}
             id="uploadFile"

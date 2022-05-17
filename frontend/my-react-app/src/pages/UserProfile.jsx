@@ -33,10 +33,12 @@ const UserProfile = () => {
           <UserFollowerTable followerList={userFollower} />
           {Object.keys(totalElevationGain).length !== 0 &&
             Object.keys(totalActivites).length !== 0 && (
-              <Plot
-                totalElevationGain={totalElevationGain}
-                totalActivites={totalActivites}
-              />
+              <div className="chart-container">
+                <Plot
+                  totalElevationGain={totalElevationGain}
+                  totalActivites={totalActivites}
+                />
+              </div>
             )}
         </>
       )}

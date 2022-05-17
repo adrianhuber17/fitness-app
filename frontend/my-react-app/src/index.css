@@ -21,6 +21,13 @@ input {
 button {
   background: #8ab4f8;
   border: 1px solid transparent;
+  border-radius: 3px;
   box-shadow: none;
   color: #202124;
+  transition: 0.1s;
+}
+
+button:hover {
+  border: 2px solid salmon;
+  cursor: pointer;
 }
