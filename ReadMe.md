@@ -44,3 +44,11 @@ Follow button will be available in another user's profile if you are not followi
 You can then see users you are following on your profile page.
 
 ![](/ReadME/followUser.gif)
+
+## Check user profile and stats
+
+![](/ReadME/userStats.gif)
+
+## Scroll throught the latest friend's activity feed
+
+![](/ReadME/friendsFeed.gif)
