@@ -4,6 +4,7 @@ import LogOut from "../components/LogOutBtn";
 import UserProfileBtn from "../components/UserProfileBtn";
 import GpxUploader from "../components/GpxUploader";
 import UserSearchBar from "../components/UserSearchBar";
+import FriendFeed from "../components/FriendFeed";
 
 export default function HomePage() {
   const [loading, setLoading] = useState(true);
@@ -18,10 +19,22 @@ export default function HomePage() {
           navigate("/login");
         }
         setEmail(data.email);
-        setLoading(false);
       });
   });
-  // WORK ON HOMEPAGE HTML
+
+  const [friendsData, setFriendsData] = useState([]);
+
+  useEffect(() => {
+    let url = "/friend-feed.json";
+    fetch(url)
+      .then((response) => response.json())
+      .then((respData) => {
+        console.log(respData);
+        setFriendsData(respData);
+        setLoading(false);
+      });
+  }, []);
+
   return (
     loading === false && (
       <div className="App">
@@ -31,7 +44,11 @@ export default function HomePage() {
         <UserSearchBar />
         <div className="feedBody">
           <GpxUploader />
-          <div className="friendsFeed"></div>
+          {friendsData.length > 0 && (
+            <div className="friendsFeed">
+              <FriendFeed friendsData={friendsData} />
+            </div>
+          )}
         </div>
       </div>
     )

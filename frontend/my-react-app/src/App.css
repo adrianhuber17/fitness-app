@@ -4,6 +4,7 @@
 .map {
   height: 400px;
   width: 600px;
+  margin: 20px;
 }
 
 .userSearch {
@@ -28,8 +29,10 @@ a:hover {
 
 .userGpxForm {
   position: relative;
-  border: 1px solid salmon;
+  border: 4px solid salmon;
   border-radius: 10px;
+  height: 650px;
+  width: 650px;
 }
 
 .submitGpx {
@@ -43,11 +46,13 @@ a:hover {
 }
 
 .friendsFeed {
-  border: 1px solid salmon;
-  height: 300px;
-  width: 600px;
+  border: 4px solid salmon;
   border-radius: 10px;
+  overflow-y: auto;
+  height: 650px;
+  width: 650px;
 }
+
 .feedBody {
   display: flex;
   flex-direction: row;

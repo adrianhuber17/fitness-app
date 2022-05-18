@@ -194,6 +194,16 @@ def unfollow_other_user():
 
     return jsonify({'unfollowStatus':unfollowedStatus})
 
+@app.route('/friend-feed.json', methods = ["GET"])
+def friends_activity_feed():
+
+    user_email = session['email']
+    user_id = crud.get_user_id(user_email)
+
+    following_activities = crud.following_activity_json(user_id)
+
+    return jsonify(following_activities)
+
 if __name__ == "__main__":
     from model import connect_to_db, db
 

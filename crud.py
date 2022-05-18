@@ -206,6 +206,28 @@ def get_total_activities_monthly(user_id):
 
     return total_activities_monthly_json(activities)
 
+def following_activity_json(user_id):
+    """get following user's activity list of json for activity feed """
+
+    user = db.session.query(User).filter_by(user_id = user_id).one()
+    following_list = user.follower.all()
+
+    all_activities = []
+
+    for following_activities in following_list:
+        if len(following_activities.activities) > 0:
+            first_name = following_activities.first_name
+            last_name = following_activities.last_name
+            for activity in following_activities.activities:
+                all_activities.append({"rideCaption":activity.ride_caption,
+                                        "date":activity.date,
+                                        "activityJson":activity.activity_json,
+                                        "firstName": first_name,
+                                        "lastName":last_name})
+    
+
+    return all_activities
+
 
 if __name__ == '__main__':
     from server import app
