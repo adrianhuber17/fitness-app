@@ -223,7 +223,8 @@ def following_activity_json(user_id):
                                         "date":activity.date,
                                         "activityJson":activity.activity_json,
                                         "firstName": first_name,
-                                        "lastName":last_name})
+                                        "lastName":last_name,
+                                        "elevationGainLossJson":activity.elevation_gain_loss_json})
     
 
     return all_activities
