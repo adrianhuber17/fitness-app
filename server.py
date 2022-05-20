@@ -115,12 +115,14 @@ def get_ride_gpx_create_activity():
     elevation_gain_loss_json = activity.elevation_gain_loss_json
     max_min_elevation_json = activity.elevation_stats_json
     activity_json = activity.map_json
+    full_elevation_json = activity.elevation_full_route_json
     # date = activity.ride_date
     date = datetime.now()
     ride_name = activity.ride_name
     activity = crud.create_activity(user,date,ride_name,
                                     ride_caption,max_min_elevation_json,
-                                    elevation_gain_loss_json,activity_json)
+                                    elevation_gain_loss_json,activity_json,
+                                    full_elevation_json)
     db.session.add(activity)
     db.session.commit()
      

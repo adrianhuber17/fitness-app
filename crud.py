@@ -95,14 +95,15 @@ def is_password_correct(password):
 def create_activity(user,date,ride_name,ride_caption,
                     max_min_elevation_json,
                     elevation_gain_loss_json,
-                    activity_json):
+                    activity_json,full_elevation_json):
     """Create and return a new activity"""
 
     activity = Activity(user=user,date=date,ride_name=ride_name,
                         ride_caption=ride_caption,
                         max_min_elevation_json=max_min_elevation_json,
                         elevation_gain_loss_json=elevation_gain_loss_json,
-                        activity_json=activity_json)  
+                        activity_json=activity_json,
+                        full_elevation_json=full_elevation_json)  
 
     return activity
 

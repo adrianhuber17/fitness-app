@@ -31,6 +31,7 @@ class gpxParser:
         self.ride_date = None
         self.ride_name = None
         self.elevation_gain_loss_json = None
+        self.elevation_full_route_json = None
 
     def complete_gpx_parser_main(self,gpx_upload):
 
@@ -43,6 +44,7 @@ class gpxParser:
         self.get_center_longitude()
         self.get_coordinates_full_route()
         self.get_json_for_map()
+        self.get_elevation_full_route_json()
 
         #--> functions needed to get heart_rate attribute, elevation extremes
         self.get_heart_rate_min_max_avg()
@@ -144,6 +146,18 @@ class gpxParser:
         self.map_json = {'coordinates': self.coordinates,
                         'latitude': self.center_latitude,
                         'longitude': self.center_longitude}
+
+
+    def get_elevation_full_route_json(self):
+        """return json with all elevation points in route"""
+
+        elevation_list = []
+        for el in self.route_df['elevation']:
+            elevation_list.append(el)
+
+        self.elevation_full_route_json = {'elevation':elevation_list}
+
+        return self.elevation_full_route_json
 
     def get_heart_rate_min_max_avg(self):
 

@@ -48,6 +48,7 @@ class Activity(db.Model):
     max_min_elevation_json = db.Column(JSON)
     elevation_gain_loss_json = db.Column(JSON)
     activity_json = db.Column(JSON)
+    full_elevation_json = db.Column(JSON)
 
     user = db.relationship("User", backref = 'activities')
 
@@ -69,4 +70,4 @@ if __name__ == "__main__":
 
     connect_to_db(app)
     print("Successfully connected to the database")
-    # db.create_all() 
+    db.create_all() 

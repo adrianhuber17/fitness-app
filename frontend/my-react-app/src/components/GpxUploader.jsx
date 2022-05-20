@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ActivityMap from "./ActivityMap";
+import { ElevationPlot } from "./ElevationChart";
 
 export default function GpxUploader() {
   const [gpxFile, setGpxFile] = useState(null);
@@ -113,6 +114,7 @@ export default function GpxUploader() {
             coordinates={coordinates}
             className="userMap"
           />
+          <ElevationPlot />
         </>
       )}
     </div>
