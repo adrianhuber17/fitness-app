@@ -115,7 +115,8 @@ def get_latest_activity(email):
 
     latest_ride_object = db.session.query(Activity).filter_by(user_id = user_id).order_by(desc(Activity.date)).first()
     if latest_ride_object is not None:
-        latest_ride_json = latest_ride_object.activity_json
+        latest_ride_json = {"latestActivity":latest_ride_object.activity_json,
+                            "elevation":latest_ride_object.full_elevation_json}
         return latest_ride_json
     
     return None

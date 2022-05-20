@@ -121,16 +121,13 @@ def get_ride_gpx_create_activity():
     ride_name = activity.ride_name
     activity = crud.create_activity(user,date,ride_name,
                                     ride_caption,max_min_elevation_json,
-                                    elevation_gain_loss_json,activity_json,
-                                    full_elevation_json)
+                                    elevation_gain_loss_json,activity_json,full_elevation_json)
     db.session.add(activity)
     db.session.commit()
      
     latest_activity_json_map = crud.get_latest_activity(email)
 
-    value = {'latestActivity':latest_activity_json_map}
-
-    return jsonify(value)
+    return jsonify(latest_activity_json_map)
 
 @app.route("/get-user-json")
 def get_users():

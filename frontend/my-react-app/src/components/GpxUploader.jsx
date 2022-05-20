@@ -18,9 +18,9 @@ export default function GpxUploader() {
       .then((response) => response.json())
       .then((respData) => {
         if (respData !== null) {
-          setCenterLatitude(respData.latitude);
-          setCenterLongitude(respData.longitude);
-          setCoordinates(respData.coordinates);
+          setCenterLatitude(respData.latestActivity.latitude);
+          setCenterLongitude(respData.latestActivity.longitude);
+          setCoordinates(respData.latestActivity.coordinates);
           setLoading(false);
         } else {
           setCenterLatitude("37.773972");
@@ -55,6 +55,7 @@ export default function GpxUploader() {
     })
       .then((resp) => resp.json())
       .then((data) => {
+        console.log(data);
         console.log("SUBMITTING!");
         if (data !== null) {
           setCenterLatitude(data.latestActivity.latitude);
