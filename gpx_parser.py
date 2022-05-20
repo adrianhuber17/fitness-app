@@ -182,10 +182,10 @@ class gpxParser:
         return self.elevation_stats_json
 
     def get_elevation_gain_loss_json(self,elevation_loss_meters_float,elevation_gain_meters_float):
-        elevation_loss_meters = str(elevation_loss_meters_float)
-        elevation_gain_meters = str(elevation_gain_meters_float)
-        elevation_loss_feet = str(elevation_loss_meters_float * 3.28084)
-        elevation_gain_feet = str(elevation_gain_meters_float * 3.28084)
+        elevation_loss_meters = str(round(elevation_loss_meters_float,1))
+        elevation_gain_meters = str(round(elevation_gain_meters_float,1))
+        elevation_loss_feet = str(round(elevation_loss_meters_float * 3.28084,1))
+        elevation_gain_feet = str(round(elevation_gain_meters_float * 3.28084,1))
 
         self.elevation_gain_loss_json = {'elevation_loss_meters':elevation_loss_meters,
                                     'elevation_gain_meters':elevation_gain_meters,
