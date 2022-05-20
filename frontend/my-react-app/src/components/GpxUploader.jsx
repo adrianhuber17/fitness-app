@@ -9,6 +9,7 @@ export default function GpxUploader() {
   const [centerLatitude, setCenterLatitude] = useState("");
   const [centerLongitude, setCenterLongitude] = useState("");
   const [coordinates, setCoordinates] = useState([""]);
+  const [elevation, setElevation] = useState([]);
 
   const [loading, setLoading] = useState(true);
 
@@ -21,6 +22,7 @@ export default function GpxUploader() {
           setCenterLatitude(respData.latestActivity.latitude);
           setCenterLongitude(respData.latestActivity.longitude);
           setCoordinates(respData.latestActivity.coordinates);
+          setElevation(respData.elevation.elevation);
           setLoading(false);
         } else {
           setCenterLatitude("37.773972");
@@ -61,6 +63,7 @@ export default function GpxUploader() {
           setCenterLatitude(data.latestActivity.latitude);
           setCenterLongitude(data.latestActivity.longitude);
           setCoordinates(data.latestActivity.coordinates);
+          setElevation(data.elevation.elevation);
           setLoading(false);
         } else {
           setCenterLatitude("37.773972");
@@ -70,7 +73,6 @@ export default function GpxUploader() {
         }
       });
   };
-
   return (
     <div className="userGpxForm">
       <form>
@@ -115,7 +117,7 @@ export default function GpxUploader() {
             coordinates={coordinates}
             className="userMap"
           />
-          <ElevationPlot />
+          {elevation.length > 0 && <ElevationPlot elevation={elevation} />}
         </>
       )}
     </div>

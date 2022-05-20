@@ -151,10 +151,14 @@ class gpxParser:
     def get_elevation_full_route_json(self):
         """return json with all elevation points in route"""
 
+        elevation_list= [x for x in self.route_df[['elevation']].to_numpy()]
         elevation_list = []
-        for el in self.route_df['elevation']:
-            elevation_list.append(el)
-
+      
+        loop_count = len(self.route_df['elevation'])
+        for el in range(0,loop_count,20):
+            
+            elevation_list.append(str(self.route_df['elevation'][el]))
+       
         self.elevation_full_route_json = {'elevation':elevation_list}
 
         return self.elevation_full_route_json
