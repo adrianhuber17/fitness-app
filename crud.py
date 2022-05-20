@@ -226,6 +226,10 @@ def following_activity_json(user_id):
                                         "lastName":last_name,
                                         "elevationGainLossJson":activity.elevation_gain_loss_json})
     
+    #sorts the list by date
+    all_activities.sort(key=lambda item:item['date'], reverse=True)
+    #limits all activities to 5 activities
+    all_activities = all_activities[:5]
 
     return all_activities
 
