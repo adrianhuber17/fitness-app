@@ -11,7 +11,7 @@ function ChangeMapView({ coords }) {
 
 export default function ActivityMap(props) {
   return (
-    <div>
+    <>
       <MapContainer
         className="map"
         center={[props.centerLatitude, props.centerLongitude]}
@@ -27,6 +27,6 @@ export default function ActivityMap(props) {
         <Polyline positions={[props.coordinates]} color={"red"} />
         <ChangeMapView coords={[props.centerLatitude, props.centerLongitude]} />
       </MapContainer>
-    </div>
+    </>
   );
 }

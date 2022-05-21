@@ -74,8 +74,21 @@ input[type="file"]::file-selector-button:hover {
 
 .chart-container {
   position: relative;
-  height: 20vh;
-  width: 60vw;
+  height: 30vh;
+  width: 70vw;
+}
+
+.map-friend {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+}
+
+.map-friend .map {
+  height: 800px;
+  width: 1000px;
+  margin: 20px;
 }
 
 .userSearchLinks {

@@ -34,13 +34,26 @@ def get_other_user_data_json(user_id_user,other_user_id):
                 'last_name': user.last_name}
     
     latest_ride_object = db.session.query(Activity).filter_by(user_id = other_user_id).order_by(desc(Activity.date)).first()
-    other_user_latest_act = None
+    other_user_latest_act,ride_caption,date,elevation_gain_loss_json = None,None,None,None
     if latest_ride_object is not None:
         other_user_latest_act = latest_ride_object.activity_json
+        ride_caption = latest_ride_object.ride_caption
+        date = latest_ride_object.date
+        elevation_gain_loss_json = latest_ride_object.elevation_gain_loss_json
 
+
+    total_activities_monthly = get_total_activities_monthly(other_user_id)
+    total_elevation_monthly = get_total_elevation_monthly(other_user_id)
     is_user_following_other = is_following(user_id_user,other_user_id)
     
-    other_user_data_json = {'userData':other_user_info,'userLatestRide':other_user_latest_act,'isFollowing':is_user_following_other}
+    other_user_data_json = {'userData':other_user_info,
+                            'userLatestRide':other_user_latest_act,
+                            'isFollowing':is_user_following_other,
+                            'totalActivities':total_activities_monthly,
+                            'totalElevationGain':total_elevation_monthly,
+                            'rideCaption':ride_caption,
+                            'date':date,
+                            'elevationGainLossJson':elevation_gain_loss_json}
 
     return other_user_data_json
 
@@ -205,7 +218,7 @@ def get_total_activities_monthly(user_id):
 
     user = db.session.query(User).filter_by(user_id = user_id).one()
     activities = Activity.query.filter_by(user_id = user.user_id).all()
-
+   
     return total_activities_monthly_json(activities)
 
 def following_activity_json(user_id):

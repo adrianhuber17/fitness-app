@@ -3,6 +3,7 @@ import { GetOtherUserId } from "../helperFunction/StateParamWrapper";
 import ActivityMap from "../components/ActivityMap";
 import OtherUserTable from "../components/OtherUserTable";
 import FollowBtn from "../components/FollowBtn";
+import { Plot } from "../components/Plot";
 
 const OtherUser = () => {
   const [centerLatitude, setCenterLatitude] = useState("");
@@ -10,6 +11,11 @@ const OtherUser = () => {
   const [coordinates, setCoordinates] = useState([""]);
   const [isFollowing, setIsFollowing] = useState(false);
   const [userData, setUserData] = useState({});
+  const [totalElevationGain, setTotalElevationGain] = useState({});
+  const [totalActivites, setTotalActivities] = useState({});
+  const [rideCaption, setRideCaption] = useState("");
+  const [date, setDate] = useState("");
+  const [elevationGain, setElevationGain] = useState({});
   const [loading, setLoading] = useState(true);
 
   const userId = GetOtherUserId();
@@ -29,9 +35,14 @@ const OtherUser = () => {
           setCenterLatitude(respData.userLatestRide.latitude);
           setCenterLongitude(respData.userLatestRide.longitude);
           setCoordinates(respData.userLatestRide.coordinates);
+          setTotalElevationGain(respData.totalElevationGain);
+          setTotalActivities(respData.totalActivities);
           setUserData(respData.userData);
+          setRideCaption(respData.rideCaption);
+          setDate(respData.date);
+          setElevationGain(respData.elevationGainLossJson);
           setIsFollowing(respData.isFollowing);
-          console.log(respData.isFollowing);
+
           setLoading(false);
         } else {
           setCenterLatitude("37.773972");
@@ -56,7 +67,6 @@ const OtherUser = () => {
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
         setIsFollowing(true);
       });
   };
@@ -89,12 +99,28 @@ const OtherUser = () => {
         />
       )}
       {!loading && (
-        <ActivityMap
-          centerLatitude={centerLatitude}
-          centerLongitude={centerLongitude}
-          coordinates={coordinates}
-        />
+        <div className="map-friend">
+          <span>
+            <li>{rideCaption}</li>
+            <li>{date}</li>
+            <li>{elevationGain.elevation_gain_feet} feet climbed</li>
+          </span>
+          <ActivityMap
+            centerLatitude={centerLatitude}
+            centerLongitude={centerLongitude}
+            coordinates={coordinates}
+          />
+        </div>
       )}
+      {Object.keys(totalElevationGain).length !== 0 &&
+        Object.keys(totalActivites).length !== 0 && (
+          <div className="chart-container">
+            <Plot
+              totalElevationGain={totalElevationGain}
+              totalActivites={totalActivites}
+            />
+          </div>
+        )}
     </div>
   );
 };
