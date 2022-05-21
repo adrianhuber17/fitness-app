@@ -100,11 +100,14 @@ const OtherUser = () => {
       )}
       {!loading && (
         <div className="map-friend">
-          <span>
-            <li>{rideCaption}</li>
-            <li>{date}</li>
-            <li>{elevationGain.elevation_gain_feet} feet climbed</li>
-          </span>
+          {date !== "" && (
+            <span>
+              <li>{rideCaption}</li>
+              <li>{date}</li>
+              <li>{elevationGain.elevation_gain_feet} feet climbed</li>
+            </span>
+          )}
+
           <ActivityMap
             centerLatitude={centerLatitude}
             centerLongitude={centerLongitude}
