@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function Login({ setSession }) {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,7 +15,7 @@ export default function Login() {
     setPassword(inputPassword);
   };
 
-  const handleClick = (event) => {
+  const handleLogIn = (event) => {
     event.preventDefault();
     const loginData = { email: email, password: password };
     setEmail("");
@@ -33,6 +33,7 @@ export default function Login() {
         } else if (responseData.status === "wrong password") {
           alert("Password enetered is incorrect, please try again");
         } else {
+          setSession(true);
           navigate("/");
         }
       });
@@ -64,7 +65,7 @@ export default function Login() {
         <br></br>
         <button
           disabled={email === "" || password === ""}
-          onClick={handleClick}
+          onClick={handleLogIn}
         >
           Log in
         </button>

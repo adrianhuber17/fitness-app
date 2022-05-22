@@ -1,27 +1,11 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import LogOut from "../components/LogOutBtn";
 import UserProfileBtn from "../components/UserProfileBtn";
 import GpxUploader from "../components/GpxUploader";
 import UserSearchBar from "../components/UserSearchBar";
 import FriendFeed from "../components/FriendFeed";
 
-export default function HomePage() {
+export default function HomePage({ email }) {
   const [loading, setLoading] = useState(true);
-  const [email, setEmail] = useState(null);
-  const navigate = useNavigate();
-  useEffect(() => {
-    let url = "/session.json";
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.email === null) {
-          navigate("/login");
-        }
-        setEmail(data.email);
-      });
-  });
-
   const [friendsData, setFriendsData] = useState([]);
 
   useEffect(() => {
@@ -29,17 +13,15 @@ export default function HomePage() {
     fetch(url)
       .then((response) => response.json())
       .then((respData) => {
-        console.log(respData);
         setFriendsData(respData);
         setLoading(false);
       });
   }, []);
 
   return (
-    loading === false && (
+    !loading && (
       <div className="App">
         <h1>Hello {email}</h1>
-        <LogOut />
         <UserProfileBtn />
         <UserSearchBar />
         <div className="feedBody">

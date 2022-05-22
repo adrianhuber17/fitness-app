@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { GetOtherUserId } from "../helperFunction/StateParamWrapper";
+import { GetOtherUserId } from "../helper/StateParamWrapper";
 import ActivityMap from "../components/ActivityMap";
 import OtherUserTable from "../components/OtherUserTable";
 import FollowBtn from "../components/FollowBtn";
