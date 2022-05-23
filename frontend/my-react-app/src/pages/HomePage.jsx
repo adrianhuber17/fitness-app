@@ -3,6 +3,7 @@ import UserProfileBtn from "../components/UserProfileBtn";
 import GpxUploader from "../components/GpxUploader";
 import UserSearchBar from "../components/UserSearchBar";
 import FriendFeed from "../components/FriendFeed";
+import { Navigate } from "react-router-dom";
 
 export default function HomePage({ email }) {
   const [loading, setLoading] = useState(true);
@@ -19,6 +20,10 @@ export default function HomePage({ email }) {
         });
     }
   }, [email]);
+
+  if (!email) {
+    return <Navigate to="/login" replace />;
+  }
 
   return (
     !loading && (
