@@ -9,14 +9,20 @@ import { UseSessionInfo } from "./helper/useSessionInfo";
 import NavBar from "./components/NavBar/NavBar";
 
 function App() {
-  const [email, session, setSession] = UseSessionInfo();
+  const [email, session, setSession, setEmail] = UseSessionInfo();
   return (
     <BrowserRouter>
       {session && <NavBar setSession={setSession} />}
       <Routes>
         <Route
           path="/login"
-          element={<LogInPage session={session} setSession={setSession} />}
+          element={
+            <LogInPage
+              session={session}
+              setSession={setSession}
+              setEmail={setEmail}
+            />
+          }
         />
         <Route path="/" element={<HomePage email={email} />} />
         <Route

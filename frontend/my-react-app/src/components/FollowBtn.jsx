@@ -1,6 +1,4 @@
 export default function FollowBtn(props) {
-  console.log("FollowBtn, isFollowing props: ", props.isFollowing);
-
   return (
     <div>
       {props.isFollowing ? (

@@ -25,7 +25,7 @@ def login():
     if crud.is_user_correct(email) == True and crud.is_password_correct(password) == True:
         session['email'] = session.get('email',email)
         print(session)
-        return jsonify({'status':'sign in ok'})
+        return jsonify({'status':'sign in ok', 'email': email})
     elif crud.is_user_correct(email) == False:
         print('wrong email')
         return jsonify({'status':'wrong email'})

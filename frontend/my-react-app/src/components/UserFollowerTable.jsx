@@ -1,5 +1,4 @@
 export default function UserFollowerTable(props) {
-  console.log("follower", props.followerList);
   if (props.followerList.length !== 0) {
     return (
       <div>

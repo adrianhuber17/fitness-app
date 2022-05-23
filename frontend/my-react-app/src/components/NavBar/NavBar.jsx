@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function NavBar({ setSession }) {
   const navigate = useNavigate();
+  console.log("NavBar");
 
   const handleLogOut = (event) => {
     event.preventDefault();
@@ -19,6 +20,7 @@ export default function NavBar({ setSession }) {
           alert("Something went wrong, please try again");
         }
       });
+    sessionStorage.clear();
   };
 
   return (

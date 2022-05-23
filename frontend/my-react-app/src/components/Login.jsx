@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Login({ setSession }) {
+export default function Login({ setSession, setEmail }) {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
+  const [formEmail, setFormEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleEmail = (event) => {
     const inputEmail = event.target.value;
-    setEmail(inputEmail);
+    setFormEmail(inputEmail);
   };
   const handlePassword = (event) => {
     const inputPassword = event.target.value;
@@ -17,8 +17,8 @@ export default function Login({ setSession }) {
 
   const handleLogIn = (event) => {
     event.preventDefault();
-    const loginData = { email: email, password: password };
-    setEmail("");
+    const loginData = { email: formEmail, password: password };
+    setFormEmail("");
     setPassword("");
     const url = "/login-user.json";
     fetch(url, {
@@ -32,8 +32,12 @@ export default function Login({ setSession }) {
           alert("Email enetered is incorrect, please try again");
         } else if (responseData.status === "wrong password") {
           alert("Password enetered is incorrect, please try again");
-        } else {
+        }
+        if (responseData.email) {
+          sessionStorage.setItem("session", JSON.stringify(true));
+          sessionStorage.setItem("email", JSON.stringify(responseData.email));
           setSession(true);
+          setEmail(responseData.email);
           navigate("/");
         }
       });
@@ -49,7 +53,7 @@ export default function Login({ setSession }) {
           type="text"
           name="email"
           id="email"
-          value={email}
+          value={formEmail}
           required
         />
         <br></br>
@@ -64,7 +68,7 @@ export default function Login({ setSession }) {
         />
         <br></br>
         <button
-          disabled={email === "" || password === ""}
+          disabled={formEmail === "" || password === ""}
           onClick={handleLogIn}
         >
           Log in
