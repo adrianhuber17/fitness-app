@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import UserFollowerTable from "../components/UserFollowerTable";
 import { Plot } from "../components/Plot";
 
-const UserProfile = () => {
+const UserProfile = ({ session }) => {
   const [loading, setLoading] = useState(true);
   const [userFollowing, setUserFollowing] = useState([]);
   const [userFollower, setUserFollower] = useState([]);
@@ -13,17 +13,20 @@ const UserProfile = () => {
   const [totalActivites, setTotalActivities] = useState({});
 
   useEffect(() => {
-    fetch("/user-data.json")
-      .then((response) => response.json())
-      .then((responseData) => {
-        setUserFollowing(responseData.followingData);
-        setUserFollower(responseData.followerData);
-        setUserProfileInfo(responseData.userData);
-        setTotalElevationGain(responseData.totalElevationGain);
-        setTotalActivities(responseData.totalActivites);
-        setLoading(false);
-      });
-  }, []);
+    if (session) {
+      fetch("/user-data.json")
+        .then((response) => response.json())
+        .then((responseData) => {
+          setUserFollowing(responseData.followingData);
+          setUserFollower(responseData.followerData);
+          setUserProfileInfo(responseData.userData);
+          setTotalElevationGain(responseData.totalElevationGain);
+          setTotalActivities(responseData.totalActivites);
+          setLoading(false);
+        });
+    }
+  }, [session]);
+
   return (
     <>
       {!loading && (

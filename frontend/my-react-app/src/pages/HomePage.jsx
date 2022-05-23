@@ -10,13 +10,15 @@ export default function HomePage({ email }) {
 
   useEffect(() => {
     let url = "/friend-feed.json";
-    fetch(url)
-      .then((response) => response.json())
-      .then((respData) => {
-        setFriendsData(respData);
-        setLoading(false);
-      });
-  }, []);
+    if (email) {
+      fetch(url)
+        .then((response) => response.json())
+        .then((respData) => {
+          setFriendsData(respData);
+          setLoading(false);
+        });
+    }
+  }, [email]);
 
   return (
     !loading && (

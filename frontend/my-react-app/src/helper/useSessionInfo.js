@@ -16,11 +16,7 @@ export const UseSessionInfo = () => {
           setEmail(data.email);
         }
       });
-    console.log("useSessionHook session:", session);
-    console.log("useSessionHook email:", email);
   }, [session, email]);
-
-  console.log("running UseSessionInfo hook");
 
   return [email, session, setSession];
 };

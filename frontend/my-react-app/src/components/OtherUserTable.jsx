@@ -1,6 +1,6 @@
 export default function OtherUserTable(props) {
   return (
-    <div>
+    <>
       <h1>Welcome to {props.userData.first_name} profile!</h1>
       <h2>Profile Information</h2>
       <table>
@@ -21,6 +21,6 @@ export default function OtherUserTable(props) {
           </tr>
         </tbody>
       </table>
-    </div>
+    </>
   );
 }

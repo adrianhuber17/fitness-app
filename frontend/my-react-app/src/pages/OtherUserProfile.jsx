@@ -5,7 +5,7 @@ import OtherUserTable from "../components/OtherUserTable";
 import FollowBtn from "../components/FollowBtn";
 import { Plot } from "../components/Plot";
 
-const OtherUser = () => {
+const OtherUser = ({ session }) => {
   const [centerLatitude, setCenterLatitude] = useState("");
   const [centerLongitude, setCenterLongitude] = useState("");
   const [coordinates, setCoordinates] = useState([""]);
@@ -22,38 +22,40 @@ const OtherUser = () => {
 
   useEffect(() => {
     const data = { userId: userId };
-    fetch("/other-user.json", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((respData) => {
-        if (respData.userLatestRide !== null) {
-          setCenterLatitude(respData.userLatestRide.latitude);
-          setCenterLongitude(respData.userLatestRide.longitude);
-          setCoordinates(respData.userLatestRide.coordinates);
-          setTotalElevationGain(respData.totalElevationGain);
-          setTotalActivities(respData.totalActivities);
-          setUserData(respData.userData);
-          setRideCaption(respData.rideCaption);
-          setDate(respData.date);
-          setElevationGain(respData.elevationGainLossJson);
-          setIsFollowing(respData.isFollowing);
+    if (session) {
+      fetch("/other-user.json", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => response.json())
+        .then((respData) => {
+          if (respData.userLatestRide !== null) {
+            setCenterLatitude(respData.userLatestRide.latitude);
+            setCenterLongitude(respData.userLatestRide.longitude);
+            setCoordinates(respData.userLatestRide.coordinates);
+            setTotalElevationGain(respData.totalElevationGain);
+            setTotalActivities(respData.totalActivities);
+            setUserData(respData.userData);
+            setRideCaption(respData.rideCaption);
+            setDate(respData.date);
+            setElevationGain(respData.elevationGainLossJson);
+            setIsFollowing(respData.isFollowing);
 
-          setLoading(false);
-        } else {
-          setCenterLatitude("37.773972");
-          setCenterLongitude("-122.431297");
-          setCoordinates(["37.773972", "-122.431297"]);
-          setUserData(respData.userData);
-          setIsFollowing(respData.isFollowing);
-          setLoading(false);
-        }
-      });
-  }, [userId]);
+            setLoading(false);
+          } else {
+            setCenterLatitude("37.773972");
+            setCenterLongitude("-122.431297");
+            setCoordinates(["37.773972", "-122.431297"]);
+            setUserData(respData.userData);
+            setIsFollowing(respData.isFollowing);
+            setLoading(false);
+          }
+        });
+    }
+  }, [userId, session]);
 
   const handleFollowClick = (event) => {
     const follow = event.target.value;
@@ -89,31 +91,31 @@ const OtherUser = () => {
   };
 
   return (
-    <div>
-      <OtherUserTable userData={userData} />
+    <>
       {!loading && (
-        <FollowBtn
-          isFollowing={isFollowing}
-          handleFollowClick={handleFollowClick}
-          handleUnfollowClick={handleUnfollowClick}
-        />
-      )}
-      {!loading && (
-        <div className="map-friend">
-          {date !== "" && (
-            <span>
-              <li>{rideCaption}</li>
-              <li>{date}</li>
-              <li>{elevationGain.elevation_gain_feet} feet climbed</li>
-            </span>
-          )}
-
-          <ActivityMap
-            centerLatitude={centerLatitude}
-            centerLongitude={centerLongitude}
-            coordinates={coordinates}
+        <>
+          <OtherUserTable userData={userData} />
+          <FollowBtn
+            isFollowing={isFollowing}
+            handleFollowClick={handleFollowClick}
+            handleUnfollowClick={handleUnfollowClick}
           />
-        </div>
+          <div className="map-friend">
+            {date !== "" && (
+              <span>
+                <li>{rideCaption}</li>
+                <li>{date}</li>
+                <li>{elevationGain.elevation_gain_feet} feet climbed</li>
+              </span>
+            )}
+
+            <ActivityMap
+              centerLatitude={centerLatitude}
+              centerLongitude={centerLongitude}
+              coordinates={coordinates}
+            />
+          </div>
+        </>
       )}
       {Object.keys(totalElevationGain).length !== 0 &&
         Object.keys(totalActivites).length !== 0 && (
@@ -124,7 +126,7 @@ const OtherUser = () => {
             />
           </div>
         )}
-    </div>
+    </>
   );
 };
 export default OtherUser;

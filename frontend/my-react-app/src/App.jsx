@@ -2,7 +2,7 @@ import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LogInPage from "./pages/LogInPage";
 import UserProfile from "./pages/UserProfile";
-import OtherUser from "./pages/OtherUserProfile";
+import OtherUserProfile from "./pages/OtherUserProfile";
 import HomePage from "./pages/HomePage";
 import { StateParamWrapper } from "./helper/StateParamWrapper";
 import { UseSessionInfo } from "./helper/useSessionInfo";
@@ -12,14 +12,22 @@ function App() {
   const [email, session, setSession] = UseSessionInfo();
   return (
     <BrowserRouter>
-      <div className="App"></div>
       {session && <NavBar setSession={setSession} />}
       <Routes>
-        <Route path="/login" element={<LogInPage setSession={setSession} />} />
+        <Route
+          path="/login"
+          element={<LogInPage session={session} setSession={setSession} />}
+        />
         <Route path="/" element={<HomePage email={email} />} />
-        <Route path="/user-profile" element={<UserProfile />} />
+        <Route
+          path="/user-profile"
+          element={<UserProfile session={session} />}
+        />
         <Route element={<StateParamWrapper />}>
-          <Route path="/other-user-profile" element={<OtherUser />} />
+          <Route
+            path="/other-user-profile"
+            element={<OtherUserProfile session={session} />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>
