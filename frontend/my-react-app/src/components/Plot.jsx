@@ -66,6 +66,7 @@ const labels = [
 
 export function Plot(props) {
   const currYearClimb = props.totalElevationGain["2022"];
+  console.log(currYearClimb);
   const currYearActivities = props.totalActivites["2022"];
   const data = {
     labels,
@@ -73,8 +74,9 @@ export function Plot(props) {
       {
         label: "Total Feet Climbed",
         data: labels.map((month, ind) => {
-          if (ind in currYearClimb) {
-            return currYearClimb[ind];
+          const act_ind = ind + 1;
+          if (act_ind in currYearClimb) {
+            return currYearClimb[act_ind];
           } else {
             return 0;
           }
@@ -85,8 +87,9 @@ export function Plot(props) {
       {
         label: "Total Activities",
         data: labels.map((month, ind) => {
-          if (ind in currYearActivities) {
-            return currYearActivities[ind];
+          const act_ind = ind + 1;
+          if (act_ind in currYearActivities) {
+            return currYearActivities[act_ind];
           } else {
             return 0;
           }

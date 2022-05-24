@@ -9,10 +9,11 @@ import { UseSessionInfo } from "./helper/useSessionInfo";
 import NavBar from "./components/NavBar/NavBar";
 
 function App() {
-  const [email, session, setSession, setEmail] = UseSessionInfo();
+  const [email, session, setSession, setEmail, userData, setUserData] =
+    UseSessionInfo();
   return (
     <BrowserRouter>
-      {session && <NavBar setSession={setSession} />}
+      {session && <NavBar setSession={setSession} userData={userData} />}
       <Routes>
         <Route
           path="/login"
@@ -21,6 +22,7 @@ function App() {
               session={session}
               setSession={setSession}
               setEmail={setEmail}
+              setUserData={setUserData}
             />
           }
         />

@@ -9,6 +9,7 @@
 
 .userSearch {
   display: flex;
+  margin-left: 10px;
   align-items: center;
   flex-direction: column;
   justify-content: flex-start;
@@ -94,4 +95,58 @@ input[type="file"]::file-selector-button:hover {
 .userSearchLinks {
   color: #bdc1c6;
   text-decoration: none;
+}
+
+.logo {
+  width: 80px;
+  margin: 2rem;
+}
+
+.primary-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.primary-navigation {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 2rem;
+}
+
+.primary-navigation a {
+  text-decoration: none;
+}
+
+.nav-items {
+  display: flex;
+}
+
+.primary-navigation ul {
+  margin: 2px;
+}
+
+.log-out {
+  margin-left: 10px;
+  max-height: 20px;
+}
+
+.nav-list {
+  margin-left: 10px;
+  font-weight: 500;
+}
+
+.avatar {
+  display: flex;
+  height: 30px;
+  width: 30px;
+  justify-content: center;
+  border-radius: 100%;
+  border: 2px solid salmon;
+  align-items: center;
+  margin-left: 10px;
+  background-color: rgba(11, 300, 1, 0.1);
+  box-shadow: lightsalmon 0px 1px 1px;
 }

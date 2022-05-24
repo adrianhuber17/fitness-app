@@ -24,8 +24,9 @@ def login():
     password = request.json.get('password')
     if crud.is_user_correct(email) == True and crud.is_password_correct(password) == True:
         session['email'] = session.get('email',email)
+        user_json = crud.get_user_json(email)
         print(session)
-        return jsonify({'status':'sign in ok', 'email': email})
+        return jsonify({'status':'sign in ok', 'email': email,'userData':user_json})
     elif crud.is_user_correct(email) == False:
         print('wrong email')
         return jsonify({'status':'wrong email'})

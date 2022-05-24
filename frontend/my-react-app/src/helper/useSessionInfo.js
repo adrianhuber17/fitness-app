@@ -7,6 +7,9 @@ export const UseSessionInfo = () => {
   const [email, setEmail] = useState(() => {
     return JSON.parse(sessionStorage.getItem("email")) ?? "";
   });
+  const [userData, setUserData] = useState(() => {
+    return JSON.parse(sessionStorage.getItem("userData")) ?? "";
+  });
 
   useEffect(() => {
     let url = "/session.json";
@@ -28,5 +31,6 @@ export const UseSessionInfo = () => {
 
   console.log(session);
   console.log(email);
-  return [email, session, setSession, setEmail];
+  console.log(userData);
+  return [email, session, setSession, setEmail, userData, setUserData];
 };

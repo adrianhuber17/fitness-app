@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Login({ setSession, setEmail }) {
+export default function Login({ setSession, setEmail, setUserData }) {
   const navigate = useNavigate();
   const [formEmail, setFormEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -36,8 +36,13 @@ export default function Login({ setSession, setEmail }) {
         if (responseData.email) {
           sessionStorage.setItem("session", JSON.stringify(true));
           sessionStorage.setItem("email", JSON.stringify(responseData.email));
+          sessionStorage.setItem(
+            "userData",
+            JSON.stringify(responseData.userData)
+          );
           setSession(true);
           setEmail(responseData.email);
+          setUserData(responseData.userData);
           navigate("/");
         }
       });
