@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+// import searchIcon from "./svg/search_icon.svg";
 
 export default function UserSearchBar() {
   const [users, setUsers] = useState([]);
@@ -21,39 +22,44 @@ export default function UserSearchBar() {
   // console.log(users);
   return (
     loading === false && (
-      <div className="userSearch">
-        <input
-          className="searchBar"
-          id="searchbar"
-          type="text"
-          placeholder="Search user.."
-          name="search"
-          onChange={handleSearch}
-        />
-        {searchUser.length !== 0 && (
-          <ul className="searchResults">
-            {users
-              .filter((user) => {
-                if (
-                  searchUser === "" ||
-                  user.fullName.toLowerCase().includes(searchUser)
-                ) {
-                  return user;
-                }
-                return null;
-              })
-              .map((user) => (
-                <p key={user.userId}>
-                  <a
-                    className="userSearchLinks"
-                    href={`/other-user-profile?userId=${user.userId}`}
-                  >
-                    {user.fullName}
-                  </a>
-                </p>
-              ))}
-          </ul>
-        )}
+      <div className="search">
+        <div className="userSearch">
+          <input
+            className="searchBar"
+            id="searchbar"
+            type="text"
+            placeholder="Search user.."
+            name="search"
+            onChange={handleSearch}
+          />
+          {/* <img className="searchIcon" src={searchIcon} alt="searchIcon" /> */}
+        </div>
+        <div className="searchResults">
+          {searchUser.length !== 0 && (
+            <>
+              {users
+                .filter((user) => {
+                  if (
+                    searchUser === "" ||
+                    user.fullName.toLowerCase().includes(searchUser)
+                  ) {
+                    return user;
+                  }
+                  return null;
+                })
+                .map((user) => (
+                  <p key={user.userId}>
+                    <a
+                      className="userSearchLinks"
+                      href={`/other-user-profile?userId=${user.userId}`}
+                    >
+                      {user.fullName}
+                    </a>
+                  </p>
+                ))}
+            </>
+          )}
+        </div>
       </div>
     )
   );

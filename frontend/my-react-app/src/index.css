@@ -9,10 +9,10 @@ body {
   color: #bdc1c6;
 }
 
-code {
+/* code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-}
+} */
 
 input {
   background-color: #202124;
@@ -29,10 +29,15 @@ button {
 }
 
 button:hover {
-  border: 2px solid salmon;
+  background-color: #2e77ec;
   cursor: pointer;
 }
 
 a {
   color: #bdc1c6;
+}
+
+a:hover {
+  background-color: transparent;
+  box-shadow: inset 0px -1px 0 0 salmon;
 }

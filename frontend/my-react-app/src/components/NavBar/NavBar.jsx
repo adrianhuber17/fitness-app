@@ -2,7 +2,7 @@ import LogOut from "../LogOutBtn";
 import UserSearchBar from "../UserSearchBar";
 import { MenuItems } from "./MenuItems";
 import { useNavigate } from "react-router-dom";
-import logo from "./logo4.svg";
+import logo from "../svg/logo4.svg";
 
 export default function NavBar({ setSession, userData }) {
   const navigate = useNavigate();
