@@ -10,7 +10,7 @@ export default function LogInPage({
 }) {
   console.log("loginPageSession", session);
   return !session ? (
-    <div className="App">
+    <div className="login-page">
       <Login
         setUserData={setUserData}
         setSession={setSession}

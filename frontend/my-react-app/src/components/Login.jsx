@@ -51,10 +51,10 @@ export default function Login({ setSession, setEmail, setUserData }) {
   return (
     <div className="login">
       <h1>Log-in</h1>
-      <form>
-        <label htmlFor="email">Email: </label>
+      <form className="login-form">
         <input
           onChange={handleEmail}
+          placeholder="email"
           type="text"
           name="email"
           id="email"
@@ -62,9 +62,9 @@ export default function Login({ setSession, setEmail, setUserData }) {
           required
         />
         <br></br>
-        <label htmlFor="password">Password: </label>
         <input
           onChange={handlePassword}
+          placeholder="password"
           type="password"
           name="password"
           id="password"

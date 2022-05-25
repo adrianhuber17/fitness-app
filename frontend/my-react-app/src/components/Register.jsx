@@ -51,11 +51,11 @@ export default function Register() {
   };
   return (
     <div className="register">
-      <h1>Register Account</h1>
-      <form>
-        <label htmlFor="reg_email">Email: </label>
+      <h1>Register</h1>
+      <form className="register-form">
         <input
           onChange={handleEmail}
+          placeholder="email"
           type="text"
           name="reg_email"
           id="reg_email"
@@ -63,9 +63,9 @@ export default function Register() {
           required
         />
         <br></br>
-        <label htmlFor="reg_password">Password: </label>
         <input
           onChange={handlePassword}
+          placeholder="password"
           type="password"
           name="reg_password"
           id="reg_password"
@@ -73,9 +73,9 @@ export default function Register() {
           required
         />
         <br></br>
-        <label htmlFor="first_name">First Name: </label>
         <input
           onChange={handleFirstName}
+          placeholder="first name"
           type="text"
           name="first_name"
           id="first_name"
@@ -83,10 +83,10 @@ export default function Register() {
           required
         />
         <br></br>
-        <label htmlFor="last_name">Last Name: </label>
         <input
           onChange={handleLastName}
           type="text"
+          placeholder="last name"
           name="last_name"
           id="last_name"
           value={lastName}
