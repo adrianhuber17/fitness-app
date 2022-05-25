@@ -1,6 +1,6 @@
 export default function UserPrflTable(props) {
   return (
-    <div>
+    <div className="user-profile-table">
       <h1>Hey {props.profileInfo.first_name}!</h1>
       <h2>Profile Information</h2>
       <table>

@@ -200,3 +200,21 @@ input[type="file"]::file-selector-button:hover {
   width: 80px;
   margin: 2rem;
 }
+
+.follow-unfollow {
+  display: flex;
+  justify-content: center;
+}
+
+.user-profile-table {
+  margin-left: 20px;
+}
+.follower-table {
+  margin-left: 20px;
+}
+.following-table {
+  margin-left: 20px;
+}
+.other-user-table {
+  margin-left: 20px;
+}

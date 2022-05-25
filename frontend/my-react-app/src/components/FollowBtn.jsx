@@ -1,6 +1,6 @@
 export default function FollowBtn(props) {
   return (
-    <div>
+    <div className="follow-unfollow">
       {props.isFollowing ? (
         <button value={"unfollow"} onClick={props.handleUnfollowClick}>
           unfollow

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { GetOtherUserId } from "../helper/StateParamWrapper";
 import ActivityMap from "../components/ActivityMap";
 import OtherUserTable from "../components/OtherUserTable";
-import FollowBtn from "../components/FollowBtn";
 import { Plot } from "../components/Plot";
 
 const OtherUser = ({ session }) => {
@@ -94,8 +93,8 @@ const OtherUser = ({ session }) => {
     <>
       {!loading && (
         <>
-          <OtherUserTable userData={userData} />
-          <FollowBtn
+          <OtherUserTable
+            userData={userData}
             isFollowing={isFollowing}
             handleFollowClick={handleFollowClick}
             handleUnfollowClick={handleUnfollowClick}
@@ -103,9 +102,12 @@ const OtherUser = ({ session }) => {
           <div className="map-friend">
             {date !== "" && (
               <span>
+                <h2>Latest Ride</h2>
                 <li>{rideCaption}</li>
-                <li>{date}</li>
-                <li>{elevationGain.elevation_gain_feet} feet climbed</li>
+                <li>Date: {date}</li>
+                <li>
+                  Elevation Gain: {elevationGain.elevation_gain_feet} feet
+                </li>
               </span>
             )}
 
