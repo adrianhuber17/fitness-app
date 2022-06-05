@@ -69,6 +69,7 @@ export default function Register() {
           type="password"
           name="reg_password"
           id="reg_password"
+          autoComplete="on"
           value={regPassword}
           required
         />

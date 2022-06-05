@@ -68,6 +68,7 @@ export default function Login({ setSession, setEmail, setUserData }) {
           type="password"
           name="password"
           id="password"
+          autoComplete="on"
           value={password}
           required
         />

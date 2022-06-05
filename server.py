@@ -3,6 +3,9 @@ from flask import Flask,jsonify, request, session
 from flask_socketio import SocketIO,emit
 from flask_cors import CORS
 import os
+
+from numpy import broadcast
+from sqlalchemy import true
 from gpx_parser import gpxParser
 import crud
 
@@ -219,6 +222,12 @@ def disconnected():
     """event listener when client disconnects to the server"""
     print("user disconnected")
     emit("disconnect",f"user {request.sid} disconnected",broadcast=True)
+
+#TODO: add logic to new_data
+@socketio.on("new_data")
+def new_data(data):
+    print("---------------------------new data uploaded",data)
+    emit("new_data","new Data uploaded",broadcast=true,include_self=False)
 
 if __name__ == "__main__":
     from model import connect_to_db, db

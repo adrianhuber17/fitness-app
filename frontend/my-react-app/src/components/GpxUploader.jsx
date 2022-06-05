@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ActivityMap from "./ActivityMap";
 import { ElevationPlot } from "./ElevationChart";
 
-export default function GpxUploader() {
+export default function GpxUploader({ socket }) {
   const [gpxFile, setGpxFile] = useState(null);
   const [rideComment, setRideComment] = useState("");
 
@@ -43,6 +43,10 @@ export default function GpxUploader() {
 
   const handleClick = (event) => {
     event.preventDefault();
+    if (socket) {
+      console.log("socket gpx");
+      socket.emit("new_data", "new ride upload");
+    }
     let formData = new FormData();
     formData.append("file", gpxFile);
     formData.append("ride-caption", rideComment);
@@ -73,6 +77,7 @@ export default function GpxUploader() {
         }
       });
   };
+
   return (
     <div className="userGpxForm">
       <form>

@@ -29,8 +29,5 @@ export const UseSessionInfo = () => {
     }
   }, [email, session]);
 
-  console.log(session);
-  console.log(email);
-  console.log(userData);
   return [email, session, setSession, setEmail, userData, setUserData];
 };

@@ -6,7 +6,6 @@ import logo from "../svg/logo4.svg";
 
 export default function NavBar({ setSession, userData }) {
   const navigate = useNavigate();
-  console.log("NavBar");
 
   const handleLogOut = (event) => {
     event.preventDefault();
@@ -17,7 +16,6 @@ export default function NavBar({ setSession, userData }) {
         if (responseData.status === "ok") {
           setSession(false);
           navigate("/login");
-          console.log(responseData.status);
         } else {
           alert("Something went wrong, please try again");
         }
