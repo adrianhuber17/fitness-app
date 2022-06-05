@@ -1,6 +1,7 @@
-from crypt import methods
 from datetime import datetime
-from flask import Flask, redirect, render_template,jsonify, request, session, flash
+from flask import Flask,jsonify, request, session
+from flask_socketio import SocketIO,emit
+from flask_cors import CORS
 import os
 from gpx_parser import gpxParser
 import crud
@@ -8,7 +9,8 @@ import crud
 app = Flask(__name__)
 SECRET_KEY = os.environ['APP_KEY']
 app.secret_key = SECRET_KEY
-
+CORS(app,resources={r"/*":{"origins":"*"}})
+socketio=SocketIO(app,cors_allowed_origins="*")
 
 @app.route('/session.json', methods=["GET"])
 def index():
@@ -204,8 +206,23 @@ def friends_activity_feed():
 
     return jsonify(following_activities)
 
+#------ WebSocket endpoints ---------
+@socketio.on("connect")
+def connected():
+    """event listener when client connects to the server"""
+    print(request.sid)
+    print("client has connected")
+    emit("connect",{"data":f"id: {request.sid} is connected"},broadcast=True)
+    
+@socketio.on("disconnect")
+def disconnected():
+    """event listener when client disconnects to the server"""
+    print("user disconnected")
+    emit("disconnect",f"user {request.sid} disconnected",broadcast=True)
+
 if __name__ == "__main__":
     from model import connect_to_db, db
 
     connect_to_db(app)
-    app.run(debug=True)
+    # app.run(debug=True)
+    socketio.run(app, debug=True,port=5001)

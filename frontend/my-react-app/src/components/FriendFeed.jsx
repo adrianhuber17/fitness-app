@@ -1,9 +1,30 @@
-// import { useEffect, useState } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ActivityMap from "./ActivityMap";
+import { io } from "socket.io-client";
 
 export default function FriendFeed(props) {
   const [changeElevation, setChangeElevation] = useState(true);
+  const [socketInstance, setSocketInstance] = useState("");
+
+  useEffect(() => {
+    const socket = io("localhost:5001/", {
+      transports: ["websocket"],
+      cors: {
+        origin: "http://localhost:3000/",
+      },
+    });
+    setSocketInstance(socket);
+
+    socket.on("connect", (data) => {
+      console.log(data);
+    });
+    socket.on("disconnect", (data) => {
+      console.log(data);
+    });
+    return function cleanup() {
+      socket.disconnect();
+    };
+  }, []);
 
   const handleElevationChangeMeters = (event) => {
     if (changeElevation === true) {
@@ -12,6 +33,7 @@ export default function FriendFeed(props) {
       setChangeElevation(true);
     }
   };
+  console.log(socketInstance);
 
   return (
     <>
