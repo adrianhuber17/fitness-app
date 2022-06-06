@@ -211,7 +211,6 @@ def friends_activity_feed():
 
 users_online = {}
 
-#TODO: add logic add user by id
 @socketio.on("connect")
 def connected():
     """event listener when client connects to the server"""
@@ -239,19 +238,14 @@ def disconnected():
 #TODO: add logic to send data only to friends
 @socketio.on("new_data")
 def new_data(data):
-    print("---------------------------new data uploaded",data)
     follower_info_list = crud.get_user_followers(data)
-    print(follower_info_list)
     for follower in follower_info_list:
         if follower['userId'] in users_online.keys():
             follower_sid = users_online[follower['userId']]
-            print(follower_sid)
-            print("------------------------",follower['userId'])
             emit("new_data",{'count':1},to=follower_sid,include_self=False)
 
 if __name__ == "__main__":
     from model import connect_to_db, db
 
     connect_to_db(app)
-    # app.run(debug=True)
     socketio.run(app, debug=True,port=5001)
