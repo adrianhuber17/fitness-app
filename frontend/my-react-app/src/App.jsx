@@ -26,7 +26,10 @@ function App() {
             />
           }
         />
-        <Route path="/" element={<HomePage email={email} />} />
+        <Route
+          path="/"
+          element={<HomePage email={email} userData={userData} />}
+        />
         <Route
           path="/user-profile"
           element={<UserProfile session={session} />}

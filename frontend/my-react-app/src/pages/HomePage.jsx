@@ -5,7 +5,7 @@ import FriendFeed from "../components/FriendFeed";
 import { Navigate } from "react-router-dom";
 import { io } from "socket.io-client";
 
-export default function HomePage({ email }) {
+export default function HomePage({ email, userData }) {
   const [loading, setLoading] = useState(true);
   const [friendsData, setFriendsData] = useState([]);
   const [socketInstance, setSocketInstance] = useState("");
@@ -54,7 +54,7 @@ export default function HomePage({ email }) {
     !loading && (
       <div className="App">
         <div className="feedBody">
-          <GpxUploader socket={socketInstance} />
+          <GpxUploader socket={socketInstance} userData={userData} />
           {friendsData.length > 0 && (
             <div className="friendsFeed">
               <FriendFeed friendsData={friendsData} socket={socketInstance} />

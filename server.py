@@ -215,10 +215,13 @@ users_online = {}
 @socketio.on("connect")
 def connected():
     """event listener when client connects to the server"""
+    if 'email' in session.keys():
+        email = session['email']
+    user_id = crud.get_user_id(email)
     print(request.sid)
     print("client has connected")
     connected_id = request.sid
-    users_online[str(connected_id)] = connected_id
+    users_online[user_id] = connected_id
     emit("connect",users_online,broadcast=True)
 
 #TODO: add logic to remove user by id
@@ -226,15 +229,25 @@ def connected():
 def disconnected():
     """event listener when client disconnects to the server"""
     print("user disconnected")
+    if 'email' in session.keys():
+        email = session['email']
+    user_id = crud.get_user_id(email)
     connected_id = request.sid
-    del users_online[str(connected_id)]
+    del users_online[user_id]
     emit("disconnect",f"user {request.sid} disconnected",broadcast=True)
 
 #TODO: add logic to send data only to friends
 @socketio.on("new_data")
 def new_data(data):
     print("---------------------------new data uploaded",data)
-    emit("new_data","new Data uploaded",broadcast=true,include_self=False)
+    follower_info_list = crud.get_user_followers(data)
+    print(follower_info_list)
+    for follower in follower_info_list:
+        if follower['userId'] in users_online.keys():
+            follower_sid = users_online[follower['userId']]
+            print(follower_sid)
+            print("------------------------",follower['userId'])
+            emit("new_data",{'count':1},to=follower_sid,include_self=False)
 
 if __name__ == "__main__":
     from model import connect_to_db, db
