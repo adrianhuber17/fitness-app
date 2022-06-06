@@ -1,10 +1,8 @@
 from datetime import datetime
 from flask import Flask,jsonify, request, session
-from flask_socketio import SocketIO,emit
+from flask_socketio import SocketIO,emit,join_room,leave_room
 from flask_cors import CORS
 import os
-
-from numpy import broadcast
 from sqlalchemy import true
 from gpx_parser import gpxParser
 import crud
@@ -210,20 +208,29 @@ def friends_activity_feed():
     return jsonify(following_activities)
 
 #------ WebSocket endpoints ---------
+
+users_online = {}
+
+#TODO: add logic add user by id
 @socketio.on("connect")
 def connected():
     """event listener when client connects to the server"""
     print(request.sid)
     print("client has connected")
-    emit("connect",{"data":f"id: {request.sid} is connected"},broadcast=True)
-    
+    connected_id = request.sid
+    users_online[str(connected_id)] = connected_id
+    emit("connect",users_online,broadcast=True)
+
+#TODO: add logic to remove user by id
 @socketio.on("disconnect")
 def disconnected():
     """event listener when client disconnects to the server"""
     print("user disconnected")
+    connected_id = request.sid
+    del users_online[str(connected_id)]
     emit("disconnect",f"user {request.sid} disconnected",broadcast=True)
 
-#TODO: add logic to new_data
+#TODO: add logic to send data only to friends
 @socketio.on("new_data")
 def new_data(data):
     print("---------------------------new data uploaded",data)
