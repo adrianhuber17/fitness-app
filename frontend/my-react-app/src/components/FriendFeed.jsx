@@ -12,16 +12,9 @@ export default function FriendFeed(props) {
     }
   };
 
-  if (props.socket) {
-    props.socket.on("new_data", (data) => {
-      console.log(data);
-    });
-  }
-
   return (
     <>
       <h1>Friends Feed</h1>
-      <button>New activity available</button>
       <button onClick={handleElevationChangeMeters}>Change Units</button>
       {props.friendsData.map((activity, ind) => (
         <div key={ind}>

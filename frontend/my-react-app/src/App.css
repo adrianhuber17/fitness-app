@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 .map {
   height: 400px;
@@ -268,5 +270,15 @@ input[type="file"]::file-selector-button:hover {
 .register-form {
   display: flex;
   flex-direction: column;
+  margin: 10px;
+}
+
+.updateButtonDiv {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 300px;
+}
+
+.updateButton {
   margin: 10px;
 }

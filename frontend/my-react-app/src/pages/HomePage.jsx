@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import GpxUploader from "../components/GpxUploader";
 import FriendFeed from "../components/FriendFeed";
-// import { SocketProvider } from "../helper/socketProvider";
 import { Navigate } from "react-router-dom";
 import { io } from "socket.io-client";
 
@@ -9,6 +8,7 @@ export default function HomePage({ email, userData }) {
   const [loading, setLoading] = useState(true);
   const [friendsData, setFriendsData] = useState([]);
   const [socketInstance, setSocketInstance] = useState("");
+  const [newFeed, setNewFeed] = useState(0);
 
   useEffect(() => {
     let url = "/friend-feed.json";
@@ -40,11 +40,29 @@ export default function HomePage({ email, userData }) {
     socket.on("disconnect", (data) => {
       console.log(data);
     });
+
     return function cleanup() {
       console.log("clean up");
       socket.disconnect();
     };
   }, [friendsData.length, loading]);
+
+  if (socketInstance) {
+    socketInstance.on("new_data", (data) => {
+      setNewFeed(newFeed + 1);
+    });
+  }
+  const updateFeed = (e) => {
+    e.preventDefault();
+
+    let url = "/friend-feed.json";
+    fetch(url)
+      .then((response) => response.json())
+      .then((respData) => {
+        setFriendsData(respData);
+      });
+    setNewFeed(0);
+  };
 
   if (!email) {
     return <Navigate to="/login" replace />;
@@ -53,6 +71,13 @@ export default function HomePage({ email, userData }) {
   return (
     !loading && (
       <div className="App">
+        {newFeed > 0 && (
+          <div className="updateButtonDiv">
+            <button className="updateButton" onClick={updateFeed}>
+              new activity + {newFeed}
+            </button>
+          </div>
+        )}
         <div className="feedBody">
           <GpxUploader socket={socketInstance} userData={userData} />
           {friendsData.length > 0 && (
