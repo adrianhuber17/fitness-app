@@ -18,7 +18,13 @@ export default function FriendFeed(props) {
       <button onClick={handleElevationChangeMeters}>Change Units</button>
       {props.friendsData.map((activity, ind) => (
         <div key={ind} className="friendCard">
-          <h2 className="cardName">{`${activity.firstName} ${activity.lastName}`}</h2>
+          <div className="avatarCardName">
+            <div className="avatarCard">
+              {activity.firstName[0]}
+              {activity.lastName[0]}
+            </div>
+            <h2 className="cardName">{`${activity.firstName} ${activity.lastName}`}</h2>
+          </div>
           <p className="cardDate">{activity.date}</p>
           <p className="cardCaption">{activity.rideCaption}</p>
           {changeElevation ? (

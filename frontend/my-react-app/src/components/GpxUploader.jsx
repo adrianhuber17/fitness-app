@@ -115,7 +115,7 @@ export default function GpxUploader({ socket, userData }) {
       </form>
       {!loading && (
         <>
-          <h3>Latest Ride</h3>
+          <h1>Latest Ride</h1>
           <ActivityMap
             centerLatitude={centerLatitude}
             centerLongitude={centerLongitude}
