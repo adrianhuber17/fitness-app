@@ -17,19 +17,23 @@ export default function FriendFeed(props) {
       <h1>Friends Feed</h1>
       <button onClick={handleElevationChangeMeters}>Change Units</button>
       {props.friendsData.map((activity, ind) => (
-        <div key={ind}>
-          <h2>{`${activity.firstName} ${activity.lastName}`}</h2>
-          <p>{activity.date}</p>
-          <p>{activity.rideCaption}</p>
+        <div key={ind} className="friendCard">
+          <h2 className="cardName">{`${activity.firstName} ${activity.lastName}`}</h2>
+          <p className="cardDate">{activity.date}</p>
+          <p className="cardCaption">{activity.rideCaption}</p>
           {changeElevation ? (
             <>
-              <p>
-                {`Elevation gain: ${activity.elevationGainLossJson.elevation_gain_feet} feet`}
+              <p className="cardElecation">Elev Gain</p>
+              <p className="cardElecationData">
+                {`${activity.elevationGainLossJson.elevation_gain_feet} ft`}
               </p>
             </>
           ) : (
             <>
-              <p>{`Elevation gain: ${activity.elevationGainLossJson.elevation_gain_meters} meters`}</p>
+              <p className="cardElecation">Elev Gain</p>
+              <p className="cardElecationData">
+                {`${activity.elevationGainLossJson.elevation_gain_meters} m`}
+              </p>
             </>
           )}
 

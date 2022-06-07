@@ -58,6 +58,9 @@
 }
 
 .friendsFeed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   box-shadow: 0px 1px 13px 0px salmon;
   border-radius: 10px;
   overflow-y: auto;
@@ -281,4 +284,61 @@ input[type="file"]::file-selector-button:hover {
 
 .updateButton {
   margin: 10px;
+}
+
+.friendCard {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: inset 0px 0px 7px 1px salmon;
+}
+
+.cardName {
+  display: flex;
+  justify-content: flex-start;
+  margin: 10px;
+  margin-bottom: 1px;
+  margin-left: 100px;
+  font-weight: 400;
+}
+
+.cardDate {
+  display: flex;
+  margin: 10px;
+  margin-top: 1px;
+  margin-left: 100px;
+  font-weight: 200;
+}
+
+.cardCaption {
+  display: flex;
+  justify-content: flex-start;
+  margin: 10px;
+  margin-left: 100px;
+  font-size: 30px;
+  font-weight: bolder;
+}
+
+.cardElecation {
+  display: flex;
+  box-shadow: 0px 0.5px 0 #fa8072;
+  justify-content: flex-start;
+  width: max-content;
+  margin: 10px;
+  margin-left: 100px;
+  font-size: 20px;
+  font-weight: 200;
+  margin-bottom: 1px;
+}
+
+.cardElecationData {
+  display: flex;
+  justify-content: flex-start;
+  margin: 10px;
+  margin: 10px;
+  margin-left: 100px;
+  font-size: 20px;
+  font-weight: 200;
+  margin-top: 1px;
 }
