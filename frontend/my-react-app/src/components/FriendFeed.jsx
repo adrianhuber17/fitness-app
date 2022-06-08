@@ -13,7 +13,7 @@ export default function FriendFeed(props) {
   };
 
   return (
-    <>
+    <div className="friendsFeed component-shadow">
       <h1>Friends Feed</h1>
       <button onClick={handleElevationChangeMeters}>Change Units</button>
       {props.friendsData.map((activity, ind) => (
@@ -51,6 +51,6 @@ export default function FriendFeed(props) {
           />
         </div>
       ))}
-    </>
+    </div>
   );
 }

@@ -23,17 +23,14 @@ export default function UserSearchBar() {
   return (
     loading === false && (
       <div className="search">
-        <div className="userSearch">
-          <input
-            className="searchBar"
-            id="searchbar"
-            type="text"
-            placeholder="Search user.."
-            name="search"
-            onChange={handleSearch}
-          />
-          {/* <img className="searchIcon" src={searchIcon} alt="searchIcon" /> */}
-        </div>
+        <input
+          className="searchBar"
+          id="searchbar"
+          type="text"
+          placeholder="Search user.."
+          name="search"
+          onChange={handleSearch}
+        />
         <div className="searchResults">
           {searchUser.length !== 0 && (
             <>

@@ -44,7 +44,7 @@ a {
 
 a:hover {
   background-color: transparent;
-  box-shadow: inset 0px -1px 0 0 salmon;
+  box-shadow: 0px 3px 0 0 salmon;
 }
 
 table {
@@ -75,5 +75,9 @@ h1 {
 
 input {
   border: none;
-  border-bottom: 1px solid #bdc1c6;
+  box-shadow: 0px 2px 0 0 #bdc1c6;
+}
+input:hover {
+  box-shadow: 0px 2px 0 0 salmon;
+  cursor: pointer;
 }

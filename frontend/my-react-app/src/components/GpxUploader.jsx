@@ -79,7 +79,7 @@ export default function GpxUploader({ socket, userData }) {
   };
 
   return (
-    <div className="userGpxForm">
+    <div className="userGpxForm component-shadow">
       <form>
         <h2 className="uploadHeading">Upload a new ride</h2>
         <label htmlFor="uploadFile" className="uploadFile">

@@ -7,6 +7,13 @@
   display: flex;
   flex-direction: column;
 }
+
+.App img {
+  position: absolute;
+  top: 0;
+  z-index: 10;
+}
+
 .map {
   height: 400px;
   width: 600px;
@@ -17,19 +24,28 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-left: 15px;
 }
 
-.userSearch {
+.searchBar {
   display: flex;
   margin-left: 10px;
   align-items: center;
   flex-direction: column;
   justify-content: flex-start;
+  font-size: 1.5rem;
+  width: 200px;
 }
+
+.searchBar:hover {
+  cursor: pointer;
+  box-shadow: 0px 3px 0 0 salmon;
+}
+
 .searchResults {
   margin-left: 13px;
   min-width: 146px;
-  margin-top: 23px;
+  margin-top: 33px;
   height: fit-content;
   background-color: #202124;
   box-shadow: lightsalmon 0px 5px 15px;
@@ -44,7 +60,6 @@
 
 .userGpxForm {
   position: relative;
-  box-shadow: 0px 1px 13px 0px salmon;
   border-radius: 10px;
   height: 1000px;
   width: 650px;
@@ -68,7 +83,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0px 1px 13px 0px salmon;
   border-radius: 10px;
   overflow-y: auto;
   height: 1000px;
@@ -77,6 +91,7 @@
 }
 
 .feedBody {
+  margin-top: 50px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -119,6 +134,7 @@ input[type="file"]::file-selector-button:hover {
   text-decoration: none;
   display: flex;
   justify-content: space-evenly;
+  padding: 10px 10px;
 }
 
 .userSearchLinks:hover {
@@ -149,6 +165,9 @@ input[type="file"]::file-selector-button:hover {
   padding: 0;
   margin: 2rem;
 }
+.primary-navigation > * {
+  font-size: 1.5rem;
+}
 
 .primary-navigation a {
   text-decoration: none;
@@ -162,14 +181,15 @@ input[type="file"]::file-selector-button:hover {
   margin: 2px;
 }
 
-.log-out {
+.primary-navigation button {
+  padding: 0;
+  text-transform: capitalize;
   border-radius: 0;
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: 500;
   color: #bdc1c6;
   text-decoration: none;
-  margin-left: 10px;
-  max-height: 20px;
+  margin-left: 20px;
   background: none;
   border: none;
   border-radius: None;
@@ -181,31 +201,34 @@ input[type="file"]::file-selector-button:hover {
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
 }
-.log-out:hover {
+.primary-navigation button:hover {
   background-color: transparent;
-  box-shadow: inset 0px -1px 0 0 salmon;
+  box-shadow: 0px 3px 0 0 salmon;
 }
 
 .nav-list {
-  margin-left: 10px;
+  font-weight: 500;
+}
+
+.nav-list a {
+  margin-left: 15px;
   font-weight: 500;
 }
 
 .avatar {
   display: flex;
-  height: 30px;
-  width: 30px;
+  height: 40px;
+  width: 40px;
+  padding: 2px;
   justify-content: center;
   border-radius: 100%;
   border: 2px solid salmon;
   align-items: center;
-  margin-left: 10px;
-  background-color: rgba(11, 300, 1, 0.1);
+  margin-left: 15px;
   box-shadow: lightsalmon 0px 1px 1px;
-}
-
-.searchBar {
-  border-radius: 5px;
+  background-color: #fa807229;
+  text-transform: uppercase;
+  font-weight: bolder;
 }
 
 .searchIcon {
@@ -325,7 +348,6 @@ input[type="file"]::file-selector-button:hover {
   margin-bottom: 30px;
   display: flex;
   flex-direction: column;
-  box-shadow: inset 0px 0px 7px 1px salmon;
 }
 
 .cardName {

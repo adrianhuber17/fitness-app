@@ -3,6 +3,7 @@ import GpxUploader from "../components/GpxUploader";
 import FriendFeed from "../components/FriendFeed";
 import { Navigate } from "react-router-dom";
 import { io } from "socket.io-client";
+import logo from "../components/svg/logo4.svg";
 
 export default function HomePage({ email, userData }) {
   const [loading, setLoading] = useState(true);
@@ -71,6 +72,7 @@ export default function HomePage({ email, userData }) {
   return (
     !loading && (
       <div className="App">
+        <img src={logo} alt="logo" className="logo" />
         {newFeed > 0 && (
           <div className="updateButtonDiv">
             <button className="updateButton" onClick={updateFeed}>
@@ -81,9 +83,7 @@ export default function HomePage({ email, userData }) {
         <div className="feedBody">
           <GpxUploader socket={socketInstance} userData={userData} />
           {friendsData.length > 0 && (
-            <div className="friendsFeed">
-              <FriendFeed friendsData={friendsData} socket={socketInstance} />
-            </div>
+            <FriendFeed friendsData={friendsData} socket={socketInstance} />
           )}
         </div>
       </div>

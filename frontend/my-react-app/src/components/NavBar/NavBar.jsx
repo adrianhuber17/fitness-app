@@ -2,7 +2,6 @@ import LogOut from "../LogOutBtn";
 import UserSearchBar from "../UserSearchBar";
 import { MenuItems } from "./MenuItems";
 import { useNavigate } from "react-router-dom";
-import logo from "../svg/logo4.svg";
 
 export default function NavBar({ setSession, userData }) {
   const navigate = useNavigate();
@@ -25,9 +24,6 @@ export default function NavBar({ setSession, userData }) {
 
   return (
     <header className="primary-header">
-      <div>
-        <img src={logo} alt="logo" className="logo" />
-      </div>
       <nav>
         <ul id="primary-navigation" className="primary-navigation flex">
           {MenuItems.map((item, index) => (
