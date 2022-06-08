@@ -58,6 +58,8 @@
   display: none;
 }
 
+/* GPX Upload */
+
 .userGpxForm {
   position: relative;
   border-radius: 10px;
@@ -69,14 +71,114 @@
   align-items: center;
 }
 
-.submitGpx {
-  margin-bottom: 3px;
-  margin-top: 3px;
+.file-upload-wrapper form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 450px;
+}
+.file-upload-wrapper form > * {
+  margin: 1rem;
 }
 
-.rideCaption {
-  margin-bottom: 3px;
-  margin-top: 3px;
+.file-upload-heading {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: end;
+  align-self: flex-end;
+  padding-right: 15px;
+}
+.file-upload-heading h3:hover {
+  box-shadow: 0px 3px 0 0 salmon;
+  color: salmon;
+  cursor: pointer;
+}
+
+.file-upload-heading div {
+  margin-left: 15px;
+  font-size: 2rem;
+}
+
+.uploadFile input {
+  box-shadow: none;
+}
+
+.submitGpx {
+  /* button */
+  align-self: center;
+  width: -webkit-fill-available;
+}
+
+.submitGpx:disabled {
+  /* button */
+  background-color: transparent;
+  border: 1px solid #f0aea6;
+  color: #f0aea6;
+  cursor: not-allowed;
+}
+
+.delete-file {
+  padding: 0px 4px 1px;
+  font-weight: bolder;
+  border-radius: 5px;
+  border: 1px solid salmon;
+  color: #202124;
+  background-color: salmon;
+}
+.delete-file:hover {
+  cursor: pointer;
+  border: 1px solid f0aea6;
+  background-color: #f0aea6;
+}
+
+[type="file"] {
+  height: 0;
+  overflow: hidden;
+  width: 0;
+}
+
+.file-select {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.file-select > div {
+  margin-left: 10px;
+  overflow: hidden;
+  max-width: 250px;
+}
+
+[type="file"] + label {
+  background: salmon;
+  padding: 5px 20px;
+  background: salmon;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  box-shadow: none;
+  color: #202124;
+  transition: 0.1s;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+}
+
+[type="file"] + label:hover {
+  background-color: #f0aea6;
+  cursor: pointer;
+}
+
+/* Friends Feed */
+
+.rideCaption-label input {
+  margin-left: 10px;
+  font-size: 1rem;
+  padding: 4px;
 }
 
 .friendsFeed {
@@ -91,23 +193,16 @@
 }
 
 .feedBody {
-  margin-top: 50px;
+  margin-top: 30px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: flex-start;
+  flex-wrap: wrap;
 }
 
-input[type="file"]::file-selector-button {
-  padding: 0.2em 0.4em;
-  border-radius: 3px;
-  background-color: #8ab4f8;
-  transition: 0.1s;
-}
-
-input[type="file"]::file-selector-button:hover {
-  border: 2px solid salmon;
-  cursor: pointer;
+.feedBody > * {
+  margin: 20px;
 }
 
 .chart-container {

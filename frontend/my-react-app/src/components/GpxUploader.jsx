@@ -5,6 +5,8 @@ import { ElevationPlot } from "./ElevationChart";
 export default function GpxUploader({ socket, userData }) {
   const [gpxFile, setGpxFile] = useState(null);
   const [rideComment, setRideComment] = useState("");
+  const [displayUpload, setDisplayUpload] = useState(false);
+  const [selectedFile, setSelectedFile] = useState("");
 
   const [centerLatitude, setCenterLatitude] = useState("");
   const [centerLongitude, setCenterLongitude] = useState("");
@@ -35,6 +37,7 @@ export default function GpxUploader({ socket, userData }) {
 
   const handleGpxFile = (event) => {
     setGpxFile(event.target.files[0]);
+    setSelectedFile(event.target.files[0].name);
   };
 
   const handleComment = (event) => {
@@ -53,6 +56,7 @@ export default function GpxUploader({ socket, userData }) {
     document.getElementById("uploadFile").value = "";
     setGpxFile(null);
     setRideComment("");
+    setSelectedFile("");
 
     fetch("/post-gpx-parser", {
       method: "POST",
@@ -76,46 +80,70 @@ export default function GpxUploader({ socket, userData }) {
           setLoading(false);
         }
       });
+    setDisplayUpload(false);
   };
 
   return (
     <div className="userGpxForm component-shadow">
-      <form>
-        <h2 className="uploadHeading">Upload a new ride</h2>
-        <label htmlFor="uploadFile" className="uploadFile">
-          <input
-            onChange={handleGpxFile}
-            id="uploadFile"
-            type="file"
-            name="uploadFile"
-            accept=".gpx"
-            required
-          />
-        </label>
-        <br />
-        <label htmlFor="ridecap">Ride Caption:</label>
-        <input
-          onChange={handleComment}
-          required
-          id="ridecap"
-          type="text"
-          name="ride-caption"
-          placeholder="Enter activity caption.."
-          value={rideComment}
-          className="rideCaption"
-        />
-        <br />
-        <button
-          disabled={rideComment === ""}
-          onClick={handleClick}
-          className="submitGpx"
-        >
-          Submit
-        </button>
-      </form>
+      <div
+        className="file-upload-heading"
+        onClick={() => setDisplayUpload(!displayUpload)}
+      >
+        <h3>{displayUpload ? "☁️" : "+"} Upload Ride</h3>
+      </div>
+      <div className="file-upload-wrapper">
+        {displayUpload && (
+          <form>
+            <div className="file-select">
+              <input
+                onChange={handleGpxFile}
+                id="uploadFile"
+                type="file"
+                name="uploadFile"
+                accept=".gpx"
+                required
+              />
+              <label htmlFor="uploadFile" className="uploadFile">
+                Select File
+              </label>
+              {selectedFile && (
+                <>
+                  <div>{selectedFile}</div>
+                  <div
+                    className="delete-file"
+                    onClick={() => setSelectedFile("")}
+                  >
+                    x
+                  </div>
+                </>
+              )}
+            </div>
+            <label htmlFor="ridecap" className="rideCaption-label">
+              Ride Caption:
+              <input
+                onChange={handleComment}
+                required
+                id="ridecap"
+                type="text"
+                name="ride-caption"
+                placeholder="Enter activity caption.."
+                value={rideComment}
+                className="rideCaption"
+              />
+            </label>
+            <button
+              disabled={rideComment === "" || selectedFile === ""}
+              onClick={handleClick}
+              className="submitGpx"
+            >
+              Upload Ride
+            </button>
+          </form>
+        )}
+      </div>
       {!loading && (
         <>
-          <h1>Latest Ride</h1>
+          <h1>My Latest Ride</h1>
           <ActivityMap
             centerLatitude={centerLatitude}
             centerLongitude={centerLongitude}
