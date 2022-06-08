@@ -49,7 +49,7 @@ export default function Login({ setSession, setEmail, setUserData }) {
   };
 
   return (
-    <div className="login">
+    <div className="login component-shadow">
       <h1>Log-in</h1>
       <form className="login-form">
         <input
@@ -61,7 +61,6 @@ export default function Login({ setSession, setEmail, setUserData }) {
           value={formEmail}
           required
         />
-        <br></br>
         <input
           onChange={handlePassword}
           placeholder="password"
@@ -72,7 +71,6 @@ export default function Login({ setSession, setEmail, setUserData }) {
           value={password}
           required
         />
-        <br></br>
         <button
           disabled={formEmail === "" || password === ""}
           onClick={handleLogIn}

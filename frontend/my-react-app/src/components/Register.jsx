@@ -50,7 +50,7 @@ export default function Register() {
       });
   };
   return (
-    <div className="register">
+    <div className="register component-shadow">
       <h1>Register</h1>
       <form className="register-form">
         <input
@@ -62,7 +62,6 @@ export default function Register() {
           value={regEmail}
           required
         />
-        <br></br>
         <input
           onChange={handlePassword}
           placeholder="password"
@@ -73,7 +72,6 @@ export default function Register() {
           value={regPassword}
           required
         />
-        <br></br>
         <input
           onChange={handleFirstName}
           placeholder="first name"
@@ -83,7 +81,6 @@ export default function Register() {
           value={firstName}
           required
         />
-        <br></br>
         <input
           onChange={handleLastName}
           type="text"
@@ -93,7 +90,6 @@ export default function Register() {
           value={lastName}
           required
         />
-        <br></br>
         <button
           disabled={
             regEmail === "" ||

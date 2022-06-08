@@ -1,3 +1,7 @@
+.component-shadow {
+  box-shadow: 0px 0px 9px 0px salmon;
+}
+
 .App {
   text-align: center;
   display: flex;
@@ -230,7 +234,6 @@ input[type="file"]::file-selector-button:hover {
 }
 
 .login {
-  box-shadow: 0px 1px 20px 3px salmon;
   border-radius: 10px;
   overflow-y: auto;
   margin: 30px;
@@ -239,21 +242,43 @@ input[type="file"]::file-selector-button:hover {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  min-height: 200px;
   padding-bottom: 10px;
   padding-top: 10px;
 }
 
+.login-page-wrapper img {
+  position: fixed;
+  top: 0;
+  z-index: 10;
+}
+
+.login-logo h1 {
+  position: fixed;
+  z-index: 10;
+  left: 30px;
+  top: 100px;
+  color: #858995;
+}
+
+.login-page-wrapper button {
+  margin-top: 20px;
+}
+
 .login-page {
-  margin: 72px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
 }
+.login-page input {
+  font-size: 1rem;
+}
+
+.login-page h1 {
+  margin: 0;
+}
 
 .register {
-  box-shadow: 0px 1px 20px 3px salmon;
   border-radius: 10px;
   overflow-y: auto;
   margin: 30px;
@@ -272,11 +297,17 @@ input[type="file"]::file-selector-button:hover {
   flex-direction: column;
   margin: 10px;
 }
+.login-form > * {
+  margin-top: 15px;
+}
 
 .register-form {
   display: flex;
   flex-direction: column;
   margin: 10px;
+}
+.register-form > * {
+  margin-top: 15px;
 }
 
 .updateButtonDiv {

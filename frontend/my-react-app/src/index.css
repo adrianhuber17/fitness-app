@@ -20,16 +20,20 @@ input {
 }
 
 button {
-  background: #8ab4f8;
+  padding: 5px 20px;
+  background: salmon;
   border: 1px solid transparent;
   border-radius: 3px;
   box-shadow: none;
   color: #202124;
   transition: 0.1s;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1rem;
 }
 
 button:hover {
-  background-color: #2e77ec;
+  background-color: #f0aea6;
   cursor: pointer;
 }
 
@@ -65,5 +69,11 @@ td {
 }
 
 h1 {
-  font-weight: 400;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+input {
+  border: none;
+  border-bottom: 1px solid #bdc1c6;
 }
