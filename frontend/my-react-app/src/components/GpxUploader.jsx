@@ -86,7 +86,7 @@ export default function GpxUploader({ socket, userData }) {
   return (
     <div className="userGpxForm component-shadow">
       <div
-        className="file-upload-heading"
+        className="top-right-corner-button"
         onClick={() => setDisplayUpload(!displayUpload)}
       >
         <h3>{displayUpload ? "☁️" : "+"} Upload Ride</h3>

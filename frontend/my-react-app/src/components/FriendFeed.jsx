@@ -14,35 +14,56 @@ export default function FriendFeed(props) {
 
   return (
     <div className="friendsFeed component-shadow">
+      <div
+        className="top-right-corner-button"
+        onClick={handleElevationChangeMeters}
+      >
+        <h3> 📐 Units: {changeElevation ? "Imperial" : "Metric"}</h3>
+      </div>
       <h1>Friends Feed</h1>
-      <button onClick={handleElevationChangeMeters}>Change Units</button>
       {props.friendsData.map((activity, ind) => (
         <div key={ind} className="friendCard">
-          <div className="avatarCardName">
-            <div className="avatarCard">
-              {activity.firstName[0]}
-              {activity.lastName[0]}
+          <div className="friendCardHeading">
+            <div className="avatarCardName">
+              <div className="avatar">
+                {activity.firstName[0]}
+                {activity.lastName[0]}
+              </div>
+              <div>
+                <h2 className="cardName">{`${activity.firstName} ${activity.lastName}`}</h2>
+                <p className="cardDate">{activity.date}</p>
+              </div>
             </div>
-            <h2 className="cardName">{`${activity.firstName} ${activity.lastName}`}</h2>
+            <div className="cardSubheading">
+              <p className="cardCaption">{activity.rideCaption}</p>
+              <div className="cardData">
+                <div className="cardDatum">
+                  <p className="cardElevation">Elev Gain</p>
+                  <p className="cardElevationData">
+                    {changeElevation ? (
+                      <>{`${activity.elevationGainLossJson.elevation_gain_feet} ft`}</>
+                    ) : (
+                      <>{`${activity.elevationGainLossJson.elevation_gain_meters} m`}</>
+                    )}
+                  </p>
+                </div>
+                <div className="cardDatum">
+                  <p className="cardElevation">Distance</p>
+                  <p className="cardElevationData">
+                    {changeElevation ? (
+                      <>{`${activity.elevationGainLossJson.elevation_gain_feet} mi`}</>
+                    ) : (
+                      <>{`${activity.elevationGainLossJson.elevation_gain_meters} km`}</>
+                    )}
+                  </p>
+                </div>
+                <div className="cardDatum">
+                  <p className="cardElevation">Time</p>
+                  <p className="cardElevationData">2h 3m</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <p className="cardDate">{activity.date}</p>
-          <p className="cardCaption">{activity.rideCaption}</p>
-          {changeElevation ? (
-            <>
-              <p className="cardElecation">Elev Gain</p>
-              <p className="cardElecationData">
-                {`${activity.elevationGainLossJson.elevation_gain_feet} ft`}
-              </p>
-            </>
-          ) : (
-            <>
-              <p className="cardElecation">Elev Gain</p>
-              <p className="cardElecationData">
-                {`${activity.elevationGainLossJson.elevation_gain_meters} m`}
-              </p>
-            </>
-          )}
-
           <ActivityMap
             centerLatitude={activity.activityJson.latitude}
             centerLongitude={activity.activityJson.longitude}
