@@ -12,6 +12,7 @@ export default function GpxUploader({ socket, userData }) {
   const [centerLongitude, setCenterLongitude] = useState("");
   const [coordinates, setCoordinates] = useState([""]);
   const [elevation, setElevation] = useState([]);
+  const [totalTime, setTotalTime] = useState("");
 
   const [loading, setLoading] = useState(true);
 
@@ -21,10 +22,13 @@ export default function GpxUploader({ socket, userData }) {
       .then((response) => response.json())
       .then((respData) => {
         if (respData !== null) {
+          console.log(respData);
           setCenterLatitude(respData.latestActivity.latitude);
           setCenterLongitude(respData.latestActivity.longitude);
           setCoordinates(respData.latestActivity.coordinates);
           setElevation(respData.elevation.elevation);
+          setTotalTime(respData.latestActivity.totalTime);
+          // setTotalTime(respData.latestActivity.totalTime) -> add total distance here
           setLoading(false);
         } else {
           setCenterLatitude("37.773972");
@@ -71,6 +75,8 @@ export default function GpxUploader({ socket, userData }) {
           setCenterLatitude(data.latestActivity.latitude);
           setCenterLongitude(data.latestActivity.longitude);
           setCoordinates(data.latestActivity.coordinates);
+          setTotalTime(data.latestActivity.totalTime);
+          // setTotalTime(data.latestActivity.totalTime) -> add total distance here
           setElevation(data.elevation.elevation);
           setLoading(false);
         } else {
@@ -144,6 +150,14 @@ export default function GpxUploader({ socket, userData }) {
       {!loading && (
         <>
           <h1>My Latest Ride</h1>
+          <div className="cardDatum">
+            <p className="cardElevation">Time</p>
+            <p className="cardElevationData">
+              {totalTime
+                ? `${totalTime.slice(0, 2)} h ${totalTime.slice(3, 5)} m `
+                : "n/a"}
+            </p>
+          </div>
           <ActivityMap
             centerLatitude={centerLatitude}
             centerLongitude={centerLongitude}
