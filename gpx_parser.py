@@ -35,6 +35,7 @@ class gpxParser:
         self.elevation_gain_loss_json = None
         self.elevation_full_route_json = None
         self.total_time = None
+        self.total_distance = None
 
     def complete_gpx_parser_main(self,gpx_upload):
 
@@ -56,11 +57,13 @@ class gpxParser:
     def get_route_info_json(self,gpx_upload):
         """Parameter: .gpx file, Returns: a json with the route information"""
 
-  
         gpx = gpxpy.parse(gpx_upload)
 
         duration_seconds = gpx.tracks[0].get_duration()
         self.get_total_time(duration_seconds)
+
+        total_dist_meters = gpx.tracks[0].segments[0].length_3d()
+        self.get_total_distance(total_dist_meters)
 
         self.ride_date = gpx.tracks[0].segments[0].points[0].time
         
@@ -152,7 +155,8 @@ class gpxParser:
         self.map_json = {'coordinates': self.coordinates,
                         'latitude': self.center_latitude,
                         'longitude': self.center_longitude,
-                        'totalTime': self.total_time}
+                        'totalTime': self.total_time,
+                        'totalDistance':self.total_distance}
 
 
     def get_elevation_full_route_json(self):
@@ -222,6 +226,19 @@ class gpxParser:
         """gets total time and returns a string hour:minute:second or None"""
         if duration_seconds is None:
             return None
-        else:
-            self.total_time = strftime("%H:%M:%S", gmtime(duration_seconds))
-            return self.total_time
+        
+        self.total_time = strftime("%H:%M:%S", gmtime(duration_seconds))
+        return self.total_time
+
+    def get_total_distance(self,total_dist_meters):
+        """gets total distance in km and mi or return None"""
+        
+        if total_dist_meters is None:
+            return None
+        
+        total_dist_km_str = str(round(total_dist_meters/1000,1))
+        total_dist_mi_str = str(round((total_dist_meters/1000)/1.6,1))
+
+        self.total_distance = {'km':total_dist_km_str,'mi':total_dist_mi_str}
+
+        return self.total_distance

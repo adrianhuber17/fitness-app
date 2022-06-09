@@ -3,7 +3,6 @@ import ActivityMap from "./ActivityMap";
 
 export default function FriendFeed(props) {
   const [changeElevation, setChangeElevation] = useState(true);
-  // const [totalTime, setTotalTime] = useState(null);
 
   const handleElevationChangeMeters = (event) => {
     if (changeElevation === true) {
@@ -51,9 +50,15 @@ export default function FriendFeed(props) {
                   <p className="cardElevation">Distance</p>
                   <p className="cardElevationData">
                     {changeElevation ? (
-                      <>{`${activity.elevationGainLossJson.elevation_gain_feet} mi`}</>
+                      activity.activityJson.totalDistance ? (
+                        <>{`${activity.activityJson.totalDistance.mi} mi`}</>
+                      ) : (
+                        <>n/a</>
+                      )
+                    ) : activity.activityJson.totalDistance ? (
+                      <>{`${activity.activityJson.totalDistance.km} km`}</>
                     ) : (
-                      <>{`${activity.elevationGainLossJson.elevation_gain_meters} km`}</>
+                      <>n/a</>
                     )}
                   </p>
                 </div>
