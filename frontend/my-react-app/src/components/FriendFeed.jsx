@@ -3,6 +3,7 @@ import ActivityMap from "./ActivityMap";
 
 export default function FriendFeed(props) {
   const [changeElevation, setChangeElevation] = useState(true);
+  // const [totalTime, setTotalTime] = useState(null);
 
   const handleElevationChangeMeters = (event) => {
     if (changeElevation === true) {
@@ -11,7 +12,6 @@ export default function FriendFeed(props) {
       setChangeElevation(true);
     }
   };
-
   return (
     <div className="friendsFeed component-shadow">
       <div
@@ -59,7 +59,14 @@ export default function FriendFeed(props) {
                 </div>
                 <div className="cardDatum">
                   <p className="cardElevation">Time</p>
-                  <p className="cardElevationData">2h 3m</p>
+                  <p className="cardElevationData">
+                    {activity.activityJson.totalTime
+                      ? `${activity.activityJson.totalTime.slice(
+                          0,
+                          2
+                        )} h ${activity.activityJson.totalTime.slice(3, 5)} m `
+                      : "n/a"}
+                  </p>
                 </div>
               </div>
             </div>

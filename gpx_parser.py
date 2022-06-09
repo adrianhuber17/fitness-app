@@ -2,6 +2,8 @@ from datetime import time
 import gpxpy
 import gpxpy.gpx
 import pandas as pd
+from time import strftime
+from time import gmtime
 
 """
 --- A few internal gpxpy functions to gather data ---
@@ -32,6 +34,7 @@ class gpxParser:
         self.ride_name = None
         self.elevation_gain_loss_json = None
         self.elevation_full_route_json = None
+        self.total_time = None
 
     def complete_gpx_parser_main(self,gpx_upload):
 
@@ -55,6 +58,9 @@ class gpxParser:
 
   
         gpx = gpxpy.parse(gpx_upload)
+
+        duration_seconds = gpx.tracks[0].get_duration()
+        self.get_total_time(duration_seconds)
 
         self.ride_date = gpx.tracks[0].segments[0].points[0].time
         
@@ -145,7 +151,8 @@ class gpxParser:
 
         self.map_json = {'coordinates': self.coordinates,
                         'latitude': self.center_latitude,
-                        'longitude': self.center_longitude}
+                        'longitude': self.center_longitude,
+                        'totalTime': self.total_time}
 
 
     def get_elevation_full_route_json(self):
@@ -210,3 +217,11 @@ class gpxParser:
                                     'elevation_loss_feet':elevation_loss_feet,
                                     'elevation_gain_feet':elevation_gain_feet}
         return self.elevation_gain_loss_json
+    
+    def get_total_time(self,duration_seconds):
+        """gets total time and returns a string hour:minute:second or None"""
+        if duration_seconds is None:
+            return None
+        else:
+            self.total_time = strftime("%H:%M:%S", gmtime(duration_seconds))
+            return self.total_time
