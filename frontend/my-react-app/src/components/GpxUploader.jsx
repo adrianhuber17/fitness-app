@@ -15,6 +15,8 @@ export default function GpxUploader({ socket, userData }) {
   const [totalTime, setTotalTime] = useState("");
   const [totalDistance, setTotalDistance] = useState("");
   const [elevationGainLoss, setElevationGainLoss] = useState("");
+  const [rideDate, setRideDate] = useState("");
+  const [rideCaption, setRideCaption] = useState("");
 
   const [loading, setLoading] = useState(true);
 
@@ -32,6 +34,9 @@ export default function GpxUploader({ socket, userData }) {
           setTotalTime(respData.latestActivity.totalTime);
           setTotalDistance(respData.latestActivity.totalDistance);
           setElevationGainLoss(respData.elevationGainLossJson);
+          setRideDate(respData.rideDate);
+          setRideCaption(respData.rideCaption);
+
           setLoading(false);
         } else {
           setCenterLatitude("37.773972");
@@ -82,6 +87,8 @@ export default function GpxUploader({ socket, userData }) {
           setTotalDistance(data.latestActivity.totalDistance);
           setElevation(data.elevation.elevation);
           setElevationGainLoss(data.elevationGainLossJson);
+          setRideDate(data.rideDate);
+          setRideCaption(data.rideCaption);
           setLoading(false);
         } else {
           setCenterLatitude("37.773972");
@@ -154,34 +161,37 @@ export default function GpxUploader({ socket, userData }) {
       {!loading && (
         <>
           <h1>My Latest Ride</h1>
-          <div className="cardSubheading">
-            <div className="cardData">
-              <div className="cardDatum">
-                <p className="cardElevation">Elev Gain</p>
-                <p className="cardElevationData">
-                  {elevationGainLoss ? (
-                    <>{`${elevationGainLoss.elevation_gain_feet} ft`}</>
-                  ) : (
-                    <>n/a</>
-                  )}
-                </p>
-              </div>
-              <div className="cardDatum">
-                <p className="cardElevation">Distance</p>
-                <p className="cardElevationData">
-                  {totalDistance ? <>{`${totalDistance.mi} mi`}</> : <>n/a</>}
-                </p>
-              </div>
-              <div className="cardDatum">
-                <p className="cardElevation">Time</p>
-                <p className="cardElevationData">
-                  {totalTime
-                    ? `${totalTime.slice(0, 2)} h ${totalTime.slice(3, 5)} m `
-                    : "n/a"}
-                </p>
-              </div>
+          <p className="cardCaption">{rideCaption}</p>
+          <p className="cardDate">
+            {rideDate.slice(0, -12)} at {rideDate.slice(17, 22)}
+          </p>
+          <div className="cardAllStats">
+            <div className="cardStat">
+              <p className="cardElevation">Elev Gain</p>
+              <p className="cardElevationData">
+                {elevationGainLoss ? (
+                  <>{`${elevationGainLoss.elevation_gain_feet} ft`}</>
+                ) : (
+                  <>n/a</>
+                )}
+              </p>
+            </div>
+            <div className="cardStat">
+              <p className="cardElevation">Distance</p>
+              <p className="cardElevationData">
+                {totalDistance ? <>{`${totalDistance.mi} mi`}</> : <>n/a</>}
+              </p>
+            </div>
+            <div className="cardStat">
+              <p className="cardElevation">Time</p>
+              <p className="cardElevationData">
+                {totalTime
+                  ? `${totalTime.slice(0, 2)} h ${totalTime.slice(3, 5)} m `
+                  : "n/a"}
+              </p>
             </div>
           </div>
+
           <ActivityMap
             centerLatitude={centerLatitude}
             centerLongitude={centerLongitude}

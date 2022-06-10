@@ -60,6 +60,24 @@
 
 /* GPX Upload */
 
+.cardAllStats {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: fit-content;
+  min-width: -webkit-fill-available;
+  padding: 21px 0;
+  margin: 0 20px;
+}
+.cardStat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  align-content: flex-start;
+}
+
 .userGpxForm {
   position: relative;
   border-radius: 10px;

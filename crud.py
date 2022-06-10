@@ -130,7 +130,9 @@ def get_latest_activity(email):
     if latest_ride_object is not None:
         latest_ride_json = {"latestActivity":latest_ride_object.activity_json,
                             "elevation":latest_ride_object.full_elevation_json,
-                            "elevationGainLossJson":latest_ride_object.elevation_gain_loss_json}
+                            "elevationGainLossJson":latest_ride_object.elevation_gain_loss_json,
+                            "rideDate":latest_ride_object.date,
+                            "rideCaption":latest_ride_object.ride_caption}
         return latest_ride_json
     
     return None

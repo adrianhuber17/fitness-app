@@ -30,7 +30,9 @@ export default function FriendFeed(props) {
               </div>
               <div>
                 <h2 className="cardName">{`${activity.firstName} ${activity.lastName}`}</h2>
-                <p className="cardDate">{activity.date}</p>
+                <p className="cardDate">
+                  {activity.date.slice(0, -12)} at {activity.date.slice(17, 22)}
+                </p>
               </div>
             </div>
             <div className="cardSubheading">
