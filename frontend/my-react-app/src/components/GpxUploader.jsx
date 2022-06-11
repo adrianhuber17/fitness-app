@@ -26,7 +26,6 @@ export default function GpxUploader({ socket, userData }) {
       .then((response) => response.json())
       .then((respData) => {
         if (respData !== null) {
-          console.log(respData);
           setCenterLatitude(respData.latestActivity.latitude);
           setCenterLongitude(respData.latestActivity.longitude);
           setCoordinates(respData.latestActivity.coordinates);
@@ -59,7 +58,6 @@ export default function GpxUploader({ socket, userData }) {
   const handleClick = (event) => {
     event.preventDefault();
     if (socket) {
-      console.log("socket gpx");
       socket.emit("new_data", userData.user_id);
     }
     let formData = new FormData();
@@ -77,7 +75,6 @@ export default function GpxUploader({ socket, userData }) {
     })
       .then((resp) => resp.json())
       .then((data) => {
-        console.log(data);
         console.log("SUBMITTING!");
         if (data !== null) {
           setCenterLatitude(data.latestActivity.latitude);

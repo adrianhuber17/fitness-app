@@ -17,7 +17,8 @@ socketio=SocketIO(app,cors_allowed_origins="*")
 def index():
     if 'email' in session.keys():
         email = session['email']
-        return jsonify({'email':email})
+        user_json = crud.get_user_json(email)
+        return jsonify({'email':email, 'userData':user_json})
     else:
         return jsonify({'email':None})
 

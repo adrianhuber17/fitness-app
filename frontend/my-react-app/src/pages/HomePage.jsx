@@ -36,9 +36,9 @@ export default function HomePage({ email, userData }) {
     setSocketInstance(socket);
 
     socket.on("connect", (data) => {
-      console.log(data);
+      console.log("socket - connect data:", data);
     });
-    socket.on("disconnect", (data) => {
+    socket.on("socket - disconnect data", (data) => {
       console.log(data);
     });
 

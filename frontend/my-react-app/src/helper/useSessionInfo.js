@@ -13,7 +13,7 @@ export const UseSessionInfo = () => {
 
   useEffect(() => {
     let url = "/session.json";
-    if (!session) {
+    if (!session || !userData) {
       fetch(url)
         .then((response) => response.json())
         .then((data) => {
@@ -22,12 +22,14 @@ export const UseSessionInfo = () => {
           } else {
             sessionStorage.setItem("session", JSON.stringify(true));
             sessionStorage.setItem("email", JSON.stringify(data.email));
+            sessionStorage.setItem("userData", JSON.stringify(data.userData));
+            setUserData(data.userData);
             setSession(true);
             setEmail(data.email);
           }
         });
     }
-  }, [email, session]);
+  }, [email, session, userData]);
 
   return [email, session, setSession, setEmail, userData, setUserData];
 };
