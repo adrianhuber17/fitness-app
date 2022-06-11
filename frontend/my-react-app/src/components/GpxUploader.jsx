@@ -98,16 +98,16 @@ export default function GpxUploader({ socket, userData }) {
   };
 
   return (
-    <div className="userGpxForm component-shadow">
+    <div className="sectionArea component-shadow">
       <div
         className="top-right-corner-button"
         onClick={() => setDisplayUpload(!displayUpload)}
       >
         <h3>{displayUpload ? "☁️" : "+"} Upload Ride</h3>
       </div>
-      <div className="file-upload-wrapper">
+      <>
         {displayUpload && (
-          <form>
+          <form className="file-upload-wrapper">
             <div className="file-select">
               <input
                 onChange={handleGpxFile}
@@ -154,48 +154,51 @@ export default function GpxUploader({ socket, userData }) {
             </button>
           </form>
         )}
-      </div>
+      </>
       {!loading && (
         <>
           <h1>My Latest Ride</h1>
-          <p className="cardCaption">{rideCaption}</p>
-          <p className="cardDate">
-            {rideDate.slice(0, -12)} at {rideDate.slice(17, 22)}
-          </p>
-          <div className="cardAllStats">
-            <div className="cardStat">
-              <p className="cardElevation">Elev Gain</p>
-              <p className="cardElevationData">
-                {elevationGainLoss ? (
-                  <>{`${elevationGainLoss.elevation_gain_feet} ft`}</>
-                ) : (
-                  <>n/a</>
-                )}
+          <div className="activityCard">
+            <div className="cardHeader">
+              <p className="cardCaption">{rideCaption}</p>
+              <p className="cardDate">
+                {rideDate.slice(0, -12)} at {rideDate.slice(17, 22)}
               </p>
+              <div className="cardData">
+                <div className="cardDatum">
+                  <p className="cardElevation">Elev Gain</p>
+                  <p className="cardElevationData">
+                    {elevationGainLoss ? (
+                      <>{`${elevationGainLoss.elevation_gain_feet} ft`}</>
+                    ) : (
+                      <>n/a</>
+                    )}
+                  </p>
+                </div>
+                <div className="cardDatum">
+                  <p className="cardElevation">Distance</p>
+                  <p className="cardElevationData">
+                    {totalDistance ? <>{`${totalDistance.mi} mi`}</> : <>n/a</>}
+                  </p>
+                </div>
+                <div className="cardDatum">
+                  <p className="cardElevation">Time</p>
+                  <p className="cardElevationData">
+                    {totalTime
+                      ? `${totalTime.slice(0, 2)} h ${totalTime.slice(3, 5)} m `
+                      : "n/a"}
+                  </p>
+                </div>
+              </div>
             </div>
-            <div className="cardStat">
-              <p className="cardElevation">Distance</p>
-              <p className="cardElevationData">
-                {totalDistance ? <>{`${totalDistance.mi} mi`}</> : <>n/a</>}
-              </p>
-            </div>
-            <div className="cardStat">
-              <p className="cardElevation">Time</p>
-              <p className="cardElevationData">
-                {totalTime
-                  ? `${totalTime.slice(0, 2)} h ${totalTime.slice(3, 5)} m `
-                  : "n/a"}
-              </p>
-            </div>
+            <ActivityMap
+              centerLatitude={centerLatitude}
+              centerLongitude={centerLongitude}
+              coordinates={coordinates}
+              className="userMap"
+            />
+            {elevation.length > 0 && <ElevationPlot elevation={elevation} />}
           </div>
-
-          <ActivityMap
-            centerLatitude={centerLatitude}
-            centerLongitude={centerLongitude}
-            coordinates={coordinates}
-            className="userMap"
-          />
-          {elevation.length > 0 && <ElevationPlot elevation={elevation} />}
         </>
       )}
     </div>

@@ -16,8 +16,7 @@
 
 .map {
   height: 400px;
-  width: 600px;
-  margin: 20px;
+  width: 650px;
 }
 
 .search {
@@ -60,43 +59,18 @@
 
 /* GPX Upload */
 
-.cardAllStats {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-  width: fit-content;
-  min-width: -webkit-fill-available;
-  padding: 21px 0;
-  margin: 0 20px;
-}
-.cardStat {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-  align-content: flex-start;
-}
-
-.userGpxForm {
-  position: relative;
-  border-radius: 10px;
-  height: 1000px;
-  width: 650px;
-  margin-bottom: 100px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.file-upload-wrapper form {
+.file-upload-wrapper {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   min-width: 450px;
+  align-items: baseline;
+  padding: 0px 50px;
+  padding: 10px 50px 40px;
 }
-.file-upload-wrapper form > * {
-  margin: 1rem;
+
+.file-upload-wrapper > * {
+  margin-top: 1.25rem;
 }
 
 .top-right-corner-button {
@@ -105,7 +79,6 @@
   align-items: center;
   justify-content: flex-end;
   align-self: flex-end;
-  padding-right: 15px;
 }
 .top-right-corner-button h3:hover {
   box-shadow: 0px 3px 0 0 salmon;
@@ -125,7 +98,8 @@
 .submitGpx {
   /* button */
   align-self: center;
-  width: -webkit-fill-available;
+  width: 100%;
+  /* width: -webkit-fill-available; */
 }
 
 .submitGpx:disabled {
@@ -199,28 +173,24 @@
   padding: 4px;
 }
 
-.friendsFeed {
+.sectionArea {
+  height: 1000px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   border-radius: 10px;
   overflow-y: auto;
-  height: 1000px;
   width: 650px;
   margin-bottom: 100px;
+  padding: 24px;
+  align-content: center;
 }
 
 .feedBody {
-  margin-top: 30px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: flex-start;
   flex-wrap: wrap;
-}
-
-.feedBody > * {
-  margin: 20px;
 }
 
 .chart-container {
@@ -239,7 +209,6 @@
 .map-friend .map {
   height: 800px;
   width: 1000px;
-  margin: 20px;
 }
 
 .userSearchLinks {
@@ -447,39 +416,46 @@
   margin-top: 15px;
 }
 
-.updateButtonDiv {
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 300px;
-}
-
 .updateButton {
-  margin: 10px;
+  font-size: 1rem;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  margin-bottom: 15px;
 }
 
 /* FriendFeed */
-
-.friendCardHeading {
-  margin: 0 20px;
-}
 
 .friendCard {
   display: flex;
   flex-direction: column;
   box-shadow: 0px 1px 0 #fa8072;
-  padding: 20px 0;
+}
+
+.activityCard {
+  padding: 30px 0;
 }
 
 .cardName {
   display: flex;
   justify-content: flex-start;
   font-weight: 400;
+  margin-right: 15px;
+  text-transform: capitalize;
 }
 
 .cardDate {
   display: flex;
   font-weight: 200;
-  margin-top: -15px;
+}
+
+.cardHeader {
+  display: flex;
+  flex-direction: column;
+  width: inherit;
+}
+
+.friendsCard {
+  /* margin: 0 65px; */
 }
 
 .cardCaption {
@@ -487,25 +463,21 @@
   justify-content: flex-start;
   font-size: 30px;
   font-weight: bolder;
-  margin: 15px 0;
-}
-
-.cardSubheading {
-  display: flex;
-  flex-direction: column;
-  margin: 0 60px;
 }
 
 .cardData {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin: 15px 0;
 }
 
 .cardDatum {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
+
 .cardDatum > * {
   margin-bottom: 5px;
 }
@@ -530,6 +502,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-bottom: 25px;
 }
 .avatarCardName > *:not(:first-child) {
   margin-left: 15px;
