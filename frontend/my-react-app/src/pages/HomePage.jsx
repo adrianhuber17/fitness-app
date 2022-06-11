@@ -73,17 +73,15 @@ export default function HomePage({ email, userData }) {
     !loading && (
       <div className="App">
         <img src={logo} alt="logo" className="logo" />
-        {newFeed > 0 && (
-          <div className="updateButtonDiv">
-            <button className="updateButton" onClick={updateFeed}>
-              new activity + {newFeed}
-            </button>
-          </div>
-        )}
         <div className="feedBody">
           <GpxUploader socket={socketInstance} userData={userData} />
           {friendsData.length > 0 && (
-            <FriendFeed friendsData={friendsData} socket={socketInstance} />
+            <FriendFeed
+              friendsData={friendsData}
+              socket={socketInstance}
+              newFeed={newFeed}
+              updateFeed={updateFeed}
+            />
           )}
         </div>
       </div>
