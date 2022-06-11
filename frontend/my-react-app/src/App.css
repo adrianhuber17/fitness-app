@@ -239,6 +239,9 @@
   align-items: center;
   justify-content: flex-end;
 }
+.primary-header button:hover {
+  color: salmon;
+}
 
 .primary-navigation {
   display: flex;
