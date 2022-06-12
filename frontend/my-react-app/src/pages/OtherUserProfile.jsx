@@ -112,7 +112,9 @@ const OtherUser = ({ session }) => {
             {date !== "" && (
               <div className="cardHeader">
                 <p className="cardCaption">{rideCaption}</p>
-                <p className="cardDate">Date: {date}</p>
+                <p className="cardDate">
+                  Date: {`${date.slice(0, -12)} at ${date.slice(17, 30)}`}
+                </p>
                 <div className="cardData">
                   <div className="cardDatum">
                     <p className="cardElevation">Elev Gain</p>

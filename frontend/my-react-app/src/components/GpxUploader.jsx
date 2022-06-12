@@ -166,7 +166,7 @@ export default function GpxUploader({ socket, userData }) {
             <div className="cardHeader">
               <p className="cardCaption">{rideCaption}</p>
               <p className="cardDate">
-                {rideDate.slice(0, -12)} at {rideDate.slice(17, 22)}
+                {rideDate.slice(0, -12)} at {rideDate.slice(17, 30)}
               </p>
               <div className="cardData">
                 <div className="cardDatum">

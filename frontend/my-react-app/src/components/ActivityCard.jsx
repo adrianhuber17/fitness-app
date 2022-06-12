@@ -15,7 +15,7 @@ export const ActivityCard = ({ activity, changeElevation, avatar }) => {
       <div className="cardHeader">
         <p className="cardCaption">{activity.rideCaption}</p>
         <p className="cardDate">
-          {activity.date.slice(0, -12)} at {activity.date.slice(17, 22)}
+          {activity.date.slice(0, -12)} at {activity.date.slice(17, 30)}
         </p>
         <div className="cardData">
           <div className="cardDatum">
