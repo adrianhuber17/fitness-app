@@ -1,4 +1,4 @@
-import UserPrflTable from "../components/UserPrflTable";
+import UserProfileTable from "../components/UserProfileTable";
 import UserFollowingTable from "../components/UserFollowingTable";
 import { useEffect, useState } from "react";
 import UserFollowerTable from "../components/UserFollowerTable";
@@ -30,8 +30,9 @@ const UserProfile = ({ session }) => {
   return (
     <>
       {!loading && (
-        <>
-          <UserPrflTable profileInfo={userProfileInfo} />
+        <div className="user-profile-page component-shadow">
+          <h1>Hey {userProfileInfo.first_name}!</h1>
+          <UserProfileTable profileInfo={userProfileInfo} />
           <UserFollowingTable followingList={userFollowing} />
           <UserFollowerTable followerList={userFollower} />
           {Object.keys(totalElevationGain).length !== 0 &&
@@ -43,7 +44,7 @@ const UserProfile = ({ session }) => {
                 />
               </div>
             )}
-        </>
+        </div>
       )}
     </>
   );

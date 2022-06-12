@@ -1,12 +1,12 @@
 export default function UserFollowingTable(props) {
   if (props.followingList.length !== 0) {
     return (
-      <div className="follower-table">
+      <div className="follower-table bottom-shadow">
         <h2>Following {props.followingList.length} users:</h2>
         <table id="following-table">
           <thead>
             <tr>
-              <th>Id</th>
+              <th>User ID</th>
               <th>First Name</th>
               <th>Last Name</th>
               <th>Email</th>

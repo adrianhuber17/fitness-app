@@ -26,7 +26,7 @@ export default function FriendFeed(props) {
       </div>
       <h1>Friends Feed</h1>
       {props.friendsData.map((activity, ind) => (
-        <div key={ind} className="activityCard friendCard">
+        <div key={ind} className="activityCard friendCard bottom-shadow">
           <div className="avatarCardName">
             <div className="avatar">
               {activity.firstName[0]}
@@ -34,7 +34,7 @@ export default function FriendFeed(props) {
             </div>
             <h2 className="cardName">{`${activity.firstName} ${activity.lastName}`}</h2>
           </div>
-          <div className="cardHeader friendsCard">
+          <div className="cardHeader">
             <p className="cardCaption">{activity.rideCaption}</p>
             <p className="cardDate">
               {activity.date.slice(0, -12)} at {activity.date.slice(17, 22)}

@@ -1,12 +1,11 @@
-export default function UserPrflTable(props) {
+export default function UserProfileTable(props) {
   return (
-    <div className="user-profile-table">
-      <h1>Hey {props.profileInfo.first_name}!</h1>
+    <div className="user-profile-table bottom-shadow">
       <h2>Profile Information</h2>
       <table>
         <thead>
           <tr>
-            <th>Id</th>
+            <th>User ID</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
