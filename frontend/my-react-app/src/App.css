@@ -198,20 +198,6 @@
 
 .chart-container {
   position: relative;
-  height: 30vh;
-  width: 550px;
-}
-
-.map-friend {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: center;
-  align-items: center;
-}
-
-.map-friend .map {
-  height: 800px;
-  width: 1000px;
 }
 
 .userSearchLinks {
@@ -340,9 +326,7 @@
 .follower-table > *:not(:last-child) {
   margin-bottom: 15px;
 }
-.other-user-table {
-  margin-left: 20px;
-}
+
 .user-profile-page {
   padding: 30px;
   border-radius: 10px;
@@ -451,6 +435,11 @@
   text-decoration: underline;
   text-decoration-thickness: 3px;
   margin-bottom: 15px;
+  position: sticky;
+  top: 0;
+  bottom: 0;
+  position: sticky;
+  z-index: 10000;
 }
 
 /* FriendFeed */
@@ -462,6 +451,10 @@
 
 .activityCard {
   padding: 30px 0;
+}
+
+.activityCard h2 {
+  padding-bottom: 20px;
 }
 
 .cardName {
@@ -500,7 +493,6 @@
 .cardDatum {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .cardDatum > * {

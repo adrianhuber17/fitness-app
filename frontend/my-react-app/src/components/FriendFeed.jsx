@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ActivityMap from "./ActivityMap";
+import { ActivityCard } from "./ActivityCard";
 
 export default function FriendFeed(props) {
   const [changeElevation, setChangeElevation] = useState(true);
@@ -26,66 +26,12 @@ export default function FriendFeed(props) {
       </div>
       <h1>Friends Feed</h1>
       {props.friendsData.map((activity, ind) => (
-        <div key={ind} className="activityCard friendCard bottom-shadow">
-          <div className="avatarCardName">
-            <div className="avatar">
-              {activity.firstName[0]}
-              {activity.lastName[0]}
-            </div>
-            <h2 className="cardName">{`${activity.firstName} ${activity.lastName}`}</h2>
-          </div>
-          <div className="cardHeader">
-            <p className="cardCaption">{activity.rideCaption}</p>
-            <p className="cardDate">
-              {activity.date.slice(0, -12)} at {activity.date.slice(17, 22)}
-            </p>
-            <div className="cardData">
-              <div className="cardDatum">
-                <p className="cardElevation">Elev Gain</p>
-                <p className="cardElevationData">
-                  {changeElevation ? (
-                    <>{`${activity.elevationGainLossJson.elevation_gain_feet} ft`}</>
-                  ) : (
-                    <>{`${activity.elevationGainLossJson.elevation_gain_meters} m`}</>
-                  )}
-                </p>
-              </div>
-              <div className="cardDatum">
-                <p className="cardElevation">Distance</p>
-                <p className="cardElevationData">
-                  {changeElevation ? (
-                    activity.activityJson.totalDistance ? (
-                      <>{`${activity.activityJson.totalDistance.mi} mi`}</>
-                    ) : (
-                      <>n/a</>
-                    )
-                  ) : activity.activityJson.totalDistance ? (
-                    <>{`${activity.activityJson.totalDistance.km} km`}</>
-                  ) : (
-                    <>n/a</>
-                  )}
-                </p>
-              </div>
-              <div className="cardDatum">
-                <p className="cardElevation">Time</p>
-                <p className="cardElevationData">
-                  {activity.activityJson.totalTime
-                    ? `${activity.activityJson.totalTime.slice(
-                        0,
-                        2
-                      )} h ${activity.activityJson.totalTime.slice(3, 5)} m `
-                    : "n/a"}
-                </p>
-              </div>
-            </div>
-          </div>
-          <ActivityMap
-            centerLatitude={activity.activityJson.latitude}
-            centerLongitude={activity.activityJson.longitude}
-            coordinates={activity.activityJson.coordinates}
-            className="userMap"
-          />
-        </div>
+        <ActivityCard
+          avatar={true}
+          activity={activity}
+          changeElevation={changeElevation}
+          index={ind}
+        />
       ))}
     </div>
   );

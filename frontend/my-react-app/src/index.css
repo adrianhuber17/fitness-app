@@ -57,6 +57,7 @@ table {
   border-collapse: collapse;
   max-width: 700px;
   overflow: auto;
+  text-align: justify;
 }
 
 th,

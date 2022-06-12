@@ -3,6 +3,7 @@ import { GetOtherUserId } from "../helper/StateParamWrapper";
 import ActivityMap from "../components/ActivityMap";
 import OtherUserTable from "../components/OtherUserTable";
 import { Plot } from "../components/Plot";
+// import { ActivityCard } from "./ActivityCard";
 
 const OtherUser = ({ session }) => {
   const [centerLatitude, setCenterLatitude] = useState("");
@@ -42,7 +43,6 @@ const OtherUser = ({ session }) => {
             setDate(respData.date);
             setElevationGain(respData.elevationGainLossJson);
             setIsFollowing(respData.isFollowing);
-
             setLoading(false);
           } else {
             setCenterLatitude("37.773972");
@@ -92,23 +92,29 @@ const OtherUser = ({ session }) => {
   return (
     <>
       {!loading && (
-        <>
+        <div className="user-profile-page component-shadow ">
+          <h1>Welcome to {userData.first_name} profile!</h1>
           <OtherUserTable
             userData={userData}
             isFollowing={isFollowing}
             handleFollowClick={handleFollowClick}
             handleUnfollowClick={handleUnfollowClick}
           />
-          <div className="map-friend">
+          <div className="activityCard friendCard bottom-shadow">
+            <h2>Latest Ride</h2>
             {date !== "" && (
-              <span>
-                <h2>Latest Ride</h2>
-                <li>{rideCaption}</li>
-                <li>Date: {date}</li>
-                <li>
-                  Elevation Gain: {elevationGain.elevation_gain_feet} feet
-                </li>
-              </span>
+              <div className="cardHeader">
+                <p className="cardCaption">{rideCaption}</p>
+                <p className="cardDate">Date: {date}</p>
+                <div className="cardData">
+                  <div className="cardDatum">
+                    <p className="cardElevation">Elev Gain</p>
+                    <p className="cardElevationData">
+                      {elevationGain.elevation_gain_feet} feet
+                    </p>
+                  </div>
+                </div>
+              </div>
             )}
 
             <ActivityMap
@@ -117,17 +123,17 @@ const OtherUser = ({ session }) => {
               coordinates={coordinates}
             />
           </div>
-        </>
+          {Object.keys(totalElevationGain).length !== 0 &&
+            Object.keys(totalActivites).length !== 0 && (
+              <div className="chart-container">
+                <Plot
+                  totalElevationGain={totalElevationGain}
+                  totalActivites={totalActivites}
+                />
+              </div>
+            )}
+        </div>
       )}
-      {Object.keys(totalElevationGain).length !== 0 &&
-        Object.keys(totalActivites).length !== 0 && (
-          <div className="chart-container">
-            <Plot
-              totalElevationGain={totalElevationGain}
-              totalActivites={totalActivites}
-            />
-          </div>
-        )}
     </>
   );
 };
