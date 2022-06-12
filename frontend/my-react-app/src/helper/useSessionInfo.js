@@ -13,7 +13,7 @@ export const UseSessionInfo = () => {
 
   useEffect(() => {
     let url = "/session.json";
-    if (!session || !userData) {
+    if (!session) {
       fetch(url)
         .then((response) => response.json())
         .then((data) => {
