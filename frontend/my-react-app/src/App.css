@@ -376,7 +376,7 @@
   position: fixed;
   z-index: 10;
   left: 30px;
-  top: 100px;
+  top: 120px;
   color: #858995;
 }
 
@@ -495,10 +495,6 @@
   flex-direction: column;
 }
 
-.cardDatum > * {
-  margin-bottom: 5px;
-}
-
 .cardElevation {
   display: flex;
   box-shadow: 0px 0.5px 0 #fa8072;
@@ -506,6 +502,8 @@
   width: max-content;
   font-size: 20px;
   font-weight: 200;
+  margin-bottom: 3px;
+  padding-bottom: 3px;
 }
 
 .cardElevationData {
