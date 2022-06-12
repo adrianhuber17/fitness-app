@@ -9,9 +9,7 @@ function ChangeMapView({ coordsCenter, coords }) {
 
   const zoomeLevel = map.getBoundsZoom(polyBounds);
 
-  map.setZoom(zoomeLevel);
-
-  map.setView(coordsCenter);
+  map.setView(coordsCenter, zoomeLevel);
   return null;
 }
 
