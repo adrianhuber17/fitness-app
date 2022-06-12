@@ -40,6 +40,7 @@ def get_other_user_data_json(user_id_user,other_user_id):
         ride_caption = latest_ride_object.ride_caption
         date = latest_ride_object.date
         elevation_gain_loss_json = latest_ride_object.elevation_gain_loss_json
+        activity_json = latest_ride_object.activity_json
 
 
     total_activities_monthly = get_total_activities_monthly(other_user_id)
@@ -53,7 +54,8 @@ def get_other_user_data_json(user_id_user,other_user_id):
                             'totalElevationGain':total_elevation_monthly,
                             'rideCaption':ride_caption,
                             'date':date,
-                            'elevationGainLossJson':elevation_gain_loss_json}
+                            'elevationGainLossJson':elevation_gain_loss_json,
+                            'activityJson':activity_json}
 
     return other_user_data_json
 

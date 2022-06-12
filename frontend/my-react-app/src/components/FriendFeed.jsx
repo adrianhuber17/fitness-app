@@ -1,14 +1,18 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { ActivityCard } from "./ActivityCard";
+import { UnitContext } from "../helper/UnitsContext";
 
 export default function FriendFeed(props) {
-  const [changeElevation, setChangeElevation] = useState(true);
+  const unitContext = useContext(UnitContext);
+  const { changeElevation, setChangeElevation } = unitContext;
 
   const handleElevationChangeMeters = (event) => {
     if (changeElevation === true) {
       setChangeElevation(false);
+      sessionStorage.setItem("unitFlag", JSON.stringify(false));
     } else {
       setChangeElevation(true);
+      sessionStorage.setItem("unitFlag", JSON.stringify(true));
     }
   };
   return (

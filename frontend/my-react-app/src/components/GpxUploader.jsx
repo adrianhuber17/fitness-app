@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import ActivityMap from "./ActivityMap";
 import { ElevationPlot } from "./ElevationChart";
+import { UnitContext } from "../helper/UnitsContext";
 
 export default function GpxUploader({ socket, userData }) {
   const [gpxFile, setGpxFile] = useState(null);
@@ -19,6 +20,9 @@ export default function GpxUploader({ socket, userData }) {
   const [rideCaption, setRideCaption] = useState("");
 
   const [loading, setLoading] = useState(true);
+
+  const unitContext = useContext(UnitContext);
+  const { changeElevation } = unitContext;
 
   useEffect(() => {
     let url = "/map.json";
@@ -169,16 +173,28 @@ export default function GpxUploader({ socket, userData }) {
                   <p className="cardElevation">Elev Gain</p>
                   <p className="cardElevationData">
                     {elevationGainLoss ? (
-                      <>{`${elevationGainLoss.elevation_gain_feet} ft`}</>
+                      changeElevation ? (
+                        <>{`${elevationGainLoss.elevation_gain_feet} ft`}</>
+                      ) : (
+                        <>{`${elevationGainLoss.elevation_loss_meters} m`}</>
+                      )
                     ) : (
-                      <>n/a</>
+                      "n/a"
                     )}
                   </p>
                 </div>
                 <div className="cardDatum">
                   <p className="cardElevation">Distance</p>
                   <p className="cardElevationData">
-                    {totalDistance ? <>{`${totalDistance.mi} mi`}</> : <>n/a</>}
+                    {totalDistance ? (
+                      changeElevation ? (
+                        <>{`${totalDistance.mi} mi`}</>
+                      ) : (
+                        <>{`${totalDistance.km} km`}</>
+                      )
+                    ) : (
+                      "n/a"
+                    )}
                   </p>
                 </div>
                 <div className="cardDatum">

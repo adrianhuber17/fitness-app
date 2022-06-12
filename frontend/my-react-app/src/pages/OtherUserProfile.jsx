@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { GetOtherUserId } from "../helper/StateParamWrapper";
 import ActivityMap from "../components/ActivityMap";
 import OtherUserTable from "../components/OtherUserTable";
 import { Plot } from "../components/Plot";
-// import { ActivityCard } from "./ActivityCard";
+import { UnitContext } from "../helper/UnitsContext";
 
 const OtherUser = ({ session }) => {
   const [centerLatitude, setCenterLatitude] = useState("");
@@ -15,8 +15,13 @@ const OtherUser = ({ session }) => {
   const [totalActivites, setTotalActivities] = useState({});
   const [rideCaption, setRideCaption] = useState("");
   const [date, setDate] = useState("");
+  const [totalDistance, setTotalDistance] = useState("");
+  const [totalTime, setTotalTime] = useState("");
   const [elevationGain, setElevationGain] = useState({});
   const [loading, setLoading] = useState(true);
+
+  const unitContext = useContext(UnitContext);
+  const { changeElevation } = unitContext;
 
   const userId = GetOtherUserId();
 
@@ -43,6 +48,8 @@ const OtherUser = ({ session }) => {
             setDate(respData.date);
             setElevationGain(respData.elevationGainLossJson);
             setIsFollowing(respData.isFollowing);
+            setTotalDistance(respData.activityJson.totalDistance);
+            setTotalTime(respData.activityJson.totalTime);
             setLoading(false);
           } else {
             setCenterLatitude("37.773972");
@@ -110,7 +117,40 @@ const OtherUser = ({ session }) => {
                   <div className="cardDatum">
                     <p className="cardElevation">Elev Gain</p>
                     <p className="cardElevationData">
-                      {elevationGain.elevation_gain_feet} feet
+                      {elevationGain ? (
+                        changeElevation ? (
+                          <>{`${elevationGain.elevation_gain_feet} ft`}</>
+                        ) : (
+                          <>{`${elevationGain.elevation_loss_meters} m`}</>
+                        )
+                      ) : (
+                        <div>n/a</div>
+                      )}
+                    </p>
+                  </div>
+                  <div className="cardDatum">
+                    <p className="cardElevation">Distance</p>
+                    <p className="cardElevationData">
+                      {totalDistance ? (
+                        changeElevation ? (
+                          <>{`${totalDistance.mi} mi`}</>
+                        ) : (
+                          <>{`${totalDistance.km} km`}</>
+                        )
+                      ) : (
+                        "n/a"
+                      )}
+                    </p>
+                  </div>
+                  <div className="cardDatum">
+                    <p className="cardElevation">Time</p>
+                    <p className="cardElevationData">
+                      {totalTime
+                        ? `${totalTime.slice(0, 2)} h ${totalTime.slice(
+                            3,
+                            5
+                          )} m `
+                        : "n/a"}
                     </p>
                   </div>
                 </div>
