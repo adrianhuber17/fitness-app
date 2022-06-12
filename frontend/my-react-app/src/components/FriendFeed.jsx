@@ -30,7 +30,7 @@ export default function FriendFeed(props) {
           avatar={true}
           activity={activity}
           changeElevation={changeElevation}
-          index={ind}
+          key={ind}
         />
       ))}
     </div>

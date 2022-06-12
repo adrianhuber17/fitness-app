@@ -2,10 +2,16 @@ import L from "leaflet";
 import { MapContainer, TileLayer, Polyline, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
-function ChangeMapView({ coords }) {
+function ChangeMapView({ coordsCenter, coords }) {
   const map = useMap();
-  map.setView(coords, map.getZoom());
 
+  const polyBounds = L.polyline(coords).getBounds();
+
+  const zoomeLevel = map.getBoundsZoom(polyBounds);
+
+  map.setZoom(zoomeLevel);
+
+  map.setView(coordsCenter);
   return null;
 }
 
@@ -16,8 +22,7 @@ export default function ActivityMap(props) {
         className="map"
         center={[props.centerLatitude, props.centerLongitude]}
         crs={L.CRS.EPSG3857}
-        zoom={12}
-        scrollWheelZoom={true}
+        scrollWheelZoom={false}
         preferCanvas={false}
       >
         <TileLayer
@@ -25,7 +30,10 @@ export default function ActivityMap(props) {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <Polyline positions={[props.coordinates]} color={"red"} />
-        <ChangeMapView coords={[props.centerLatitude, props.centerLongitude]} />
+        <ChangeMapView
+          coordsCenter={[props.centerLatitude, props.centerLongitude]}
+          coords={[props.coordinates]}
+        />
       </MapContainer>
     </>
   );

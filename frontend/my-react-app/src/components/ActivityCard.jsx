@@ -1,13 +1,8 @@
 import ActivityMap from "./ActivityMap";
 
-export const ActivityCard = ({
-  activity,
-  changeElevation,
-  avatar,
-  index = 0,
-}) => {
+export const ActivityCard = ({ activity, changeElevation, avatar }) => {
   return (
-    <div key={index} className="activityCard friendCard bottom-shadow">
+    <div className="activityCard friendCard bottom-shadow">
       <div className="avatarCardName">
         {avatar && (
           <div className="avatar">
