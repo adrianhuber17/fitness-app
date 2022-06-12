@@ -36,16 +36,40 @@ export const options = {
   animation: false,
   plugins: {
     legend: {
+      labels: {
+        font: {
+          size: 14,
+        },
+        color: "#bdc1c6",
+      },
       position: "top",
     },
     title: {
       display: true,
       text: "Elevation Profile",
+      font: {
+        size: 20,
+      },
+      color: "#bdc1c6",
     },
     decimation: true,
     tooltip: {
       callbacks: {
         footer: footer,
+      },
+    },
+  },
+  scales: {
+    xAxis: {
+      ticks: {
+        color: "#bdc1c6",
+        font: { size: 15 },
+      },
+    },
+    yAxis: {
+      ticks: {
+        color: "#bdc1c6",
+        font: { size: 15 },
       },
     },
   },

@@ -30,13 +30,35 @@ export const options = {
     title: {
       display: true,
       text: "User Statistics",
+      font: {
+        size: 20,
+      },
+      color: "#bdc1c6",
+    },
+    legend: {
+      labels: {
+        font: {
+          size: 14,
+        },
+        color: "#bdc1c6",
+      },
     },
   },
   scales: {
+    xAxis: {
+      ticks: {
+        color: "#bdc1c6",
+        font: { size: 15 },
+      },
+    },
     y: {
       type: "linear",
       display: true,
       position: "left",
+      ticks: {
+        color: "#bdc1c6",
+        font: { size: 15 },
+      },
     },
     y1: {
       type: "linear",
@@ -44,6 +66,10 @@ export const options = {
       position: "right",
       grid: {
         drawOnChartArea: false,
+      },
+      ticks: {
+        color: "#bdc1c6",
+        font: { size: 15 },
       },
     },
   },
