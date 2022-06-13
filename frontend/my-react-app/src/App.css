@@ -198,6 +198,13 @@
 
 .chart-container {
   position: relative;
+  height: 350px;
+  margin-bottom: 45px;
+}
+.elevation-plot {
+  width: 580px;
+  padding-left: 37px;
+  padding-top: 27px;
 }
 
 .userSearchLinks {
@@ -450,7 +457,7 @@
 }
 
 .activityCard {
-  padding: 30px 0;
+  padding-top: 30px;
 }
 
 .activityCard h2 {

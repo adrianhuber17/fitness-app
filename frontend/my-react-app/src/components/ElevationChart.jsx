@@ -33,6 +33,7 @@ const footer = (tooltipItems) => {
 };
 export const options = {
   responsive: true,
+  aspectRatio: 1.7,
   animation: false,
   plugins: {
     legend: {
@@ -98,5 +99,9 @@ export function ElevationPlot(props) {
     ],
   };
 
-  return <Line options={options} data={data} />;
+  return (
+    <div className="elevation-plot">
+      <Line options={options} data={data} />
+    </div>
+  );
 }

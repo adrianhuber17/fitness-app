@@ -21,6 +21,7 @@ ChartJS.register(
 
 export const options = {
   responsive: true,
+  aspectRatio: 1.5,
   interaction: {
     mode: "index",
     intersect: false,
