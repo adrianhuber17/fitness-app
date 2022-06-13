@@ -161,51 +161,59 @@ export default function GpxUploader({ socket, userData }) {
       </>
       {!loading && (
         <>
-          <h1>My Latest Ride</h1>
+          <h1>{rideCaption ? "My Latest Ride" : "Upload Your First Ride"}</h1>
           <div className="activityCard">
             <div className="cardHeader">
-              <p className="cardCaption">{rideCaption}</p>
-              <p className="cardDate">
-                {rideDate.slice(0, -12)} at {rideDate.slice(17, 30)}
-              </p>
-              <div className="cardData">
-                <div className="cardDatum">
-                  <p className="cardElevation">Elev Gain</p>
-                  <p className="cardElevationData">
-                    {elevationGainLoss ? (
-                      changeElevation ? (
-                        <>{`${elevationGainLoss.elevation_gain_feet} ft`}</>
-                      ) : (
-                        <>{`${elevationGainLoss.elevation_loss_meters} m`}</>
-                      )
-                    ) : (
-                      "n/a"
-                    )}
+              <p className="cardCaption">{rideCaption && rideCaption}</p>
+              {rideCaption && (
+                <>
+                  <p className="cardDate">
+                    {rideDate.slice(0, -12)} {rideDate && "at"}{" "}
+                    {rideDate.slice(17, 30)}
                   </p>
-                </div>
-                <div className="cardDatum">
-                  <p className="cardElevation">Distance</p>
-                  <p className="cardElevationData">
-                    {totalDistance ? (
-                      changeElevation ? (
-                        <>{`${totalDistance.mi} mi`}</>
-                      ) : (
-                        <>{`${totalDistance.km} km`}</>
-                      )
-                    ) : (
-                      "n/a"
-                    )}
-                  </p>
-                </div>
-                <div className="cardDatum">
-                  <p className="cardElevation">Time</p>
-                  <p className="cardElevationData">
-                    {totalTime
-                      ? `${totalTime.slice(0, 2)} h ${totalTime.slice(3, 5)} m `
-                      : "n/a"}
-                  </p>
-                </div>
-              </div>
+                  <div className="cardData">
+                    <div className="cardDatum">
+                      <p className="cardElevation">Elev Gain</p>
+                      <p className="cardElevationData">
+                        {elevationGainLoss ? (
+                          changeElevation ? (
+                            <>{`${elevationGainLoss.elevation_gain_feet} ft`}</>
+                          ) : (
+                            <>{`${elevationGainLoss.elevation_loss_meters} m`}</>
+                          )
+                        ) : (
+                          "n/a"
+                        )}
+                      </p>
+                    </div>
+                    <div className="cardDatum">
+                      <p className="cardElevation">Distance</p>
+                      <p className="cardElevationData">
+                        {totalDistance ? (
+                          changeElevation ? (
+                            <>{`${totalDistance.mi} mi`}</>
+                          ) : (
+                            <>{`${totalDistance.km} km`}</>
+                          )
+                        ) : (
+                          "n/a"
+                        )}
+                      </p>
+                    </div>
+                    <div className="cardDatum">
+                      <p className="cardElevation">Time</p>
+                      <p className="cardElevationData">
+                        {totalTime
+                          ? `${totalTime.slice(0, 2)} h ${totalTime.slice(
+                              3,
+                              5
+                            )} m `
+                          : "n/a"}
+                      </p>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
             <ActivityMap
               centerLatitude={centerLatitude}

@@ -183,7 +183,6 @@
   border-radius: 10px;
   overflow-y: auto;
   width: 650px;
-  margin-bottom: 100px;
   padding: 24px;
   align-content: center;
 }
@@ -194,6 +193,9 @@
   justify-content: space-evenly;
   align-items: flex-start;
   flex-wrap: wrap;
+}
+.feedBody > * {
+  margin-bottom: 30px;
 }
 
 .chart-container {
@@ -457,11 +459,7 @@
 }
 
 .activityCard {
-  padding-top: 30px;
-}
-
-.activityCard h2 {
-  padding-bottom: 20px;
+  padding: 30px 0;
 }
 
 .cardName {

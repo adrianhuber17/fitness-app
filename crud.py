@@ -34,7 +34,8 @@ def get_other_user_data_json(user_id_user,other_user_id):
                 'last_name': user.last_name}
     
     latest_ride_object = db.session.query(Activity).filter_by(user_id = other_user_id).order_by(desc(Activity.date)).first()
-    other_user_latest_act,ride_caption,date,elevation_gain_loss_json = None,None,None,None
+    other_user_latest_act,ride_caption,date,elevation_gain_loss_json,activity_json = None,None,None,None,None
+
     if latest_ride_object is not None:
         other_user_latest_act = latest_ride_object.activity_json
         ride_caption = latest_ride_object.ride_caption
@@ -234,17 +235,19 @@ def following_activity_json(user_id):
 
     all_activities = []
 
-    for following_activities in following_list:
-        if len(following_activities.activities) > 0:
-            first_name = following_activities.first_name
-            last_name = following_activities.last_name
-            for activity in following_activities.activities:
+    for following_user in following_list:
+        if len(following_user.activities) > 0:
+            first_name = following_user.first_name
+            last_name = following_user.last_name
+            user_id = following_user.user_id
+            for activity in following_user.activities:
                 all_activities.append({"rideCaption":activity.ride_caption,
                                         "date":activity.date,
                                         "activityJson":activity.activity_json,
                                         "firstName": first_name,
                                         "lastName":last_name,
-                                        "elevationGainLossJson":activity.elevation_gain_loss_json})
+                                        "elevationGainLossJson":activity.elevation_gain_loss_json,
+                                        "userId":user_id})
     
     #sorts the list by date
     all_activities.sort(key=lambda item:item['date'], reverse=True)

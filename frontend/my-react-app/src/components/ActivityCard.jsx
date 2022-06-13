@@ -10,7 +10,11 @@ export const ActivityCard = ({ activity, changeElevation, avatar }) => {
             {activity.lastName[0]}
           </div>
         )}
-        <h2 className="cardName">{`${activity.firstName} ${activity.lastName}`}</h2>
+        <h2 className="cardName">
+          <a
+            href={`/other-user-profile?userId=${activity.userId}`}
+          >{`${activity.firstName} ${activity.lastName}`}</a>
+        </h2>
       </div>
       <div className="cardHeader">
         <p className="cardCaption">{activity.rideCaption}</p>

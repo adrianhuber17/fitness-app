@@ -100,7 +100,7 @@ const OtherUser = ({ session }) => {
     <>
       {!loading && (
         <div className="user-profile-page component-shadow ">
-          <h1>Welcome to {userData.first_name} profile!</h1>
+          <h1>Welcome to {userData.first_name}'s profile!</h1>
           <OtherUserTable
             userData={userData}
             isFollowing={isFollowing}
@@ -108,7 +108,9 @@ const OtherUser = ({ session }) => {
             handleUnfollowClick={handleUnfollowClick}
           />
           <div className="activityCard friendCard bottom-shadow">
-            <h2>Latest Ride</h2>
+            <h2 style={{ marginBottom: "20px" }}>
+              {date ? "Latest Ride" : "User Has Not Uploaded a Ride"}
+            </h2>
             {date !== "" && (
               <div className="cardHeader">
                 <p className="cardCaption">{rideCaption}</p>

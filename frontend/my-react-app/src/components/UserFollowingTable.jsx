@@ -32,6 +32,6 @@ export default function UserFollowingTable(props) {
       </div>
     );
   } else {
-    return <h2>Not following any user</h2>;
+    return <h2>Not following any users</h2>;
   }
 }
