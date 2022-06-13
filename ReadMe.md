@@ -23,32 +23,36 @@ I'm currently building the front-end using ReactJS. Then I will add styling with
 
 ## App Log-In
 
-![](/ReadME/LogIn.gif)
+![](/ReadME/log-in-home.gif)
 
 ## Uploading an activity
 
 Upload a .gpx (GPS exchange format) from user's local drive, add an activity comment and upload the activity. File is parsed and rendered on a map displaying User's latest activity. Map component is rendered without refreshing the entire page.
 
-![](/ReadME/UploadFile.gif)
+![](/ReadME/upload-latest-ride.gif)
 
 ## Scroll throught the latest friend's activity feed
 
-![](/ReadME/FriendsFeed.gif)
+![](/ReadME/scroll-friends-feed.gif)
 
-## Searching for a user
+## Searching and Following a user
 
 Use search bar to look for another user in the data base and click on their name
 to navigate to their profile page.
 
-![](/ReadME/SearchUser.gif)
-
-## Follow/Unfollow a user
-
 Follow button will be available in another user's profile if you are not following them. Otherwise an unfollow button will appear.
 You can then see users you are following on your profile page.
 
-![](/ReadME/FollowUser.gif)
+![](/ReadME/search-and-follow-user.gif)
 
 ## Check user profile and stats
 
-![](/ReadME/UserStats.gif)
+![](/ReadME/check-profile-information.gif)
+
+## Live feed using WebSocket
+
+![](/ReadME/WebSocketLiveFeed.gif)
+
+## Changing Units from imperial to metric globally
+
+![](/ReadME/context-provider-units.gif)
