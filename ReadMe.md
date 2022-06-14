@@ -30,7 +30,7 @@ On log-in, the users information is stored in the session storage and as a globa
 ## Uploading a new activity
 
 The `+Upload Ride` button will open a form for a user to upload a new activity.
-Upload a .gpx (GPS exchange format) file from the user's local drive, add an activity caption and upload the activity. The file is sent to the back-end for parsing and storing in the database. After the file is parsed and stored, it is returned to the front-end to be rendered on a map displaying the latest activity and associated data such as total elevetaion gain, total distance, and total time. The map component is rendered without refreshing the entire page.
+Upload a .gpx (GPS exchange format) file from the user's local drive, add an activity caption and upload the activity. The file is sent to the back-end for parsing and storing in the database. After the file is parsed and stored, it is returned to the front-end to be rendered on a map displaying the latest activity and associated data such as total elevetaion gain, total distance, total time as well as a plot with the elevation provile throughout the activity. This user's latest ride component is rendered without refreshing the entire page.
 
 ![](/ReadME/upload-latest-ride.gif)
 
