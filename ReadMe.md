@@ -6,8 +6,7 @@ Users can upload their rides using a .gpx file and instantly view the activity d
 
 Users can also view their overall statistics such as total miles, total elevation gain for a single ride or their entire activity history.
 
-Immediately after the user logs in, their latest activity data and the user's friends activity feed are displayed on the home page. Also displayed are an upload form to submit a new activity, and navigation capabilities to go to the user's profile
-as well as to search for other users.
+Immediately after the user logs in, their latest activity data and the user's friends activity feed are displayed on the home page. Also displayed are an upload form to submit a new activity, and navigation capabilities to go to the user's profile as well as to search for other users.
 
 The app updates the friends activity feed in real-time using WebSocket communication protocols. If a friend uploads an activity, the user will immediately see a button pop up alerting them of the update. The button will display the count of new activities available to display.
 
@@ -21,7 +20,7 @@ The app updates the friends activity feed in real-time using WebSocket communica
 
 ## App Log-In
 
-Log-in to the app with an exisiting user name and password. A register form is also availble for new users. After log-in, the user will be routed to the home page where they will have access to their latest activity, their friends latest activity feed, and a navigation bar to access their profile page, search for a user, or log out.
+Log-in to the app with an existing user name and password. A register form is also available for new users. After log-in, the user will be routed to the home page where they will have access to their latest activity, their friends latest activity feed, and a navigation bar to access their profile page, search for a user, or log out.
 
 On log-in, the user's information is stored in the session storage and as a global state to be used to fetch back-end data throughout the app. The session storage is deleted when logging out.
 
