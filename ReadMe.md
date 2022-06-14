@@ -44,7 +44,7 @@ Immediately after User2 uploads a new activity, User1 will get notified via the 
 
 ## Scroll throught the latest friend's activity feed
 
-The latest friends activity feed is displayed on the home page. A user can scroll through their friends feed which is ordered by the activity date in descending order. The friends acitivy feed has an activity card for each activity which displays the name of the user, ride caption, ride date, total elevation gain, total distance, total time, and a map of the activity,
+The latest friends activity feed is displayed on the home page. A user can scroll through their friends feed which is ordered by the activity date in descending order. The friends acitivy feed has an activity card for each activity which displays the name of the user, ride caption, ride date, total elevation gain, total distance, total time, and a map of the activity
 
 ![](/ReadME/scroll-friends-feed.gif)
 
@@ -71,3 +71,53 @@ In the user's profile page, you can see your Profile Information, a list of all 
 In the home page, a `UNITS` button is available to toggle between imperial and metric units for the entire app. This will toggle the distances between meters and feet for elevation gain, and miles and kilometers for total distance. A Context provider was used for this implementation in order to change the state of the units globally and apply them to different componets in the app without having to pass them down as props. The session storage was also used to store the state of the units, in order to keep the current state even when the page is refreshed or when user navigates to another route.
 
 ![](/ReadME/context-provider-units.gif)
+
+# Installation
+
+Make sure you have installed Node.js, npm, Python3, and pip.
+After installation please follow the instructions below to download the repo.
+
+- Within the terminal window, create a folder in your local drive.
+- Navigate to the folder created.
+- Run the following command:
+
+```bash
+  git clone https://github.com/adrianhuber17/fitness-app.git
+```
+
+- Navigate into the new sub-folder created called **fitness-app**.
+- Run the following commands to create an environment and install the dependencies:
+
+```bash
+  python3 -m venv env
+  source env/bin/activate
+  pip install -r requirements.txt
+```
+
+- Navigate into the /**frontend/my-react-app** folder and run the following command:
+
+```bash
+  npm i react-scripts
+```
+
+## Run Locally
+
+Open two terminal windows, one to be used by the Flask server and the other
+to be used by the React client.
+Make sure the server is initialized before the client to avoid any issues.
+
+Terminal **window 1** - start the server:
+
+```bash
+  cd fitness-app
+  source secrets.sh
+  source env/bin/activate
+  python3 server.py
+```
+
+Terminal **window 2** - start the client:
+
+```bash
+  cd fitness-app/frontend/my-react-app
+  npm start
+```
