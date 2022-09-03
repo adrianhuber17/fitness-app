@@ -6,7 +6,7 @@ def total_elevation_gain_json(activities):
     total_elevation_json = {}
     initial_feet_climbed = 0
     for activity in activities:
-        print(activity)
+
         activity_year = activity['date'].year
         activity_month = activity['date'].month
         feet_climbed = float(activity['elevation_gain'])

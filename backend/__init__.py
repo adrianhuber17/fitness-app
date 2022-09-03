@@ -1,0 +1,2 @@
+from backend.helper_functions import total_activities_monthly_json
+from backend.helper_functions import total_elevation_gain_json
