@@ -1,6 +1,5 @@
 import unittest
-from helper_functions_all import total_activities_monthly_json,total_elevation_gain_json
-
+from backend.helper_functions import total_activities_monthly_json,total_elevation_gain_json
 
 class Test(unittest.TestCase):
 
