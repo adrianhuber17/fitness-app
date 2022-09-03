@@ -49,6 +49,11 @@ class Test(unittest.TestCase):
         output = total_elevation_gain_json(activities_mock)
         self.assertEqual(output,exepected_output)
 
+         # ---- tests for helper_functions: total_activities_monthly_json ----
+
+    def test_total_activities_monthly_json_1(self):
+        pass   
+
 if __name__ == "__main__":
     unittest.main()
 
