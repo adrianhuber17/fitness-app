@@ -1,8 +1,8 @@
 """CRUD operations"""
 
-from model import db, User, Activity, connect_to_db
+from backend.database_model.model import db, User, Activity, connect_to_db
 from sqlalchemy import desc
-from helper_functions import total_elevation_gain_json,total_activities_monthly_json
+from backend.helper_files.helper_functions import total_elevation_gain_json,total_activities_monthly_json
 #CRUD helper functions
 
 def create_user(email,first_name,last_name,password):

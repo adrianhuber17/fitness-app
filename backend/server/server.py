@@ -4,8 +4,8 @@ from flask_socketio import SocketIO,emit,join_room,leave_room
 from flask_cors import CORS
 import os
 from sqlalchemy import true
-from gpx_parser import gpxParser
-import crud
+from backend.helper_files.gpx_parser import gpxParser
+from backend.helper_files import crud
 
 app = Flask(__name__)
 SECRET_KEY = os.environ['APP_KEY']
@@ -246,7 +246,7 @@ def new_data(data):
             emit("new_data",{'count':1},to=follower_sid,include_self=False)
 
 if __name__ == "__main__":
-    from model import connect_to_db, db
+    from backend.database_model.model import connect_to_db, db
 
     connect_to_db(app)
     socketio.run(app, debug=True,port=5001)

@@ -1,6 +1,6 @@
 import unittest
 import datetime
-from backend import total_elevation_gain_json,total_activities_monthly_json
+from backend.helper_files.helper_functions import total_elevation_gain_json,total_activities_monthly_json
 
 #date and activity class to create mock input data for total_activities_monthly_json
 class Date:
