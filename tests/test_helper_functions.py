@@ -2,6 +2,17 @@ import unittest
 import datetime
 from backend import total_elevation_gain_json,total_activities_monthly_json
 
+#date and activity class to create mock input data for total_activities_monthly_json
+class Date:
+    def __init__(self,date):
+        self.date= date
+class Activity:
+    def __init__(self):
+        self.activities = []
+
+    def add_activities(self,date):    
+        self.activities.append(Date(date))
+
 class Test(unittest.TestCase):
 
     # ---- tests for helper_functions: total_elevation_gain_json ----
@@ -49,10 +60,53 @@ class Test(unittest.TestCase):
         output = total_elevation_gain_json(activities_mock)
         self.assertEqual(output,exepected_output)
 
-         # ---- tests for helper_functions: total_activities_monthly_json ----
+    
+    # ---- tests for helper_functions: total_activities_monthly_json ----
 
     def test_total_activities_monthly_json_1(self):
-        pass   
+        """same month, same year activities"""
+        activity_obj = Activity()
+        activity_obj.add_activities(datetime.datetime(2022, 6, 13, 12, 54, 29, 584855))
+        activity_obj.add_activities(datetime.datetime(2022, 6, 14, 12, 54, 29, 584855))
+        activities_mock = activity_obj.activities
+        output = total_activities_monthly_json(activities_mock)
+        exepected_output = {2022:{6:2}}
+        self.assertEqual(output,exepected_output)
+
+    def test_total_activities_monthly_json_2(self):
+        """no activities"""
+        activity_obj = Activity()
+        activities_mock = activity_obj.activities
+        output = total_activities_monthly_json(activities_mock)
+        exepected_output = {}
+        self.assertEqual(output,exepected_output)
+
+    def test_total_activities_monthly_json_3(self):
+        """diff month, same year activities"""
+        activity_obj = Activity()
+        activity_obj.add_activities(datetime.datetime(2022, 6, 13, 12, 54, 29, 584855))
+        activity_obj.add_activities(datetime.datetime(2022, 6, 13, 12, 54, 29, 584855))
+        activity_obj.add_activities(datetime.datetime(2022, 7, 13, 12, 54, 29, 584855))
+        activity_obj.add_activities(datetime.datetime(2022, 9, 13, 12, 54, 29, 584855))
+        activity_obj.add_activities(datetime.datetime(2022, 9, 13, 12, 54, 29, 584855))
+        activities_mock = activity_obj.activities
+        output = total_activities_monthly_json(activities_mock)
+        exepected_output = {2022:{6:2,7:1,9:2}}
+        self.assertEqual(output,exepected_output)
+
+    def test_total_activities_monthly_json_4(self):
+        """diff month, diff year"""
+        activity_obj = Activity()
+        activity_obj.add_activities(datetime.datetime(2021, 6, 13, 12, 54, 29, 584855))
+        activity_obj.add_activities(datetime.datetime(2021, 6, 13, 12, 54, 29, 584855))
+        activity_obj.add_activities(datetime.datetime(2022, 7, 13, 12, 54, 29, 584855))
+        activity_obj.add_activities(datetime.datetime(2023, 9, 13, 12, 54, 29, 584855))
+        activity_obj.add_activities(datetime.datetime(2024, 9, 13, 12, 54, 29, 584855))
+        activity_obj.add_activities(datetime.datetime(2024, 9, 13, 12, 54, 29, 584855))
+        activities_mock = activity_obj.activities
+        output = total_activities_monthly_json(activities_mock)
+        exepected_output = {2021:{6:2},2022:{7:1},2023:{9:1},2024:{9:2}}
+        self.assertEqual(output,exepected_output)
 
 if __name__ == "__main__":
     unittest.main()

@@ -223,7 +223,7 @@ def get_total_activities_monthly(user_id):
 
     user = db.session.query(User).filter_by(user_id = user_id).one()
     activities = Activity.query.filter_by(user_id = user.user_id).all()
-   
+    
     return total_activities_monthly_json(activities)
 
 def following_activity_json(user_id):
