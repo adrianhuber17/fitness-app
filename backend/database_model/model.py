@@ -57,16 +57,17 @@ class Activity(db.Model):
 
 def connect_to_db(app):
     """connect to the database"""
-
+    #fitness_app -> production db
+    #test -> test db
     app.config["SQLALCHEMY_DATABASE_URI"] = f"postgresql:///fitness_app"
-    app.config["SQLALCHEMY_ECHO"] = True
+    app.config["SQLALCHEMY_ECHO"] = False
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     db.app = app
     db.init_app(app)
 
 if __name__ == "__main__":
-    from server import app
+    from backend.server.server import app
 
     connect_to_db(app)
     print("Successfully connected to the database")

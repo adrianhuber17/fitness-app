@@ -257,5 +257,5 @@ def following_activity_json(user_id):
 
 
 if __name__ == '__main__':
-    from server import app
+    from backend.server.server import app
     connect_to_db(app)
