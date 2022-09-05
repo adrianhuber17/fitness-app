@@ -59,7 +59,7 @@ def connect_to_db(app):
     """connect to the database"""
     #fitness_app -> production db
     #test -> test db
-    app.config["SQLALCHEMY_DATABASE_URI"] = f"postgresql:///test"
+    app.config["SQLALCHEMY_DATABASE_URI"] = f"postgresql:///fitness_app"
     app.config["SQLALCHEMY_ECHO"] = False
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
