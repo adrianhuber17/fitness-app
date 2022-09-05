@@ -2,10 +2,10 @@ import os
 import json
 from datetime import datetime
 
-import crud
+from backend.helper_files import crud
 import model
-import server
-import gpx_parser
+from backend.server import server
+from backend.helper_files import gpx_parser
 
 # Deletes and creates a brand new fitness_app database
 os.system("dropdb fitness_app")
