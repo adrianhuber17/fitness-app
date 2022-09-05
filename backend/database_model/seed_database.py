@@ -3,7 +3,7 @@ import json
 from datetime import datetime
 
 from backend.helper_files import crud
-import model
+from backend.database_model import model
 from backend.server import server
 from backend.helper_files import gpx_parser
 
@@ -17,7 +17,7 @@ model.db.create_all()
 
 #creates a mew user
 user = crud.create_user('adrianhuber17@gmail.com', 'Adrian', 'Huber', 'a230591h')
-user_2 = crud.create_user('est0691@gmail.com', 'Ernest', 'Torres', 'est111')
+user_2 = crud.create_user('est0691@gmail.com', 'Ernesto', 'Torres', 'est111')
 
 #create a new activity
 curr_activity = gpx_parser.gpxParser()

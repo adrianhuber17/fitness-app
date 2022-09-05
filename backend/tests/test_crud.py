@@ -44,19 +44,15 @@ class Test(unittest.TestCase):
 
     def tearDown(self):
         pass
-
-    def test_create_user(self):
-        """test create_user to see if database is creating new row and id for new users"""
-        new_user_mock = crud.create_user("zig@gmail.com","ziggy","huber","z123")
-        model.db.session.add(new_user_mock)
-        model.db.session.commit()
-        expected_output = User(4,"zig@gmail.com","ziggy","huber","z123")
-        self.assertIn(expected_output.first_name,new_user_mock.first_name)
-        self.assertIn(expected_output.last_name,new_user_mock.last_name)
-        self.assertIn(expected_output.password,new_user_mock.password)
-        self.assertEqual(expected_output.user_id,new_user_mock.user_id)
         
-        
+    def test_get_all_users(self):
+        test_mock = crud.get_all_users_list()
+        expected_output = [{'fullName':'adrian huber','userId':1},
+                            {'fullName':'nichole reyes','userId':2},
+                            {'fullName':'ganch rocoso','userId':3},
+                            ]
+        self.assertEqual(test_mock,expected_output)
+   
 
 if __name__ == "__main__":
     unittest.main()
