@@ -1,8 +1,9 @@
 """CRUD operations"""
 
-from backend.database_model.model import db, User, Activity, connect_to_db
+from app import db
+from app.api.model import User, Activity
 from sqlalchemy import desc
-from backend.helper_files.helper_functions import total_elevation_gain_json,total_activities_monthly_json
+from app.helper_files.helper_functions import total_elevation_gain_json,total_activities_monthly_json
 #CRUD helper functions
 
 def create_user(email,first_name,last_name,password):
@@ -90,7 +91,6 @@ def get_all_users_list():
 
 def is_user_correct(email):
     """Confirm if user exists based on an email"""
-
     is_email = db.session.query(User).filter_by(email=email).first()
     
     if is_email:
@@ -256,6 +256,6 @@ def following_activity_json(user_id):
     return all_activities
 
 
-if __name__ == '__main__':
-    from backend.server.server import app
-    connect_to_db(app)
+# if __name__ == '__main__':
+#     from app.server import app
+#     connect_to_db(app)

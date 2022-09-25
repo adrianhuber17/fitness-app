@@ -4,7 +4,9 @@ from sqlalchemy.dialects.postgresql import JSON
 from flask import Flask
 from datetime import datetime
 
-db = SQLAlchemy()
+from app import db
+
+# db = SQLAlchemy()
 
 #many to many relationship table for followers
 followers = db.Table('followers',
@@ -55,20 +57,20 @@ class Activity(db.Model):
     def __repr__(self):
         return f"<Activity activity_id: {self.activity_id} user_id: {self.user_id}>"
 
-def connect_to_db(app):
-    """connect to the database"""
-    #fitness_app -> production db
-    #test -> test db
-    app.config["SQLALCHEMY_DATABASE_URI"] = f"postgresql:///test"
-    app.config["SQLALCHEMY_ECHO"] = False
-    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+# def connect_to_db(app):
+#     """connect to the database"""
+#     #fitness_app -> production db
+#     #test -> test db
+#     app.config["SQLALCHEMY_DATABASE_URI"] = f"postgresql:///fitness_app"
+#     app.config["SQLALCHEMY_ECHO"] = False
+#     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-    db.app = app
-    db.init_app(app)
+#     db.app = app
+#     db.init_app(app)
 
-if __name__ == "__main__":
-    from backend.server.server import app
+# if __name__ == "__main__":
+#     from app import app
 
-    connect_to_db(app)
-    print("Successfully connected to the database")
-    # db.create_all() 
+#     connect_to_db(app)
+#     print("Successfully connected to the database")
+#     # db.create_all() 

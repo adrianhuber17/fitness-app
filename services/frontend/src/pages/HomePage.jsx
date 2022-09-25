@@ -27,7 +27,7 @@ export default function HomePage({ email, userData }) {
     if (loading === true || friendsData.length === 0) {
       return;
     }
-    const socket = io("localhost:5001/", {
+    const socket = io("localhost:8000/", {
       transports: ["websocket"],
       cors: {
         origin: "http://localhost:3000/",

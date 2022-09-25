@@ -1,6 +1,6 @@
 import unittest
-from backend.server.server import *
-from backend.database_model import model
+from app.server import *
+from app.database_model import model
 
 class Test(unittest.TestCase):
 

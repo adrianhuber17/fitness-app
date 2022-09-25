@@ -1,7 +1,7 @@
 import unittest
-from backend.server.server import *
-from backend.database_model import model
-from backend.helper_files import crud
+from app.server import *
+from app.database_model import model
+from app.helper_files import crud
 
 class User:
     """User data mock"""
