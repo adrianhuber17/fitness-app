@@ -57,7 +57,7 @@ class Activity(db.Model):
     def __repr__(self):
         return f"<Activity activity_id: {self.activity_id} user_id: {self.user_id}>"
 
-<<<<<<< HEAD:services/backend/app/api/model.py
+
 # def connect_to_db(app):
 #     """connect to the database"""
 #     #fitness_app -> production db
@@ -65,15 +65,6 @@ class Activity(db.Model):
 #     app.config["SQLALCHEMY_DATABASE_URI"] = f"postgresql:///fitness_app"
 #     app.config["SQLALCHEMY_ECHO"] = False
 #     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-=======
-def connect_to_db(app):
-    """connect to the database"""
-    #fitness_app -> production db
-    #test -> test db
-    app.config["SQLALCHEMY_DATABASE_URI"] = f"postgresql:///fitness_app"
-    app.config["SQLALCHEMY_ECHO"] = False
-    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
->>>>>>> refs/remotes/origin/main:backend/database_model/model.py
 
 #     db.app = app
 #     db.init_app(app)

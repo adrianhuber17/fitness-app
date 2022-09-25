@@ -1,5 +1,4 @@
 from flask_restx import Api
-
 from app.api.ping import ping_namespace
 from app.api.session import session_nampespace
 from app.api.login import login_namespace
@@ -13,6 +12,7 @@ from app.api.post_gpx import post_gpx_namespace
 from app.api.other_user import other_user_namespace
 from app.api.follow_user import follow_user_namespace
 from app.api.unfollow import unfollow_user_namespace
+
 
 api = Api(version="1.0", title="APIs", doc="/docs/")
 

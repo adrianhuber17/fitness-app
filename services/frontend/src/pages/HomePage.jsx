@@ -25,16 +25,17 @@ export default function HomePage({ email, userData }) {
 
   useEffect(() => {
     if (loading === true || friendsData.length === 0) {
+      console.log("no_data");
       return;
     }
-    const socket = io("localhost:8000/", {
+    const socket = io("http://localhost:5001/", {
       transports: ["websocket"],
       cors: {
         origin: "http://localhost:3000/",
       },
     });
     setSocketInstance(socket);
-
+    console.log("socet", socket);
     socket.on("connect", (data) => {
       console.log("socket - connect data:", data);
     });
