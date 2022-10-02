@@ -5,11 +5,8 @@ import os
 class BaseConfig:
     DEBUG = True
     TESTING = False
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = "secret"  # new
-    SESSION_COOKIE_HTTPONLY=True
-    REMEMBER_COOKIE_HTTPONLY=True
-    SESSION_COOKIE_SAMESITE="Lax"
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
     
 
 class DevelopmentConfig(BaseConfig):
