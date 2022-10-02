@@ -18,7 +18,6 @@ export default function Login({ setSession, setEmail, setUserData }) {
   const handleLogIn = (event) => {
     event.preventDefault();
     const loginData = { email: formEmail, password: password };
-    console.log("Login.jsx, loginData", loginData);
     setFormEmail("");
     setPassword("");
     const url = `${process.env.REACT_APP_BACKEND_SERVICE_URL}/login-user.json`;
