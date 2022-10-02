@@ -9,7 +9,8 @@ class Session(Resource):
         if 'email' in session.keys():
             email = session['email']
             user_json = crud.get_user_json(email)
-            return jsonify({'email':email, 'userData':user_json})
+            response = jsonify({'email':email, 'userData':user_json})
+            return response
         else:
             return jsonify({'email':None})
 

@@ -6,9 +6,10 @@ map_nampespace = Namespace("map")
 
 class Map(Resource):
     def get(self):
-        email = session['email']
-
-        latest_activity_json_map = crud.get_latest_activity(email)
+        email = session.get('email')
+        latest_activity_json_map = []
+        if email:
+            latest_activity_json_map = crud.get_latest_activity(email)
 
         return jsonify(latest_activity_json_map)
 
