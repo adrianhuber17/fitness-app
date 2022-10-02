@@ -12,9 +12,9 @@ export const UseSessionInfo = () => {
   });
 
   useEffect(() => {
-    let url = "/session.json";
+    let url = `${process.env.REACT_APP_BACKEND_SERVICE_URL}/session.json`;
     if (!session) {
-      fetch(url)
+      fetch(url, { credentials: "include" })
         .then((response) => response.json())
         .then((data) => {
           if (data.email === null) {

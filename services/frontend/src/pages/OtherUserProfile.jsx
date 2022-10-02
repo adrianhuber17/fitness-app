@@ -28,12 +28,13 @@ const OtherUser = ({ session }) => {
   useEffect(() => {
     const data = { userId: userId };
     if (session) {
-      fetch("/other-user.json", {
+      fetch(`${process.env.REACT_APP_BACKEND_SERVICE_URL}/other-user.json`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
+        credentials: "include",
       })
         .then((response) => response.json())
         .then((respData) => {
@@ -66,12 +67,13 @@ const OtherUser = ({ session }) => {
   const handleFollowClick = (event) => {
     const follow = event.target.value;
     const data = { userId: userId, follow: follow };
-    fetch("/follow-user.json", {
+    fetch(`${process.env.REACT_APP_BACKEND_SERVICE_URL}/follow-user.json`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
+      credentials: "include",
     })
       .then((response) => response.json())
       .then((response) => {
@@ -82,12 +84,13 @@ const OtherUser = ({ session }) => {
   const handleUnfollowClick = (event) => {
     const unfollow = event.target.value;
     const data = { userId: userId, unfollow: unfollow };
-    fetch("/unfollow-user.json", {
+    fetch(`${process.env.REACT_APP_BACKEND_SERVICE_URL}/unfollow-user.json`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
+      credentials: "include",
     })
       .then((response) => response.json())
       .then((response) => {

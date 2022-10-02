@@ -7,8 +7,9 @@ export default function UserSearchBar() {
   const [searchUser, setSearchUser] = useState("");
 
   useEffect(() => {
-    let url = "/get-user-json";
-    fetch(url)
+    console.log("get-user-json");
+    let url = `${process.env.REACT_APP_BACKEND_SERVICE_URL}/get-user-json`;
+    fetch(url, { credentials: "include" })
       .then((response) => response.json())
       .then((responseData) => {
         setUsers(responseData);

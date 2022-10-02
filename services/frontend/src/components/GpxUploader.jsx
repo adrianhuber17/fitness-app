@@ -25,8 +25,9 @@ export default function GpxUploader({ socket, userData }) {
   const { changeElevation } = unitContext;
 
   useEffect(() => {
-    let url = "/map.json";
-    fetch(url)
+    console.log("/map.json");
+    let url = `${process.env.REACT_APP_BACKEND_SERVICE_URL}/map.json`;
+    fetch(url, { credentials: "include" })
       .then((response) => response.json())
       .then((respData) => {
         if (respData !== null) {
@@ -72,10 +73,11 @@ export default function GpxUploader({ socket, userData }) {
     setRideComment("");
     setSelectedFile("");
 
-    fetch("/post-gpx-parser", {
+    fetch(`${process.env.REACT_APP_BACKEND_SERVICE_URL}/post-gpx-parser`, {
       method: "POST",
       body: formData,
       hearders: { "Content-Type": "multipart/form-data" },
+      credentials: "include",
     })
       .then((resp) => resp.json())
       .then((data) => {

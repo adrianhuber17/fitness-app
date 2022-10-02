@@ -14,7 +14,9 @@ const UserProfile = ({ session }) => {
 
   useEffect(() => {
     if (session) {
-      fetch("/user-data.json")
+      fetch(`${process.env.REACT_APP_BACKEND_SERVICE_URL}/user-data.json`, {
+        credentials: "include",
+      })
         .then((response) => response.json())
         .then((responseData) => {
           setUserFollowing(responseData.followingData);

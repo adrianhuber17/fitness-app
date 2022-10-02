@@ -12,10 +12,15 @@ export default function HomePage({ email, userData }) {
   const [newFeed, setNewFeed] = useState(0);
 
   useEffect(() => {
-    let url = "/friend-feed.json";
+    let url = `${process.env.REACT_APP_BACKEND_SERVICE_URL}/friend-feed.json`;
     if (email) {
-      fetch(url)
-        .then((response) => response.json())
+      fetch(url, {
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      })
+        .then((response) => {
+          return response.json();
+        })
         .then((respData) => {
           setFriendsData(respData);
           setLoading(false);
@@ -25,13 +30,14 @@ export default function HomePage({ email, userData }) {
 
   useEffect(() => {
     if (loading === true || friendsData.length === 0) {
-      console.log("no_data");
+      console.log("HomePage, friendsData:", friendsData);
+      console.log("HomePage, no friendsData");
       return;
     }
     const socket = io("http://localhost:5001/", {
       transports: ["websocket"],
       cors: {
-        origin: "http://localhost:3000/",
+        origin: "http://localhost:3007/",
       },
     });
     setSocketInstance(socket);
@@ -47,18 +53,19 @@ export default function HomePage({ email, userData }) {
       console.log("clean up");
       socket.disconnect();
     };
-  }, [friendsData.length, loading]);
+  }, [friendsData, loading]);
 
   if (socketInstance) {
     socketInstance.on("new_data", (data) => {
       setNewFeed(newFeed + 1);
     });
   }
+
   const updateFeed = (e) => {
     e.preventDefault();
 
-    let url = "/friend-feed.json";
-    fetch(url)
+    let url = `${process.env.REACT_APP_BACKEND_SERVICE_URL}/friend-feed.json`;
+    fetch(url, { credentials: "include" })
       .then((response) => response.json())
       .then((respData) => {
         setFriendsData(respData);

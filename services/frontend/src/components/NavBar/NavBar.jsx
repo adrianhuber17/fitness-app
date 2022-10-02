@@ -8,8 +8,8 @@ export default function NavBar({ setSession, userData }) {
 
   const handleLogOut = (event) => {
     event.preventDefault();
-    const url = "/logout.json";
-    fetch(url)
+    const url = `${process.env.REACT_APP_BACKEND_SERVICE_URL}/logout.json`;
+    fetch(url, { credentials: "include" })
       .then((response) => response.json())
       .then((responseData) => {
         if (responseData.status === "ok") {

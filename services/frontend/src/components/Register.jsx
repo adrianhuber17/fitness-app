@@ -34,11 +34,12 @@ export default function Register() {
     setRegPassword("");
     setFirstName("");
     setLastName("");
-    const url = "/register-user.json";
+    const url = `${process.env.REACT_APP_BACKEND_SERVICE_URL}/register-user.json`;
     fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(regData),
+      credentials: "include",
     })
       .then((response) => response.json())
       .then((responseData) => {

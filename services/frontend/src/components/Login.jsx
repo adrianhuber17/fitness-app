@@ -18,13 +18,15 @@ export default function Login({ setSession, setEmail, setUserData }) {
   const handleLogIn = (event) => {
     event.preventDefault();
     const loginData = { email: formEmail, password: password };
+    console.log("Login.jsx, loginData", loginData);
     setFormEmail("");
     setPassword("");
-    const url = "/login-user.json";
+    const url = `${process.env.REACT_APP_BACKEND_SERVICE_URL}/login-user.json`;
     fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(loginData),
+      credentials: "include",
     })
       .then((response) => response.json())
       .then((responseData) => {
