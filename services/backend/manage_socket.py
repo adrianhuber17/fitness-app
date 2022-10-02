@@ -13,12 +13,11 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 app = Flask(__name__)
-app.config.from_object(config.BaseConfigSocket)
+app.config.from_object(config.DevelopmentConfig)
 app.config['SQLALCHEMY_DATABASE_URI']='postgresql:///fitness_app'
 CORS(app,resources={r"/*":{"origins":"*"}})
 socketio=SocketIO(app,cors_allowed_origins="*")
 users_online = {}
-
 db.init_app(app)
 
 @socketio.on("connect")
