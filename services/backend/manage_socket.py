@@ -11,7 +11,6 @@ from app.api import crud
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
-
 app = Flask(__name__)
 app.config.from_object(config.DevelopmentConfig)
 app.config['SQLALCHEMY_DATABASE_URI']='postgresql:///fitness_app'
@@ -52,4 +51,4 @@ def new_data(data):
             emit("new_data",{'count':1},to=follower_sid,include_self=False)
 
 if __name__ == "__main__":
-    socketio.run(app,debug=True,port=5001)
+    socketio.run(app,debug=True,host='0.0.0.0')

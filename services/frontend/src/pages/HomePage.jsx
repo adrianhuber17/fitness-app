@@ -34,10 +34,11 @@ export default function HomePage({ email, userData }) {
       console.log("HomePage, no friendsData");
       return;
     }
-    const socket = io("http://localhost:5001/", {
+    const socket = io(`${process.env.REACT_APP_BACKEND_SERVICE_URL}`, {
       transports: ["websocket"],
       cors: {
-        origin: "http://localhost:3007/",
+        origin: "http://localhost:3000/",
+        withCredentials: true,
       },
     });
     setSocketInstance(socket);
