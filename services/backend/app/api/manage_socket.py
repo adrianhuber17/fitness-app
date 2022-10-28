@@ -9,15 +9,16 @@ from app.helper_files.gpx_parser import gpxParser
 import app.config as config
 from app.api import crud
 from flask_sqlalchemy import SQLAlchemy
+from app import socketio
 
-db = SQLAlchemy()
-app = Flask(__name__)
-app.config.from_object(config.DevelopmentConfig)
-app.config['SQLALCHEMY_DATABASE_URI']='postgresql:///fitness_app'
-CORS(app,resources={r"/*":{"origins":"*"}})
-socketio=SocketIO(app,cors_allowed_origins="*")
+# db = SQLAlchemy()
+# app = Flask(__name__)
+# app.config.from_object(config.DevelopmentConfig)
+# app.config['SQLALCHEMY_DATABASE_URI']='postgresql:///fitness_app'
+# CORS(app,resources={r"/*":{"origins":"*"}})
+# socketio=SocketIO(app,cors_allowed_origins="*")
 users_online = {}
-db.init_app(app)
+# db.init_app(app)
 
 @socketio.on("connect")
 def connected():
@@ -50,5 +51,5 @@ def new_data(data):
             follower_sid = users_online[follower['userId']]
             emit("new_data",{'count':1},to=follower_sid,include_self=False)
 
-if __name__ == "__main__":
-    socketio.run(app,debug=True,host='0.0.0.0')
+# if __name__ == "__main__":
+#     socketio.run(app,debug=True,host='0.0.0.0')

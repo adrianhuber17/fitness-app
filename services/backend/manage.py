@@ -2,7 +2,7 @@
 
 import sys, os
 from flask.cli import FlaskGroup
-from app import create_app,db
+from app import create_app,db,socketio
 from app.api import crud
 
 
@@ -30,5 +30,6 @@ def populate_db():
     
 if __name__ == "__main__":
     cli()
+    # socketio.run(app)
    
  

@@ -16,10 +16,11 @@ RUN apt-get update \
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 
-
 # add entrypoint.sh
 COPY ./entrypoint.sh /usr/src/fitness-web-app/entrypoint.sh
 RUN chmod +x /usr/src/fitness-web-app/entrypoint.sh
 
-# add appc
+# add app
 COPY . .
+
+# CMD gunicorn --bind 0.0.0.0:$PORT manage:app
