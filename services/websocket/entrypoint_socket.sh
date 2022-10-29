@@ -9,3 +9,4 @@ done
 echo "PostgreSQL started"
 
 python manage_socket.py -h 0.0.0.0
+# gunicorn -w 1 --threads 100 manage_socket:app

@@ -42,8 +42,10 @@ export default function HomePage({ email, userData }) {
       },
     });
     setSocketInstance(socket);
-    console.log("socet", socket);
+    console.log("socket", socket);
     socket.on("connect", (data) => {
+      const userEmail = JSON.parse(sessionStorage.getItem("email"));
+      socket.emit("user_online", { data: userEmail });
       console.log("socket - connect data:", data);
     });
     socket.on("socket - disconnect data", (data) => {
