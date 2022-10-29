@@ -3,26 +3,26 @@ import sys
 from flask import Flask, request, session
 from flask_socketio import SocketIO,emit
 from flask_cors import CORS
-import os
 from sqlalchemy import true
-from app.helper_files.gpx_parser import gpxParser
-import app.config as config
-from app.api import crud
+# from websocket import config_socket
 from flask_sqlalchemy import SQLAlchemy
-from app import socketio
+from app import crud
 
-# db = SQLAlchemy()
-# app = Flask(__name__)
-# app.config.from_object(config.DevelopmentConfig)
-# app.config['SQLALCHEMY_DATABASE_URI']='postgresql:///fitness_app'
-# CORS(app,resources={r"/*":{"origins":"*"}})
-# socketio=SocketIO(app,cors_allowed_origins="*")
+
+db = SQLAlchemy()
+app = Flask(__name__)
+# app.config.from_object(config_socket.DevelopmentConfig)
+app.config['SQLALCHEMY_DATABASE_URI']='postgresql:///fitness_app'
+CORS(app,resources={r"/*":{"origins":"*"}})
+socketio=SocketIO(app,cors_allowed_origins="*")
 users_online = {}
-# db.init_app(app)
+db.init_app(app)
 
 @socketio.on("connect")
 def connected():
+    print("hereee")
     """event listener when client connects to the server"""
+    print(session)
     if 'email' in session.keys():
         email = session['email']
     user_id = crud.get_user_id(email)
@@ -51,5 +51,5 @@ def new_data(data):
             follower_sid = users_online[follower['userId']]
             emit("new_data",{'count':1},to=follower_sid,include_self=False)
 
-# if __name__ == "__main__":
-#     socketio.run(app,debug=True,host='0.0.0.0')
+if __name__ == "__main__":
+    socketio.run(app,debug=True,port=5001)

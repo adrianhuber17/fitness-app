@@ -4,11 +4,11 @@ import os
 from flask import Flask,request,session
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-from flask_socketio import SocketIO
+# from flask_socketio import SocketIO
 
 db = SQLAlchemy()
 cors = CORS()
-socketio = SocketIO()
+# socketio = SocketIO()
 
 def create_app(script_info=None):
     app_settings = os.getenv("APP_SETTINGS")
@@ -29,7 +29,7 @@ def create_app(script_info=None):
     #register api
     from app.api import api
     api.init_app(app)
-    socketio.init_app(app,cors_allowed_origins="*")
+    # socketio.init_app(app,cors_allowed_origins="*")
 
     @app.shell_context_processor
     def ctx():
