@@ -3,9 +3,7 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.dialects.postgresql import JSON
 from flask import Flask
 from datetime import datetime
-from manage_socket import db
-
-# db = SQLAlchemy()
+from app.db import db
 
 #many to many relationship table for followers
 followers = db.Table('followers',

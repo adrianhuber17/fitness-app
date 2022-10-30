@@ -8,4 +8,5 @@ done
 
 echo "PostgreSQL started"
 
-python manage_socket.py -h 0.0.0.0
+# python manage_socket.py -h 0.0.0.0
+gunicorn 'manage_socket:create_app()' --worker-class eventlet --workers 1 --bind 0.0.0.0:5001 --reload

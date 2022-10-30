@@ -1,6 +1,6 @@
 """CRUD operations"""
 
-from manage_socket import db
+from app.db import db
 from app.model import User, Activity
 from sqlalchemy import desc
 #CRUD helper functions

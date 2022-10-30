@@ -49,7 +49,17 @@ export default function HomePage({ email, userData }) {
       console.log("socket - connect data:", data);
     });
     socket.on("socket - disconnect data", (data) => {
+      const userEmail = JSON.parse(sessionStorage.getItem("email"));
+      socket.emit("user_offline", { data: userEmail });
       console.log(data);
+    });
+
+    socket.on("user_online", (data) => {
+      console.log("socket - users_online:", data);
+    });
+
+    socket.on("user_offline", (data) => {
+      console.log("socket - users_offline", data);
     });
 
     return function cleanup() {
