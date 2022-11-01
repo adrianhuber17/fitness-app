@@ -71,14 +71,15 @@ In the home page, a `UNITS` button is available to toggle between imperial and m
 
 ![](/ReadME/context-provider-units.gif)
 
-# Installation
+## Configuring the repo for the first time and running application
 
-Make sure you have installed Node.js, npm, Python3, and pip.
-After installation please follow the instructions below to download the repo.
+### Docker
 
-- Within the terminal window, create a folder in your local drive.
-- Navigate to the folder created.
-- Run the following command:
+To be able to run this project you will need Docker Desktop installed on your computer. Docker installation instructions: `https://www.docker.com/products/docker-desktop/`
+
+The instructions below will allow you to run this project on your local computer using **docker-compose**
+
+1. Run the following command in the terminal to download a copy of the repo to your local machine
 
 ```bash
   git clone https://github.com/adrianhuber17/fitness-app.git
@@ -87,36 +88,26 @@ After installation please follow the instructions below to download the repo.
 - Navigate into the new sub-folder created called **fitness-app**.
 - Run the following commands to create an environment and install the dependencies:
 
-```bash
-  python3 -m venv env
-  source env/bin/activate
-  pip install -r requirements.txt
-```
-
-- Navigate into the /**frontend/my-react-app** folder and run the following command:
-
-```bash
-  npm i react-scripts
-```
-
-## Run Locally
-
-Open two terminal windows, one to be used by the Flask server and the other
-to be used by the React client.
-Make sure the server is initialized before the client to avoid any issues.
-
-Terminal **window 1** - start the server:
+2. After the project repo is downloaded navigate into the project directory
 
 ```bash
   cd fitness-app
-  source secrets.sh
-  source env/bin/activate
-  python3 server.py
 ```
 
-Terminal **window 2** - start the client:
+3. Manually open Docker desktop or run the command below to open Docker
 
 ```bash
-  cd fitness-app/frontend/my-react-app
-  npm start
+ open -a Docker
 ```
+
+4. Once the Docker desktop is runnning, type the command below to create and start the container in detached mode and build the image
+
+```bash
+  docker-compose up -d --build
+```
+
+At this point the container with the app should be running in your local computer
+
+Services are running on **Port 3000** (front-end React), **Port 5001** (back-end REST), **Port 5004** (back-end WebSocket). Please make sure you have no other app running on these ports
+
+Open a browser to the local host **http://localhost:3000/** and start enjoying the app.
