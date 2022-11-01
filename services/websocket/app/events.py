@@ -11,15 +11,16 @@ users_online = {}
 
 @socketio.on('connect')
 def test_connect():
+    """event listener when client has connected to the server"""
     print(f"client {request.sid} has connected")
     emit("connect",request.sid,broadcast=True)
 
 
 @socketio.on("user_online")
 def new_user(data):
-    email = data['data']
-    user_id = get_user_id(email)
-    users_online[user_id] = request.sid
+    """event listener to add new connected client to the online users dict"""
+    user_id = data['data']
+    users_online[request.sid] = user_id
     print('users_online: ', users_online)
     emit("user_online",users_online,broadcast=True)
 
@@ -27,13 +28,7 @@ def new_user(data):
 def test_disconnected():
     """event listener when client disconnects to the server"""
     print(f"client {request.sid} has disconnected")
+    del users_online[request.sid]
+    print("current online users: ",users_online)
     emit("disconnect",f"user {request.sid} disconnected",broadcast=True)
 
-@socketio.on("user_offline")
-def user_disconnected(data):
-    email = data['data']
-    print('offlioneee',email)
-    user_id = get_user_id(email)
-    del users_online[user_id]
-    print('users_online: ', users_online)
-    emit("user_offline",users_online,broadcast=True)

@@ -44,22 +44,18 @@ export default function HomePage({ email, userData }) {
     setSocketInstance(socket);
     console.log("socket", socket);
     socket.on("connect", (data) => {
-      const userEmail = JSON.parse(sessionStorage.getItem("email"));
-      socket.emit("user_online", { data: userEmail });
-      console.log("socket - connect data:", data);
+      const userData = JSON.parse(sessionStorage.getItem("userData"));
+      const userId = userData.user_id;
+      socket.emit("user_online", { data: userId });
+      console.log("socket - connected users:", data);
     });
-    socket.on("socket - disconnect data", (data) => {
-      const userEmail = JSON.parse(sessionStorage.getItem("email"));
-      socket.emit("user_offline", { data: userEmail });
+    socket.on("disconnect", (data) => {
       console.log(data);
+      console.log("socket - disconnected users:", data);
     });
 
     socket.on("user_online", (data) => {
       console.log("socket - users_online:", data);
-    });
-
-    socket.on("user_offline", (data) => {
-      console.log("socket - users_offline", data);
     });
 
     return function cleanup() {
