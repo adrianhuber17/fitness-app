@@ -22,5 +22,3 @@ RUN chmod +x /usr/src/fitness-web-app/entrypoint_socket.sh
 
 # add app
 COPY . .
-
-# CMD gunicorn --bind 0.0.0.0:$PORT manage:app
