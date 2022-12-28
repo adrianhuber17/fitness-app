@@ -57,6 +57,11 @@ class Activity(db.Model):
     def __repr__(self):
         return f"<Activity activity_id: {self.activity_id} user_id: {self.user_id}>"
 
+#TODO: need to add a new table for followers using a json
+#example {1:[2,3,4],2:[1],3:[1],4:[1,2,3]}
+#need to do this in order to get user proximity and determine primary, secondary, thirdary connections
+#need to add a crud function to get this dictionary and perform dfs to find distance.
+
 
 # def connect_to_db(app):
 #     """connect to the database"""
